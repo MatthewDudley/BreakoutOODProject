@@ -3,6 +3,7 @@
 #include <iostream>
 class Renderer;
 class InputManager;
+class MediaManager;
 /*
 #include "Entity.h"
 #include "Player.h"
@@ -27,7 +28,7 @@ private:
 	int levelHeight;
 
 	Renderer* renderer;
-	//MediaManager* mediaManager;
+	MediaManager* mediaManager;
 	InputManager* inputManager;
 
 };

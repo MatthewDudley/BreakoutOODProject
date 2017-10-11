@@ -1,6 +1,7 @@
 #include "Game.h"
 #include "Renderer.h"
 #include "InputManager.h"
+#include "MediaManager.h"
 //#include "Animation.h"
 
 
@@ -12,7 +13,7 @@ Game::Game()
 	levelHeight = 1001;
 
 	renderer = new Renderer(screenWidth, screenHeight, false);
-	//mediaManager = new MediaManager();
+	mediaManager = new MediaManager();
 	inputManager = new InputManager();
 }
 
@@ -20,8 +21,8 @@ Game::Game()
 Game::~Game()
 {
 	delete renderer;
-	//delete mediaManager;
-	//delete inputManager;
+	delete mediaManager;
+	delete inputManager;
 }
 
 void Game::Start()
@@ -87,6 +88,7 @@ bool Game::Initialize()
 {
 	if (renderer->Initialize() == true)
 	{
+		mediaManager->CreateTexture("Media/Sprites/block1.png", renderer->GetRenderer());
 		/*
 		mediaManager->CreateTexture("Media/Sprites/megamanx.png", renderer->GetRenderer());
 		//mediaManager->CreateTexture("Media/Sprites/megamanxidlerun.png", renderer->GetRenderer());
