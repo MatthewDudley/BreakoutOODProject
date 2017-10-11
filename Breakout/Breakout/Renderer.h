@@ -1,6 +1,5 @@
 #pragma once
 #include <SDL.h>
-#include <stdio.h>
 #include <SDL_image.h>
 #include <iostream>
 //#include "Entity.h"

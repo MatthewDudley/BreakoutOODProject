@@ -1,9 +1,8 @@
 #pragma once
-#include <iostream>
 #include <SDL.h>
-#include <stdio.h>
-#include "Renderer.h"
-#include "InputManager.h"
+#include <iostream>
+class Renderer;
+class InputManager;
 /*
 #include "Entity.h"
 #include "Player.h"

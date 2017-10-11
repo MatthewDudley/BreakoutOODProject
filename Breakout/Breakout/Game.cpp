@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "Renderer.h"
+#include "InputManager.h"
 //#include "Animation.h"
 
 
