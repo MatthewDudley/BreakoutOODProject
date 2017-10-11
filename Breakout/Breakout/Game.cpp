@@ -2,6 +2,9 @@
 #include "Renderer.h"
 #include "InputManager.h"
 #include "MediaManager.h"
+#include "VisualComponent.h"
+#include "SingleImageController.h"
+#include "Entity.h"
 //#include "Animation.h"
 
 
@@ -30,6 +33,11 @@ void Game::Start()
 	if (Initialize())
 	{
 		bool quit = false;
+		Entity entity(250, 250);
+		entity.GetVisualComponent()->SetTexture(mediaManager->GetTexture(0));
+
+		std::vector<Entity*> entityList;
+		entityList.push_back(&entity);
 		/*
 		Player player(350, 150, 18, 26, -9.0f, -12.0f);
 		player.GetAnimationController()->SetTexture(mediaManager->GetTexture(0));
@@ -78,7 +86,7 @@ void Game::Start()
 			quit = inputManager->HandleInput();//deltaTime, &player);
 			//player.Update(entityList);
 			//camera.Reset();
-			renderer->Draw();//&entityList, &camera);
+			renderer->Draw(&entityList);// , &camera);
 			//SDL_Delay(30);
 		}
 	}

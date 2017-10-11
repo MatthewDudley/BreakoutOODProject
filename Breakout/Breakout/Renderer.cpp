@@ -1,7 +1,6 @@
 #include "Renderer.h"
-
-
-
+#include "Entity.h"
+#include "VisualComponent.h"
 Renderer::Renderer(int screenWidth, int screenHeight, bool debug)
 {
 	this->screenWidth = screenWidth;
@@ -19,27 +18,28 @@ Renderer::~Renderer()
 	IMG_Quit();
 	SDL_Quit();
 }
-/*
-void Renderer::Render(Entity* entity, Camera* camera)
+
+void Renderer::Render(Entity* entity)//, Camera* camera)
 {
 	//entity->GetTexture()->Render((int)entity->GetPosX() - (int)camera->GetPosX(), (int)entity->GetPosY() - (int)camera->GetPosY(), sdlRenderer);
 	//entity->GetTexture()->Render((int)entity->GetCollider()->GetPosX() - (int)camera->GetPosX() + entity->GetCollider()->GetWidth()/2 , (int)entity->GetCollider()->GetPosY() - (int)camera->GetPosY() + entity->GetCollider()->GetHeight() / 2, sdlRenderer, entity->GetAnimationController()->GetAnimationFrameRect());
-	entity->GetVisualComponent()->Render((int)entity->GetPosX() - (int)camera->GetPosX(), (int)entity->GetPosY() - (int)camera->GetPosY(), sdlRenderer);
-	if (debug == true)
-	{
-		SDL_Rect newRect{ (int)entity->GetCollider()->GetPosX() - (int)camera->GetPosX(), (int)entity->GetCollider()->GetPosY() - (int)camera->GetPosY(), entity->GetCollider()->GetWidth(), entity->GetCollider()->GetHeight() };
-		SDL_RenderDrawRect(sdlRenderer, &newRect);
-	}
+	//entity->GetVisualComponent()->Render((int)entity->GetPosX() - (int)camera->GetPosX(), (int)entity->GetPosY() - (int)camera->GetPosY(), sdlRenderer);
+	entity->GetVisualComponent()->Render((int)entity->GetPosX(), (int)entity->GetPosY(), sdlRenderer);
+	//if (debug == true)
+	//{
+	//	SDL_Rect newRect{ (int)entity->GetCollider()->GetPosX() - (int)camera->GetPosX(), (int)entity->GetCollider()->GetPosY() - (int)camera->GetPosY(), entity->GetCollider()->GetWidth(), entity->GetCollider()->GetHeight() };
+	//	SDL_RenderDrawRect(sdlRenderer, &newRect);
+	//}
 }
-*/
 
-void Renderer::Draw()//std::vector<Entity*>* entityList, Camera* camera)
+
+void Renderer::Draw(std::vector<Entity*>* entityList)//, Camera* camera)
 {
 	SDL_RenderClear(sdlRenderer);
-	//for (unsigned i = 0; i < entityList->size(); ++i)
-	//{
-	//	Render((*entityList)[i], camera);
-	//}
+	for (unsigned i = 0; i < entityList->size(); ++i)
+	{
+		Render((*entityList)[i]);
+	}
 	SDL_RenderPresent(sdlRenderer);
 }
 void Renderer::SetRenderer(SDL_Renderer* renderer)

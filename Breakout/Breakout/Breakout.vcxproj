@@ -117,19 +117,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Entity.cpp" />
     <ClCompile Include="Entry.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MediaManager.cpp" />
     <ClCompile Include="Renderer.cpp" />
+    <ClCompile Include="SingleImageController.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="VisualComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MediaManager.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="SingleImageController.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="VisualComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
