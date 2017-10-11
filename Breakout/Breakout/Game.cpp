@@ -11,7 +11,7 @@ Game::Game()
 
 	renderer = new Renderer(screenWidth, screenHeight, false);
 	//mediaManager = new MediaManager();
-	//inputManager = new InputManager();
+	inputManager = new InputManager();
 }
 
 
@@ -72,7 +72,7 @@ void Game::Start()
 			currentFrameTime = SDL_GetTicks();
 			deltaTime = (float)(currentFrameTime - lastFrameTime) / 1000;
 			//player.GetTiming(lastFrameTime, currentFrameTime, deltaTime);
-			//quit = inputManager->HandleInput(deltaTime, &player);
+			quit = inputManager->HandleInput();//deltaTime, &player);
 			//player.Update(entityList);
 			//camera.Reset();
 			renderer->Draw();//&entityList, &camera);

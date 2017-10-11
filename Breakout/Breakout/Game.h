@@ -3,6 +3,7 @@
 #include <SDL.h>
 #include <stdio.h>
 #include "Renderer.h"
+#include "InputManager.h"
 /*
 #include "Entity.h"
 #include "Player.h"
@@ -11,7 +12,6 @@
 #include "Texture.h"
 #include "MediaManager.h"
 #include "Camera.h"
-#include "InputManager.h"
 #include "AnimationNames.h"
 */
 class Game
@@ -29,7 +29,7 @@ private:
 
 	Renderer* renderer;
 	//MediaManager* mediaManager;
-	//InputManager* inputManager;
+	InputManager* inputManager;
 
 };
 
