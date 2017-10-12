@@ -126,7 +126,6 @@
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SingleImageController.cpp" />
     <ClCompile Include="Texture.cpp" />
-    <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="VisualComponent.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -61,10 +61,7 @@
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="Paddle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector2.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Entities</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,11 +89,11 @@
     <ClInclude Include="MediaManager.h">
       <Filter>Header Files\Rendering</Filter>
     </ClInclude>
-    <ClInclude Include="Paddle.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Vector2.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Paddle.h">
+      <Filter>Header Files\Entities</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
