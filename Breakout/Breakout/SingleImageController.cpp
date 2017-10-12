@@ -4,9 +4,6 @@
 SingleImageController::SingleImageController()
 {
 	currentSpriteRect = nullptr;
-	//Temporarily set a sprite rect: change when adding sprite sheets
-	std::cout << "SingleImageController: Temporarily set sprite rect in constructor" << std::endl;
-	SetCurrentSpriteRect(0, 0, 100, 100);
 }
 
 

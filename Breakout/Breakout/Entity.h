@@ -3,6 +3,7 @@
 #include <iostream>
 class Texture;
 class VisualComponent;
+class Vector2;
 //#include"Collider.h"
 //#include "Vector2.h"
 class Entity
@@ -24,10 +25,8 @@ public:
 	VisualComponent* GetVisualComponent();
 
 private:
-	//Vector2* position;
+	Vector2* position;
 	//Collider* col;
-	float positionX;
-	float positionY;
 	//float collXOffset;
 	//float collYOffset;
 	//float collSizeOffset;

@@ -5,6 +5,7 @@
 #include "VisualComponent.h"
 #include "SingleImageController.h"
 #include "Entity.h"
+#include "Paddle.h"
 //#include "Animation.h"
 
 
@@ -33,11 +34,12 @@ void Game::Start()
 	if (Initialize())
 	{
 		bool quit = false;
-		Entity entity(250, 250);
-		entity.GetVisualComponent()->SetTexture(mediaManager->GetTexture(0));
+		Paddle paddle(250, 250);
+		paddle.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
+		paddle.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 100);
 
 		std::vector<Entity*> entityList;
-		entityList.push_back(&entity);
+		entityList.push_back(&paddle);
 		/*
 		Player player(350, 150, 18, 26, -9.0f, -12.0f);
 		player.GetAnimationController()->SetTexture(mediaManager->GetTexture(0));
@@ -47,29 +49,6 @@ void Game::Start()
 		BlockTest block(350, 345, 100, 100, -50.0f, -50.0f, false);
 		block.GetVisualComponent()->SetTexture(mediaManager->GetTexture(1));
 		block.GetSingleImageController()->SetCurrentSpriteRect(100, 0, 100, 100);
-
-
-		std::vector<Entity*> entityList;
-		entityList.push_back(&block);
-		entityList.push_back(&block2);
-		entityList.push_back(&block3);
-		entityList.push_back(&block4);
-		entityList.push_back(&block5);
-		entityList.push_back(&block6);
-		entityList.push_back(&block7);
-		entityList.push_back(&block8);
-		entityList.push_back(&block9);
-		entityList.push_back(&block10);
-		entityList.push_back(&block11);
-		entityList.push_back(&block12);
-		entityList.push_back(&block13);
-		entityList.push_back(&block14);
-		entityList.push_back(&block15);
-		entityList.push_back(&player);
-
-
-		Camera camera(0, 0, screenWidth, screenHeight, levelWidth, levelHeight);
-		camera.SetTarget(&player);
 		*/
 
 		Uint32 lastFrameTime = 0;

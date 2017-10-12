@@ -122,9 +122,11 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MediaManager.cpp" />
+    <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SingleImageController.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Vector2.cpp" />
     <ClCompile Include="VisualComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -132,9 +134,11 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MediaManager.h" />
+    <ClInclude Include="Paddle.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="SingleImageController.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Vector2.h" />
     <ClInclude Include="VisualComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
