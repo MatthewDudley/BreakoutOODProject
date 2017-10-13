@@ -52,14 +52,16 @@ bool InputManager::HandleInput()//float deltaTime, Player* player)
 	{
 		player->GetInput(PlayerActions::JUMP, InputType::HELD);
 	}
+	*/
 	if (currentKeyboardState[SDL_SCANCODE_LEFT])
 	{
-		player->GetInput(PlayerActions::MOVE_LEFT, InputType::HELD);
+		//move entity left
+		//player->GetInput(PlayerActions::MOVE_LEFT, InputType::HELD);
 	}
 	if (currentKeyboardState[SDL_SCANCODE_RIGHT])
 	{
-		player->GetInput(PlayerActions::MOVE_RIGHT, InputType::HELD);
+		//move entity right
+		//player->GetInput(PlayerActions::MOVE_RIGHT, InputType::HELD);
 	}
-	*/
 	return quit;
 }

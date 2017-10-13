@@ -31,6 +31,12 @@
     <Filter Include="Header Files\Rendering">
       <UniqueIdentifier>{9f39060f-9f5a-47c4-a695-ce9cdbbcd981}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Physics">
+      <UniqueIdentifier>{6a018994-77ce-4493-b6bc-7e82bc85aea6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Physics">
+      <UniqueIdentifier>{f3d0428c-777a-46ea-9582-f2556dbe941c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entry.cpp">
@@ -63,6 +69,9 @@
     <ClCompile Include="Paddle.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="PhysicsComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -94,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="Paddle.h">
       <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysicsComponent.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

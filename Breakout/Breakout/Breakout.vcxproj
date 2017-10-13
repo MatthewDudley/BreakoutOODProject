@@ -123,6 +123,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="MediaManager.cpp" />
     <ClCompile Include="Paddle.cpp" />
+    <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="SingleImageController.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -134,6 +135,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MediaManager.h" />
     <ClInclude Include="Paddle.h" />
+    <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="SingleImageController.h" />
     <ClInclude Include="Texture.h" />
