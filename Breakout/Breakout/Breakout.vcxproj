@@ -139,6 +139,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="SingleImageController.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="VisualComponent.h" />
   </ItemGroup>

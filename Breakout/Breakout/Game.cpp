@@ -6,6 +6,7 @@
 #include "SingleImageController.h"
 #include "Entity.h"
 #include "Paddle.h"
+#include "Time.h"
 //#include "Animation.h"
 
 
@@ -60,7 +61,8 @@ void Game::Start()
 		{
 			lastFrameTime = currentFrameTime;
 			currentFrameTime = SDL_GetTicks();
-			deltaTime = (float)(currentFrameTime - lastFrameTime) / 1000;
+			Time::CalculateDeltaTime(lastFrameTime, currentFrameTime);
+			//deltaTime = (float)(currentFrameTime - lastFrameTime) / 1000;
 			//player.GetTiming(lastFrameTime, currentFrameTime, deltaTime);
 			quit = inputManager->HandleInput();//deltaTime, &player);
 			//player.Update(entityList);
