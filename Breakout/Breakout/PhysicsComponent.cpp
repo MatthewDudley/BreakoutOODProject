@@ -19,6 +19,11 @@ void PhysicsComponent::SetMaxSpeed(float maxSpeed)
 	this->maxSpeed = maxSpeed;
 }
 
+float PhysicsComponent::GetMaxSpeed()
+{
+	return maxSpeed;
+}
+
 void PhysicsComponent::Update()
 {
 	//multiply by delta time

@@ -13,7 +13,7 @@ public:
 	//void SetVelocityX(float velocityX);
 	//void SetVelocityY(float velocityY);
 
-	void Update(std::vector<Entity*> entityList);
+	void Update();//std::vector<Entity*> entityList);
 	SingleImageController* GetSingleImageController();
 
 	//void GetInput(PlayerActions action, InputType type);

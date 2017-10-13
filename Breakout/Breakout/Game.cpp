@@ -10,7 +10,6 @@
 #include "PhysicsComponent.h"
 //#include "Animation.h"
 
-
 Game::Game()
 {
 	screenWidth = 800;
@@ -66,9 +65,10 @@ void Game::Start()
 			Time::CalculateDeltaTime(lastFrameTime, currentFrameTime);
 			//deltaTime = (float)(currentFrameTime - lastFrameTime) / 1000;
 			//player.GetTiming(lastFrameTime, currentFrameTime, deltaTime);
-			quit = inputManager->HandleInput();//deltaTime, &player);
+			quit = inputManager->HandleInput(&paddle);//deltaTime, &player);
 			//player.Update(entityList);
 			//camera.Reset();
+			paddle.Update();
 			renderer->Draw(&entityList);// , &camera);
 			//SDL_Delay(30);
 		}

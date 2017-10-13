@@ -53,7 +53,7 @@ void Player::SetVelocityY(float y)
 	velocity->SetY(y);
 }
 */
-void Paddle::Update(std::vector<Entity*> entityList)
+void Paddle::Update()//std::vector<Entity*> entityList)
 {
 	//update logic here
 	physicsComponent->Update();

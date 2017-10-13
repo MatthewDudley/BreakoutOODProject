@@ -10,6 +10,7 @@ public:
 	void SetVelocity(Vector2* velocity);
 	void SetMaxSpeed(float maxSpeed);
 	Vector2* GetVelocity();
+	float GetMaxSpeed();
 	void Update();
 private:
 	Vector2* velocity;

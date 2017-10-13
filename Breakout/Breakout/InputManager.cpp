@@ -1,7 +1,6 @@
 #include "InputManager.h"
-
-
-
+#include "Entity.h"
+#include "PhysicsComponent.h"
 InputManager::InputManager()
 {
 	currentKeyboardState = SDL_GetKeyboardState(NULL);
@@ -12,7 +11,7 @@ InputManager::~InputManager()
 {
 }
 
-bool InputManager::HandleInput()//float deltaTime, Player* player)
+bool InputManager::HandleInput(Entity* entity)
 {
 	bool quit = false;
 	while (SDL_PollEvent(&e) != 0 && e.key.repeat == 0)
@@ -53,15 +52,22 @@ bool InputManager::HandleInput()//float deltaTime, Player* player)
 		player->GetInput(PlayerActions::JUMP, InputType::HELD);
 	}
 	*/
-	if (currentKeyboardState[SDL_SCANCODE_LEFT])
+
+	PhysicsComponent* phsComp = entity->GetPhysicsComponent();
+	if (phsComp != nullptr)
 	{
-		//move entity left
-		//player->GetInput(PlayerActions::MOVE_LEFT, InputType::HELD);
-	}
-	if (currentKeyboardState[SDL_SCANCODE_RIGHT])
-	{
-		//move entity right
-		//player->GetInput(PlayerActions::MOVE_RIGHT, InputType::HELD);
+		if (currentKeyboardState[SDL_SCANCODE_LEFT])
+		{
+			phsComp->SetVelocity(-phsComp->GetMaxSpeed(), 0);
+			//move entity left
+			//player->GetInput(PlayerActions::MOVE_LEFT, InputType::HELD);
+		}
+		if (currentKeyboardState[SDL_SCANCODE_RIGHT])
+		{
+			phsComp->SetVelocity(phsComp->GetMaxSpeed(), 0);
+			//move entity right
+			//player->GetInput(PlayerActions::MOVE_RIGHT, InputType::HELD);
+		}
 	}
 	return quit;
 }
