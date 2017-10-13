@@ -1,10 +1,10 @@
 #include "PhysicsComponent.h"
 #include "Vector2.h"
 #include "Entity.h"
+#include "Time.h"
 
-PhysicsComponent::PhysicsComponent(Entity* parentEntity, float maxSpeed)
+PhysicsComponent::PhysicsComponent(Entity* parentEntity)
 {
-	this->maxSpeed = maxSpeed;
 	velocity = new Vector2(0.0f, 0.0f);
 	this->parentEntity = parentEntity;
 }
@@ -14,11 +14,16 @@ PhysicsComponent::~PhysicsComponent()
 	delete velocity;
 }
 
+void PhysicsComponent::SetMaxSpeed(float maxSpeed)
+{
+	this->maxSpeed = maxSpeed;
+}
+
 void PhysicsComponent::Update()
 {
 	//multiply by delta time
-	parentEntity->SetPosX(parentEntity->GetPosX() + velocity->GetX());
-	parentEntity->SetPosY(parentEntity->GetPosY() + velocity->GetY());
+	parentEntity->SetPosX(parentEntity->GetPosX() + (velocity->GetX() * Time::GetDeltaTime()));
+	parentEntity->SetPosY(parentEntity->GetPosY() + (velocity->GetY() * Time::GetDeltaTime()));
 }
 
 void PhysicsComponent::SetVelocity(float x, float y)

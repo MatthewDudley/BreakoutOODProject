@@ -1,12 +1,14 @@
 #include "Paddle.h"
 #include "SingleImageController.h"
 #include "Vector2.h"
+#include "PhysicsComponent.h"
 
 Paddle::Paddle(float x, float y) : Entity(x, y)//, int width, int height, float collXOffset, float collYOffset) : Entity(x, y, width, height, collXOffset, collYOffset, false)
 {
 	velocity = new Vector2(0.0f, 0.0f);
 	speed = 10.0f;
 	visualComponent = new SingleImageController();
+	physicsComponent = new PhysicsComponent(this);
 }
 
 
@@ -54,6 +56,7 @@ void Player::SetVelocityY(float y)
 void Paddle::Update(std::vector<Entity*> entityList)
 {
 	//update logic here
+	physicsComponent->Update();
 }
 
 /*

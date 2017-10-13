@@ -12,5 +12,5 @@ public:
 	}
 private:
 	Time() {}
-	static float deltaTime
+	static float deltaTime;
 };

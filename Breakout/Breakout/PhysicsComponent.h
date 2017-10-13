@@ -4,10 +4,11 @@ class Entity;
 class PhysicsComponent
 {
 public:
-	PhysicsComponent(Entity* parentEntity, float maxSpeed);
+	PhysicsComponent(Entity* parentEntity);
 	~PhysicsComponent();
 	void SetVelocity(float x, float y);
 	void SetVelocity(Vector2* velocity);
+	void SetMaxSpeed(float maxSpeed);
 	Vector2* GetVelocity();
 	void Update();
 private:

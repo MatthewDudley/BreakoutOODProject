@@ -17,6 +17,8 @@ Entity::~Entity()
 	//col = nullptr;
 	delete visualComponent;
 	visualComponent = nullptr;
+	delete physicsComponent;
+	physicsComponent = nullptr;
 	//delete position;
 	//position = nullptr;
 }
@@ -68,4 +70,8 @@ Collider* Entity::GetCollider()
 VisualComponent* Entity::GetVisualComponent()
 {
 	return visualComponent;
+}
+PhysicsComponent* Entity::GetPhysicsComponent()
+{
+	return physicsComponent;
 }

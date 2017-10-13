@@ -4,6 +4,7 @@
 class Texture;
 class VisualComponent;
 class Vector2;
+class PhysicsComponent;
 //#include"Collider.h"
 //#include "Vector2.h"
 class Entity
@@ -23,6 +24,7 @@ public:
 	//float GetCollYOffset();
 	//Collider* GetCollider();
 	VisualComponent* GetVisualComponent();
+	PhysicsComponent* GetPhysicsComponent();
 
 private:
 	Vector2* position;
@@ -32,6 +34,7 @@ private:
 	//float collSizeOffset;
 
 protected:
-	VisualComponent* visualComponent;
+	VisualComponent* visualComponent = nullptr;
+	PhysicsComponent* physicsComponent = nullptr;
 };
 
