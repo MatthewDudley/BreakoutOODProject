@@ -24,7 +24,8 @@ void Renderer::Render(Entity* entity)//, Camera* camera)
 	//entity->GetTexture()->Render((int)entity->GetPosX() - (int)camera->GetPosX(), (int)entity->GetPosY() - (int)camera->GetPosY(), sdlRenderer);
 	//entity->GetTexture()->Render((int)entity->GetCollider()->GetPosX() - (int)camera->GetPosX() + entity->GetCollider()->GetWidth()/2 , (int)entity->GetCollider()->GetPosY() - (int)camera->GetPosY() + entity->GetCollider()->GetHeight() / 2, sdlRenderer, entity->GetAnimationController()->GetAnimationFrameRect());
 	//entity->GetVisualComponent()->Render((int)entity->GetPosX() - (int)camera->GetPosX(), (int)entity->GetPosY() - (int)camera->GetPosY(), sdlRenderer);
-	entity->GetVisualComponent()->Render((int)entity->GetPosX(), (int)entity->GetPosY(), sdlRenderer);
+	entity->GetVisualComponent()->Render(entity->GetPosX(), entity->GetPosY(), sdlRenderer);
+
 	//if (debug == true)
 	//{
 	//	SDL_Rect newRect{ (int)entity->GetCollider()->GetPosX() - (int)camera->GetPosX(), (int)entity->GetCollider()->GetPosY() - (int)camera->GetPosY(), entity->GetCollider()->GetWidth(), entity->GetCollider()->GetHeight() };
@@ -38,7 +39,8 @@ void Renderer::Draw(std::vector<Entity*>* entityList)//, Camera* camera)
 	SDL_RenderClear(sdlRenderer);
 	for (unsigned i = 0; i < entityList->size(); ++i)
 	{
-		Render((*entityList)[i]);
+		//Render((*entityList)[i]);
+		Render(entityList->at(i));
 	}
 	SDL_RenderPresent(sdlRenderer);
 }

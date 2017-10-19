@@ -38,7 +38,7 @@ void Game::Start()
 		Paddle paddle(250, 250);
 		paddle.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
 		paddle.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 100);
-		paddle.GetPhysicsComponent()->SetMaxSpeed(10.0f);
+		paddle.GetPhysicsComponent()->SetMaxSpeed(100.0f);
 
 		std::vector<Entity*> entityList;
 		entityList.push_back(&paddle);

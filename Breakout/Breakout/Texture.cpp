@@ -60,6 +60,7 @@ void Texture::Render(int posX, int posY, SDL_Rect* cutRect, SDL_Renderer* render
 	else
 	{
 		SDL_Rect rect{ posX - cutRect->w / 2, posY - cutRect->h / 2, cutRect->w, cutRect->h };
-		SDL_RenderCopyEx(renderer, texture, cutRect, &rect, 0.0, NULL, flip);
+		//SDL_RenderCopyEx(renderer, texture, cutRect, &rect, 0.0, NULL, flip);
+		SDL_RenderCopyEx(renderer, texture, cutRect, &rect, 0.0, NULL, flip);	
 	}
 }
