@@ -59,8 +59,14 @@ void Texture::Render(int posX, int posY, SDL_Rect* cutRect, SDL_Renderer* render
 	}
 	else
 	{
-		SDL_Rect rect{ posX - cutRect->w / 2, posY - cutRect->h / 2, cutRect->w, cutRect->h };
-		//SDL_RenderCopyEx(renderer, texture, cutRect, &rect, 0.0, NULL, flip);
+		//If we want the position to be the middle, do this calculation
+		//SDL_Rect rect{ posX - cutRect->w / 2, posY - cutRect->h / 2, cutRect->w, cutRect->h };
+
+		//If we want the position to be the top left do this calcuation
+		SDL_Rect rect{ posX, posY, cutRect->w, cutRect->h };
+
+		//Theres a memory leak here. Why? I dont fucking know
+		//in the texture portion fo rendercopyex. Fix at a later date
 		SDL_RenderCopyEx(renderer, texture, cutRect, &rect, 0.0, NULL, flip);	
 	}
 }

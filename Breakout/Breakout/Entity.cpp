@@ -1,38 +1,39 @@
 #include "Entity.h"
 #include "Texture.h"
 #include "Vector2.h"
+#include "Collider.h"
 
-Entity::Entity(float x, float y)//, int collWidth, int collHeight, float collXOffset, float collYOffset, bool isTrigger)
+Entity::Entity(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset)
 {
-	//col = new Collider(x + collXOffset, y + collYOffset, collWidth, collHeight, isTrigger);
+	col = new Collider(x + collXOffset, y + collYOffset, collWidth, collHeight);
 	position = new Vector2(x, y);
-	//this->collXOffset = collXOffset;
-	//this->collYOffset = collYOffset;
+	this->collXOffset = collXOffset;
+	this->collYOffset = collYOffset;
 }
 
 
 Entity::~Entity()
 {
-	//delete col;
-	//col = nullptr;
+	delete col;
+	col = nullptr;
 	delete visualComponent;
 	visualComponent = nullptr;
 	delete physicsComponent;
 	physicsComponent = nullptr;
-	//delete position;
-	//position = nullptr;
+	delete position;
+	position = nullptr;
 }
 
 
 void Entity::SetPosX(float x)
 {
 	position->SetX(x);
-	//col->SetPosX(x + collXOffset);
+	col->SetPosX(x + collXOffset);
 }
 void Entity::SetPosY(float y)
 {
 	position->SetY(y);
-	//col->SetPosY(y + collYOffset);
+	col->SetPosY(y + collYOffset);
 }
 /*
 void Entity::SetColliderWidth(int width)
@@ -62,11 +63,12 @@ float Entity::GetCollYOffset()
 {
 	return collYOffset;
 }
+*/
 Collider* Entity::GetCollider()
 {
 	return col;
 }
-*/
+
 VisualComponent* Entity::GetVisualComponent()
 {
 	return visualComponent;

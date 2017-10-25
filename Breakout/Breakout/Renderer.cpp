@@ -1,6 +1,7 @@
 #include "Renderer.h"
 #include "Entity.h"
 #include "VisualComponent.h"
+#include "Collider.h"
 Renderer::Renderer(int screenWidth, int screenHeight, bool debug)
 {
 	this->screenWidth = screenWidth;
@@ -26,11 +27,11 @@ void Renderer::Render(Entity* entity)//, Camera* camera)
 	//entity->GetVisualComponent()->Render((int)entity->GetPosX() - (int)camera->GetPosX(), (int)entity->GetPosY() - (int)camera->GetPosY(), sdlRenderer);
 	entity->GetVisualComponent()->Render(entity->GetPosX(), entity->GetPosY(), sdlRenderer);
 
-	//if (debug == true)
-	//{
-	//	SDL_Rect newRect{ (int)entity->GetCollider()->GetPosX() - (int)camera->GetPosX(), (int)entity->GetCollider()->GetPosY() - (int)camera->GetPosY(), entity->GetCollider()->GetWidth(), entity->GetCollider()->GetHeight() };
-	//	SDL_RenderDrawRect(sdlRenderer, &newRect);
-	//}
+	if (debug == true)
+	{
+		SDL_Rect newRect{ (int)entity->GetCollider()->GetPosX(), (int)entity->GetCollider()->GetPosY(), entity->GetCollider()->GetWidth(), entity->GetCollider()->GetHeight() };
+		SDL_RenderDrawRect(sdlRenderer, &newRect);
+	}
 }
 
 

@@ -5,12 +5,13 @@ class Texture;
 class VisualComponent;
 class Vector2;
 class PhysicsComponent;
+class Collider;
 //#include"Collider.h"
 //#include "Vector2.h"
 class Entity
 {
 public:
-	Entity(float x, float y);//, int collWidth, int collHeight, float collXOffset, float collYOffset, bool isTrigger);
+	Entity(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset);
 	~Entity();
 
 	void SetPosX(float x);
@@ -22,19 +23,19 @@ public:
 	float GetPosY();
 	//float GetCollXOffset();
 	//float GetCollYOffset();
-	//Collider* GetCollider();
+	Collider* GetCollider();
 	VisualComponent* GetVisualComponent();
 	PhysicsComponent* GetPhysicsComponent();
 
 private:
 	Vector2* position;
-	//Collider* col;
-	//float collXOffset;
-	//float collYOffset;
 	//float collSizeOffset;
 
 protected:
+	Collider* col;
 	VisualComponent* visualComponent = nullptr;
 	PhysicsComponent* physicsComponent = nullptr;
+	float collXOffset;
+	float collYOffset;
 };
 

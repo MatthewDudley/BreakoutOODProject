@@ -8,6 +8,7 @@
 #include "Paddle.h"
 #include "Time.h"
 #include "PhysicsComponent.h"
+#include "Ball.h"
 //#include "Animation.h"
 
 Game::Game()
@@ -17,7 +18,7 @@ Game::Game()
 	levelWidth = 1000;
 	levelHeight = 1001;
 
-	renderer = new Renderer(screenWidth, screenHeight, false);
+	renderer = new Renderer(screenWidth, screenHeight, true);
 	mediaManager = new MediaManager();
 	inputManager = new InputManager();
 }
@@ -35,13 +36,19 @@ void Game::Start()
 	if (Initialize())
 	{
 		bool quit = false;
-		Paddle paddle(250, 250);
+		Paddle paddle(250, 250, 10, 10, 0, 0);
 		paddle.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
 		paddle.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 100);
 		paddle.GetPhysicsComponent()->SetMaxSpeed(100.0f);
 
+		Ball ball(250, 0, 10, 10, 0, 0);
+		ball.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
+		ball.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 10, 10);
+		ball.GetPhysicsComponent()->SetMaxSpeed(100.0f);
+
 		std::vector<Entity*> entityList;
 		entityList.push_back(&paddle);
+		entityList.push_back(&ball);
 		/*
 		Player player(350, 150, 18, 26, -9.0f, -12.0f);
 		player.GetAnimationController()->SetTexture(mediaManager->GetTexture(0));
