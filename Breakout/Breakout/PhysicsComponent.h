@@ -12,6 +12,8 @@ public:
 	Vector2* GetVelocity();
 	float GetMaxSpeed();
 	void Update();
+	void UpdateHorizontal();
+	void UpdateVertical();
 private:
 	Vector2* velocity;
 	Entity* parentEntity;

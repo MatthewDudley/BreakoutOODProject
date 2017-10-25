@@ -36,15 +36,16 @@ void Game::Start()
 	if (Initialize())
 	{
 		bool quit = false;
-		Paddle paddle(250, 250, 10, 10, 0, 0);
+		Paddle paddle(250, 250, 100, 100, 0, 0);
 		paddle.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
 		paddle.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 100);
 		paddle.GetPhysicsComponent()->SetMaxSpeed(100.0f);
 
-		Ball ball(250, 0, 10, 10, 0, 0);
+		Ball ball(250, 10, 10, 10, 0, 0);
 		ball.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
 		ball.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 10, 10);
 		ball.GetPhysicsComponent()->SetMaxSpeed(100.0f);
+		ball.GetPhysicsComponent()->SetVelocity(0, 80);
 
 		std::vector<Entity*> entityList;
 		entityList.push_back(&paddle);
@@ -76,6 +77,7 @@ void Game::Start()
 			//player.Update(entityList);
 			//camera.Reset();
 			paddle.Update();
+			ball.Update(entityList);
 			renderer->Draw(&entityList);// , &camera);
 			//SDL_Delay(30);
 		}

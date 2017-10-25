@@ -19,8 +19,9 @@ Ball::~Ball()
 void Ball::Update(std::vector<Entity*> entityList)
 {
 	//update logic here
-	physicsComponent->Update();
+	physicsComponent->UpdateHorizontal();
 	CollisionSide horizontalSide = HandleHorizontalCollisions(entityList);
+	physicsComponent->UpdateVertical();
 	CollisionSide verticalSide = HandleVerticalCollisions(entityList);
 	if (horizontalSide != CollisionSide::NONE || verticalSide != CollisionSide::NONE)
 	{
@@ -64,12 +65,12 @@ Ball::CollisionSide Ball::HandleHorizontalCollisions(std::vector<Entity*> entity
 				//If there was a collision
 				if (col->GetPosX() > entityList[i]->GetCollider()->GetPosX())
 				{
-					SetPosX(entityList[i]->GetCollider()->GetPosX() + entityList[i]->GetCollider()->GetWidth() - collXOffset); //+  collisionResolutionOffset);
+					SetPosX(entityList[i]->GetCollider()->GetPosX() + entityList[i]->GetCollider()->GetWidth() - collXOffset + collisionResolutionOffset); //+  collisionResolutionOffset);
 					side = CollisionSide::LEFT;
 				}
 				else
 				{
-					SetPosX(entityList[i]->GetCollider()->GetPosX() - GetCollider()->GetWidth() - collXOffset);//- collisionResolutionOffset - this->GetCollXOffset());
+					SetPosX(entityList[i]->GetCollider()->GetPosX() - col->GetWidth() - collXOffset - collisionResolutionOffset);//- collisionResolutionOffset - this->GetCollXOffset());
 					side = CollisionSide::RIGHT;
 				}
 				//end if there was a collision
@@ -90,12 +91,12 @@ Ball::CollisionSide Ball::HandleVerticalCollisions(std::vector<Entity*> entityLi
 			{
 				if (col->GetPosY() < (entityList[i]->GetCollider()->GetPosY()))
 				{
-					SetPosY(entityList[i]->GetCollider()->GetPosY() - col->GetHeight() - collYOffset);// - collisionResolutionOffset - this->GetCollYOffset());
+					SetPosY(entityList[i]->GetCollider()->GetPosY() - col->GetHeight() - collYOffset - collisionResolutionOffset);// - collisionResolutionOffset - this->GetCollYOffset());
 					side = CollisionSide::BOTTOM;
 				}
 				else
 				{
-					SetPosY(entityList[i]->GetCollider()->GetPosY() + entityList[i]->GetCollider()->GetHeight() - collYOffset);//+ collisionResolutionOffset - this->GetCollYOffset());
+					SetPosY(entityList[i]->GetCollider()->GetPosY() + entityList[i]->GetCollider()->GetHeight() - collYOffset + collisionResolutionOffset);//+ collisionResolutionOffset - this->GetCollYOffset());
 					side = CollisionSide::TOP;
 				}
 			}

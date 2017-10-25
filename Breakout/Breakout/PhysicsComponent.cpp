@@ -26,8 +26,16 @@ float PhysicsComponent::GetMaxSpeed()
 
 void PhysicsComponent::Update()
 {
-	//multiply by delta time
+	UpdateHorizontal();
+	UpdateVertical();
+}
+
+void PhysicsComponent::UpdateHorizontal()
+{
 	parentEntity->SetPosX(parentEntity->GetPosX() + (velocity->GetX() * Time::GetDeltaTime()));
+}
+void PhysicsComponent::UpdateVertical()
+{
 	parentEntity->SetPosY(parentEntity->GetPosY() + (velocity->GetY() * Time::GetDeltaTime()));
 }
 
