@@ -28,15 +28,33 @@ void Ball::Update(std::vector<Entity*> entityList)
 		//If there was a collision
 		if (verticalSide == CollisionSide::NONE)
 		{
-			//if it was a horizontal collision
+			if (horizontalSide == CollisionSide::LEFT)
+			{
+				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(physicsComponent->GetVelocity(), &Vector2(1, 0)));
+			}
+			else
+			{
+				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(physicsComponent->GetVelocity(), &Vector2(-1, 0)));
+
+			}
 		}
 		else if (horizontalSide == CollisionSide::NONE)
 		{
 			//if it was a vertical collision
+			if (verticalSide == CollisionSide::BOTTOM)
+			{
+				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(physicsComponent->GetVelocity(), &Vector2(0, 1)));
+			}
+			else
+			{
+				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(physicsComponent->GetVelocity(), &Vector2(0, -1)));
+			}
 		}
 		else
 		{
-			//if it was both a vertial and horizontal collision (corner)
+			//if it was both a vertical and horizontal collision (corner)
+			//Never actually gets called due to collision offsets. look into?
+			physicsComponent->SetVelocity(-physicsComponent->GetVelocity()->GetX(), -physicsComponent->GetVelocity()->GetY());
 		}
 	}
 }
