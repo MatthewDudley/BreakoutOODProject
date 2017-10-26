@@ -9,6 +9,7 @@
 #include "Time.h"
 #include "PhysicsComponent.h"
 #include "Ball.h"
+#include "Wall.h"
 //#include "Animation.h"
 
 Game::Game()
@@ -18,7 +19,7 @@ Game::Game()
 	levelWidth = 1000;
 	levelHeight = 1001;
 
-	renderer = new Renderer(screenWidth, screenHeight, true);
+	renderer = new Renderer(screenWidth, screenHeight, false);
 	mediaManager = new MediaManager();
 	inputManager = new InputManager();
 }
@@ -36,9 +37,9 @@ void Game::Start()
 	if (Initialize())
 	{
 		bool quit = false;
-		Paddle paddle(250, 250, 100, 100, 0, 0);
+		Paddle paddle(screenWidth/2, screenHeight - 100, 100, 15, 0, 0);
 		paddle.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
-		paddle.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 100);
+		paddle.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
 		paddle.GetPhysicsComponent()->SetMaxSpeed(100.0f);
 
 		Ball ball(250, 100, 10, 10, 0, 0);
@@ -47,9 +48,30 @@ void Game::Start()
 		ball.GetPhysicsComponent()->SetMaxSpeed(100.0f);
 		ball.GetPhysicsComponent()->SetVelocity(50,180);
 
+		int wallThickness = 25;
+		Wall topWall(0, 0, screenWidth, wallThickness);
+		topWall.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
+		topWall.GetSingleImageController()->SetCurrentSpriteRect(0, 0, screenWidth, wallThickness);
+
+		Wall bottomWall(0, screenHeight - wallThickness, screenWidth, wallThickness);
+		bottomWall.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
+		bottomWall.GetSingleImageController()->SetCurrentSpriteRect(0, 0, screenWidth, wallThickness);
+
+		Wall leftWall(0, 0, wallThickness, screenHeight);
+		leftWall.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
+		leftWall.GetSingleImageController()->SetCurrentSpriteRect(0, 0, wallThickness, screenHeight);
+
+		Wall rightWall(screenWidth - wallThickness, 0, wallThickness, screenHeight);
+		rightWall.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
+		rightWall.GetSingleImageController()->SetCurrentSpriteRect(0, 0, wallThickness, screenHeight);
+
 		std::vector<Entity*> entityList;
 		entityList.push_back(&paddle);
 		entityList.push_back(&ball);
+		entityList.push_back(&topWall);
+		entityList.push_back(&bottomWall);
+		entityList.push_back(&leftWall);
+		entityList.push_back(&rightWall);
 		/*
 		Player player(350, 150, 18, 26, -9.0f, -12.0f);
 		player.GetAnimationController()->SetTexture(mediaManager->GetTexture(0));
