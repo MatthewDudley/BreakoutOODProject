@@ -1,7 +1,7 @@
 #include "Wall.h"
 #include "SingleImageController.h"
 
-Wall::Wall(float x, float y, int collWidth, int collHeight) : Entity(x, y, collWidth, collHeight, 0, 0)
+Wall::Wall(float x, float y, int collWidth, int collHeight) : Entity(x, y, collWidth, collHeight, 0, 0, "wall")
 {
 	visualComponent = new SingleImageController();
 }

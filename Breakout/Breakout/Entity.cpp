@@ -3,12 +3,13 @@
 #include "Vector2.h"
 #include "Collider.h"
 
-Entity::Entity(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset)
+Entity::Entity(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset, std::string tag)
 {
 	col = new Collider(x + collXOffset, y + collYOffset, collWidth, collHeight);
 	position = new Vector2(x, y);
 	this->collXOffset = collXOffset;
 	this->collYOffset = collYOffset;
+	this->tag = tag;
 }
 
 
@@ -76,4 +77,9 @@ VisualComponent* Entity::GetVisualComponent()
 PhysicsComponent* Entity::GetPhysicsComponent()
 {
 	return physicsComponent;
+}
+
+std::string Entity::GetTag()
+{
+	return tag;
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include <SDL.h>
 #include <iostream>
+#include <string>
 class Texture;
 class VisualComponent;
 class Vector2;
@@ -11,7 +12,7 @@ class Collider;
 class Entity
 {
 public:
-	Entity(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset);
+	Entity(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset, std::string tag);
 	~Entity();
 
 	void SetPosX(float x);
@@ -26,6 +27,7 @@ public:
 	Collider* GetCollider();
 	VisualComponent* GetVisualComponent();
 	PhysicsComponent* GetPhysicsComponent();
+	std::string GetTag();
 
 private:
 	Vector2* position;
@@ -37,5 +39,6 @@ protected:
 	PhysicsComponent* physicsComponent = nullptr;
 	float collXOffset;
 	float collYOffset;
+	std::string tag;
 };
 

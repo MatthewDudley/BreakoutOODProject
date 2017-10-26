@@ -2,7 +2,7 @@
 #include "SingleImageController.h"
 #include "PhysicsComponent.h"
 
-Paddle::Paddle(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset) : Entity(x, y, collWidth, collHeight, collXOffset, collYOffset)
+Paddle::Paddle(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset) : Entity(x, y, collWidth, collHeight, collXOffset, collYOffset, "paddle")
 {
 	visualComponent = new SingleImageController();
 	physicsComponent = new PhysicsComponent(this);

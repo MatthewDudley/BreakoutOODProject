@@ -4,7 +4,7 @@
 #include "PhysicsComponent.h"
 #include "Collider.h"
 
-Ball::Ball(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset) : Entity(x, y, collWidth, collHeight, collXOffset, collYOffset)
+Ball::Ball(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset) : Entity(x, y, collWidth, collHeight, collXOffset, collYOffset, "ball")
 {
 	visualComponent = new SingleImageController();
 	physicsComponent = new PhysicsComponent(this);
