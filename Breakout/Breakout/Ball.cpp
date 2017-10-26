@@ -3,6 +3,7 @@
 #include "Vector2.h"
 #include "PhysicsComponent.h"
 #include "Collider.h"
+#include "Brick.h"
 
 Ball::Ball(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset) : Entity(x, y, collWidth, collHeight, collXOffset, collYOffset, "ball")
 {
@@ -103,6 +104,10 @@ Ball::CollisionSide Ball::HandleHorizontalCollisions(std::vector<Entity*> entity
 					//Set the ball on top of the paddle no matter what
 					SetPosY(entityList[i]->GetCollider()->GetPosY() - col->GetHeight() - collYOffset - collisionResolutionOffset);
 				}
+				else if (entityList[i]->GetTag() == "brick")
+				{
+					((Brick*)entityList[i])->Destroy();
+				}
 				//end if there was a collision
 			}
 		}
@@ -135,7 +140,10 @@ Ball::CollisionSide Ball::HandleVerticalCollisions(std::vector<Entity*> entityLi
 					hitPosition = (col->GetPosX() + (col->GetWidth() / 2)) - (entityList[i]->GetCollider()->GetPosX() + (entityList[i]->GetCollider()->GetWidth() / 2));
 					//Set the ball on top of the paddle no matter what
 					SetPosY(entityList[i]->GetCollider()->GetPosY() - col->GetHeight() - collYOffset - collisionResolutionOffset);
-
+				}
+				else if (entityList[i]->GetTag() == "brick")
+				{
+					((Brick*)entityList[i])->Destroy();
 				}
 			}
 		}

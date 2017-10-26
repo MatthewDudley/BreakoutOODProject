@@ -10,6 +10,7 @@
 #include "PhysicsComponent.h"
 #include "Ball.h"
 #include "Wall.h"
+#include "Brick.h"
 //#include "Animation.h"
 
 Game::Game()
@@ -42,11 +43,11 @@ void Game::Start()
 		paddle.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
 		paddle.GetPhysicsComponent()->SetMaxSpeed(100.0f);
 
-		Ball ball(250, 100, 10, 10, 0, 0);
+		Ball ball(screenWidth/2, screenHeight - 125, 10, 10, 0, 0);
 		ball.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
 		ball.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 10, 10);
 		ball.GetPhysicsComponent()->SetMaxSpeed(100.0f);
-		ball.GetPhysicsComponent()->SetVelocity(50,180);
+		ball.GetPhysicsComponent()->SetVelocity(0,180);
 
 		int wallThickness = 25;
 		Wall topWall(0, 0, screenWidth, wallThickness);
@@ -65,7 +66,22 @@ void Game::Start()
 		rightWall.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
 		rightWall.GetSingleImageController()->SetCurrentSpriteRect(0, 0, wallThickness, screenHeight);
 
+
 		std::vector<Entity*> entityList;
+		int brickWidth = 25;
+		int brickHeight = 15;
+		int hOffset = 90;
+		int vOffset = 100;
+		for (int i = 0; i < 25; ++i)
+		{
+			for (int j = 0; j < 10; ++j)
+			{
+				Brick* brick = new Brick(hOffset + i*brickWidth, vOffset + j * brickHeight, brickWidth, brickHeight);
+				brick->GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
+				brick->GetSingleImageController()->SetCurrentSpriteRect(0, 0, brickWidth, brickHeight);
+				entityList.push_back(brick);
+			}
+		}
 		entityList.push_back(&paddle);
 		entityList.push_back(&ball);
 		entityList.push_back(&topWall);
@@ -95,6 +111,7 @@ void Game::Start()
 			Time::CalculateDeltaTime(lastFrameTime, currentFrameTime);
 			//deltaTime = (float)(currentFrameTime - lastFrameTime) / 1000;
 			//player.GetTiming(lastFrameTime, currentFrameTime, deltaTime);
+			CheckDestroyedBricks(&entityList);
 			quit = inputManager->HandleInput(&paddle);//deltaTime, &player);
 			//player.Update(entityList);
 			//camera.Reset();
@@ -104,6 +121,23 @@ void Game::Start()
 			//SDL_Delay(30);
 		}
 	}
+}
+
+void Game::CheckDestroyedBricks(std::vector<Entity*>* entityList)
+{
+	int i = 0;
+	while (i < entityList->size())
+	{
+		if (entityList->at(i)->GetTag() == "brick" && ((Brick*)entityList->at(i))->IsDestroyed())
+		{
+			entityList->erase(entityList->begin() + i);
+		}
+		else
+		{
+			++i;
+		}
+	}
+
 }
 
 bool Game::Initialize()

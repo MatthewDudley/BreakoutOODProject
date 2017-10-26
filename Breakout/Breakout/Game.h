@@ -1,9 +1,11 @@
 #pragma once
 #include <SDL.h>
 #include <iostream>
+#include <vector>
 class Renderer;
 class InputManager;
 class MediaManager;
+class Entity;
 /*
 #include "Entity.h"
 #include "Player.h"
@@ -26,6 +28,7 @@ private:
 	int screenHeight;
 	int levelWidth;
 	int levelHeight;
+	void CheckDestroyedBricks(std::vector<Entity*>* entityList);
 
 	Renderer* renderer;
 	MediaManager* mediaManager;
