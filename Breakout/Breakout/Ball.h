@@ -21,6 +21,7 @@ private:
 	CollisionSide HandleHorizontalCollisions(std::vector<Entity*> entityList);
 	CollisionSide HandleVerticalCollisions(std::vector<Entity*> entityList);
 	float collisionResolutionOffset = 0.001f;
-
+	bool paddleHit = false;
+	float hitPosition = 0.0f;
 };
 

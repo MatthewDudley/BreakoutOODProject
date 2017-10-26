@@ -19,11 +19,17 @@ Ball::~Ball()
 void Ball::Update(std::vector<Entity*> entityList)
 {
 	//update logic here
+	paddleHit = false;
 	physicsComponent->UpdateHorizontal();
 	CollisionSide horizontalSide = HandleHorizontalCollisions(entityList);
 	physicsComponent->UpdateVertical();
 	CollisionSide verticalSide = HandleVerticalCollisions(entityList);
-	if (horizontalSide != CollisionSide::NONE || verticalSide != CollisionSide::NONE)
+	if (paddleHit)
+	{
+		physicsComponent->SetVelocity(hitPosition, -200.0f);
+		std::cout << "PADDLE HIT: " << physicsComponent->GetVelocity()->GetX()<< ", " << physicsComponent->GetVelocity()->GetY()<< std::endl;
+	}
+	else if (horizontalSide != CollisionSide::NONE || verticalSide != CollisionSide::NONE)
 	{
 		//If there was a collision
 		if (verticalSide == CollisionSide::NONE)
@@ -35,7 +41,6 @@ void Ball::Update(std::vector<Entity*> entityList)
 			else
 			{
 				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(physicsComponent->GetVelocity(), &Vector2(-1, 0)));
-
 			}
 		}
 		else if (horizontalSide == CollisionSide::NONE)
@@ -83,13 +88,20 @@ Ball::CollisionSide Ball::HandleHorizontalCollisions(std::vector<Entity*> entity
 				//If there was a collision
 				if (col->GetPosX() > entityList[i]->GetCollider()->GetPosX())
 				{
-					SetPosX(entityList[i]->GetCollider()->GetPosX() + entityList[i]->GetCollider()->GetWidth() - collXOffset + collisionResolutionOffset); //+  collisionResolutionOffset);
+					SetPosX(entityList[i]->GetCollider()->GetPosX() + entityList[i]->GetCollider()->GetWidth() - collXOffset + collisionResolutionOffset);
 					side = CollisionSide::LEFT;
 				}
 				else
 				{
-					SetPosX(entityList[i]->GetCollider()->GetPosX() - col->GetWidth() - collXOffset - collisionResolutionOffset);//- collisionResolutionOffset - this->GetCollXOffset());
+					SetPosX(entityList[i]->GetCollider()->GetPosX() - col->GetWidth() - collXOffset - collisionResolutionOffset);
 					side = CollisionSide::RIGHT;
+				}
+				if (entityList[i]->GetTag() == "paddle") 
+				{
+					paddleHit = true;
+					hitPosition = (col->GetPosX() + (col->GetWidth()/2)) - (entityList[i]->GetCollider()->GetPosX() + (entityList[i]->GetCollider()->GetWidth() / 2));
+					//Set the ball on top of the paddle no matter what
+					SetPosY(entityList[i]->GetCollider()->GetPosY() - col->GetHeight() - collYOffset - collisionResolutionOffset);
 				}
 				//end if there was a collision
 			}
@@ -109,13 +121,21 @@ Ball::CollisionSide Ball::HandleVerticalCollisions(std::vector<Entity*> entityLi
 			{
 				if (col->GetPosY() < (entityList[i]->GetCollider()->GetPosY()))
 				{
-					SetPosY(entityList[i]->GetCollider()->GetPosY() - col->GetHeight() - collYOffset - collisionResolutionOffset);// - collisionResolutionOffset - this->GetCollYOffset());
+					SetPosY(entityList[i]->GetCollider()->GetPosY() - col->GetHeight() - collYOffset - collisionResolutionOffset);
 					side = CollisionSide::BOTTOM;
 				}
 				else
 				{
-					SetPosY(entityList[i]->GetCollider()->GetPosY() + entityList[i]->GetCollider()->GetHeight() - collYOffset + collisionResolutionOffset);//+ collisionResolutionOffset - this->GetCollYOffset());
+					SetPosY(entityList[i]->GetCollider()->GetPosY() + entityList[i]->GetCollider()->GetHeight() - collYOffset + collisionResolutionOffset);
 					side = CollisionSide::TOP;
+				}
+				if (entityList[i]->GetTag() == "paddle")
+				{
+					paddleHit = true;
+					hitPosition = (col->GetPosX() + (col->GetWidth() / 2)) - (entityList[i]->GetCollider()->GetPosX() + (entityList[i]->GetCollider()->GetWidth() / 2));
+					//Set the ball on top of the paddle no matter what
+					SetPosY(entityList[i]->GetCollider()->GetPosY() - col->GetHeight() - collYOffset - collisionResolutionOffset);
+
 				}
 			}
 		}
