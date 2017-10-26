@@ -38,6 +38,10 @@ void Game::Start()
 	if (Initialize())
 	{
 		bool quit = false;
+
+		//Entities are instantiated here
+		//Need to use factories to create entities
+		//PaddleFactory, BallFactory, WallFactory, BrickFactory
 		Paddle paddle(screenWidth/2, screenHeight - 100, 100, 15, 0, 0);
 		paddle.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
 		paddle.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
@@ -137,7 +141,6 @@ void Game::CheckDestroyedBricks(std::vector<Entity*>* entityList)
 			++i;
 		}
 	}
-
 }
 
 bool Game::Initialize()

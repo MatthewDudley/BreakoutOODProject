@@ -13,6 +13,8 @@ InputManager::~InputManager()
 
 bool InputManager::HandleInput(Entity* entity)
 {
+
+	//Command pattern code will go here
 	bool quit = false;
 	PhysicsComponent* phsComp = entity->GetPhysicsComponent();
 	while (SDL_PollEvent(&e) != 0 && e.key.repeat == 0)
@@ -49,17 +51,16 @@ bool InputManager::HandleInput(Entity* entity)
 
 	if (phsComp != nullptr)
 	{
+		//Instead of just moving the paddle, call the move paddle command
 		if (currentKeyboardState[SDL_SCANCODE_LEFT])
 		{
-			phsComp->SetVelocity(-phsComp->GetMaxSpeed(), 0);
 			//move entity left
-			//player->GetInput(PlayerActions::MOVE_LEFT, InputType::HELD);
+			phsComp->SetVelocity(-phsComp->GetMaxSpeed(), 0);
 		}
 		if (currentKeyboardState[SDL_SCANCODE_RIGHT])
 		{
-			phsComp->SetVelocity(phsComp->GetMaxSpeed(), 0);
 			//move entity right
-			//player->GetInput(PlayerActions::MOVE_RIGHT, InputType::HELD);
+			phsComp->SetVelocity(phsComp->GetMaxSpeed(), 0);
 		}
 	}
 	return quit;
