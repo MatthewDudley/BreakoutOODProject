@@ -26,8 +26,6 @@ private:
 	bool Initialize();
 	int screenWidth;
 	int screenHeight;
-	int levelWidth;
-	int levelHeight;
 	void CheckDestroyedBricks(std::vector<Entity*>* entityList);
 
 	Renderer* renderer;

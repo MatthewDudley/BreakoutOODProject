@@ -11,14 +11,11 @@
 #include "Ball.h"
 #include "Wall.h"
 #include "Brick.h"
-//#include "Animation.h"
 
 Game::Game()
 {
 	screenWidth = 800;
 	screenHeight = 601;
-	levelWidth = 1000;
-	levelHeight = 1001;
 
 	renderer = new Renderer(screenWidth, screenHeight, false);
 	mediaManager = new MediaManager();
@@ -46,6 +43,7 @@ void Game::Start()
 		paddle.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
 		paddle.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
 		paddle.GetPhysicsComponent()->SetMaxSpeed(100.0f);
+		paddle.SetBounds(25, screenWidth - 25);
 
 		Ball ball(screenWidth/2, screenHeight - 125, 10, 10, 0, 0);
 		ball.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
@@ -72,13 +70,18 @@ void Game::Start()
 
 
 		std::vector<Entity*> entityList;
-		int brickWidth = 25;
+		int brickWidthCount = 15;
+		int brickHeightCount = 10;
+		int brickWidth = 40;
 		int brickHeight = 15;
-		int hOffset = 90;
+		int screenSpace = screenWidth - (2 * wallThickness);
+		int blockSpace = brickWidth * brickWidthCount;
+		int whiteSpace = screenSpace - blockSpace;
+		int hOffset = (whiteSpace / 2) + wallThickness;
 		int vOffset = 100;
-		for (int i = 0; i < 25; ++i)
+		for (int i = 0; i < brickWidthCount; ++i)
 		{
-			for (int j = 0; j < 10; ++j)
+			for (int j = 0; j < brickHeightCount; ++j)
 			{
 				Brick* brick = new Brick(hOffset + i*brickWidth, vOffset + j * brickHeight, brickWidth, brickHeight);
 				brick->GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));

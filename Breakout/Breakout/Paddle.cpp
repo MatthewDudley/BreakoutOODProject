@@ -1,6 +1,7 @@
 #include "Paddle.h"
 #include "SingleImageController.h"
 #include "PhysicsComponent.h"
+#include "Collider.h"
 
 Paddle::Paddle(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset) : Entity(x, y, collWidth, collHeight, collXOffset, collYOffset, "paddle")
 {
@@ -18,19 +19,22 @@ void Paddle::Update()//std::vector<Entity*> entityList)
 {
 	//update logic here
 	physicsComponent->Update();
+	if (GetPosX() < leftBounds)
+	{
+		SetPosX(leftBounds);
+	}
+	else if (GetPosX() + GetCollider()->GetWidth() > rightBounds)
+	{
+		SetPosX(rightBounds - GetCollider()->GetWidth());
+	}
 }
 
-/*
-bool Player::CheckCollisions(Collider* other)
+void Paddle::SetBounds(float leftBounds, float rightBounds)
 {
-	if ((GetCollider()->GetPosX() + GetCollider()->GetWidth() < other->GetPosX()) || (GetCollider()->GetPosX() > (other->GetPosX() + other->GetWidth())) ||
-		(GetCollider()->GetPosY() + GetCollider()->GetHeight() < other->GetPosY()) || (GetCollider()->GetPosY() > (other->GetPosY() + other->GetHeight())))
-	{
-		return false;
-	}
-	return true;
+	this->leftBounds = leftBounds;
+	this->rightBounds = rightBounds;
 }
-*/
+
 
 SingleImageController* Paddle::GetSingleImageController()
 {

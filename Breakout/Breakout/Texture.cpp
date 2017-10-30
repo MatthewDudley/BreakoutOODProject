@@ -65,8 +65,7 @@ void Texture::Render(int posX, int posY, SDL_Rect* cutRect, SDL_Renderer* render
 		//If we want the position to be the top left do this calcuation
 		SDL_Rect rect{ posX, posY, cutRect->w, cutRect->h };
 
-		//Theres a memory leak here. Why? I dont fucking know
-		//in the texture portion fo rendercopyex. Fix at a later date
+		//Not a memory leak? Memory is just slowly allocated but has an upper bounds
 		SDL_RenderCopyEx(renderer, texture, cutRect, &rect, 0.0, NULL, flip);	
 	}
 }
