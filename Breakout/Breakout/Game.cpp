@@ -39,10 +39,10 @@ void Game::Start()
 		//Entities are instantiated here
 		//Need to use factories to create entities
 		//PaddleFactory, BallFactory, WallFactory, BrickFactory
-		Paddle paddle(screenWidth/2, screenHeight - 100, 100, 15, 0, 0);
+		Paddle paddle(screenWidth/2 - 50, screenHeight - 100, 100, 15, 0, 0);
 		paddle.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
 		paddle.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
-		paddle.GetPhysicsComponent()->SetMaxSpeed(100.0f);
+		paddle.GetPhysicsComponent()->SetMaxSpeed(200.0f);
 		paddle.SetBounds(25, screenWidth - 25);
 
 		Ball ball(screenWidth/2, screenHeight - 125, 10, 10, 0, 0);

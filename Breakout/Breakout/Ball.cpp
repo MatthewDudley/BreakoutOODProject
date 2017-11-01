@@ -27,7 +27,9 @@ void Ball::Update(std::vector<Entity*> entityList)
 	CollisionSide verticalSide = HandleVerticalCollisions(entityList);
 	if (paddleHit)
 	{
-		physicsComponent->SetVelocity(hitPosition, -200.0f);
+		Vector2 ballDirection = Vector2(hitPosition, -50).Normalized();
+		physicsComponent->SetVelocity(&(ballDirection * 300));
+		//physicsComponent->SetVelocity(hitPosition, -200.0f);
 		//std::cout << "PADDLE HIT: " << physicsComponent->GetVelocity()->GetX()<< ", " << physicsComponent->GetVelocity()->GetY()<< std::endl;
 	}
 	else if (horizontalSide != CollisionSide::NONE || verticalSide != CollisionSide::NONE)
