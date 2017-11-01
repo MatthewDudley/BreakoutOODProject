@@ -5,10 +5,13 @@
 #include "Collider.h"
 #include "Brick.h"
 
-Ball::Ball(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset) : Entity(x, y, collWidth, collHeight, collXOffset, collYOffset, "ball")
+Ball::Ball(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset, float speedModifier, float speedUpAmount, float maxSpeed) : Entity(x, y, collWidth, collHeight, collXOffset, collYOffset, "ball")
 {
 	visualComponent = new SingleImageController();
 	physicsComponent = new PhysicsComponent(this);
+	this->maxSpeed = maxSpeed;
+	this->speedUpAmount = speedUpAmount;
+	this->speedModifier = speedModifier;
 }
 
 
@@ -27,23 +30,27 @@ void Ball::Update(std::vector<Entity*> entityList)
 	CollisionSide verticalSide = HandleVerticalCollisions(entityList);
 	if (paddleHit)
 	{
-		Vector2 ballDirection = Vector2(hitPosition, -50).Normalized();
-		physicsComponent->SetVelocity(&(ballDirection * 300));
-		//physicsComponent->SetVelocity(hitPosition, -200.0f);
-		//std::cout << "PADDLE HIT: " << physicsComponent->GetVelocity()->GetX()<< ", " << physicsComponent->GetVelocity()->GetY()<< std::endl;
+		IncrementSpeedModifier();
+		Vector2 newVelocity = Vector2(hitPosition, -50).Normalized() * speedModifier;
+		physicsComponent->SetVelocity(&newVelocity);
 	}
 	else if (horizontalSide != CollisionSide::NONE || verticalSide != CollisionSide::NONE)
 	{
 		//If there was a collision
+		IncrementSpeedModifier();
 		if (verticalSide == CollisionSide::NONE)
 		{
 			if (horizontalSide == CollisionSide::LEFT)
 			{
-				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(1, 0)));
+				//physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(1, 0)));
+				Vector2 newVelocity = Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(1, 0)).Normalized() * speedModifier;
+				physicsComponent->SetVelocity(&newVelocity);
 			}
 			else
 			{
-				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(-1, 0)));
+				Vector2 newVelocity = Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(-1, 0)).Normalized() * speedModifier;
+				physicsComponent->SetVelocity(&newVelocity);
+				//physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(-1, 0)));
 			}
 		}
 		else if (horizontalSide == CollisionSide::NONE)
@@ -51,11 +58,15 @@ void Ball::Update(std::vector<Entity*> entityList)
 			//if it was a vertical collision
 			if (verticalSide == CollisionSide::BOTTOM)
 			{
-				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, 1)));
+				Vector2 newVelocity = Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, 1)).Normalized() * speedModifier;
+				physicsComponent->SetVelocity(&newVelocity);
+				//physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, 1)));
 			}
 			else
 			{
-				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, -1)));
+				Vector2 newVelocity = Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, -1)).Normalized() * speedModifier;
+				physicsComponent->SetVelocity(&newVelocity);
+				//physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, -1)));
 			}
 		}
 		else
@@ -64,6 +75,15 @@ void Ball::Update(std::vector<Entity*> entityList)
 			//Never actually gets called due to collision offsets. look into?
 			physicsComponent->SetVelocity(-physicsComponent->GetVelocity()->GetX(), -physicsComponent->GetVelocity()->GetY());
 		}
+	}
+}
+
+void Ball::IncrementSpeedModifier()
+{
+	speedModifier += speedUpAmount;
+	if (speedModifier > maxSpeed)
+	{
+		speedModifier = maxSpeed;
 	}
 }
 
@@ -78,6 +98,7 @@ bool Ball::CheckCollisions(Collider* other)
 	}
 	return true;
 }
+
 
 Ball::CollisionSide Ball::HandleHorizontalCollisions(std::vector<Entity*> entityList)
 {

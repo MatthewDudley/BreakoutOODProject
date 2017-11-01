@@ -45,7 +45,7 @@ void Game::Start()
 		paddle.GetPhysicsComponent()->SetMaxSpeed(200.0f);
 		paddle.SetBounds(25, screenWidth - 25);
 
-		Ball ball(screenWidth/2, screenHeight - 125, 10, 10, 0, 0);
+		Ball ball(screenWidth/2, screenHeight - 125, 10, 10, 0, 0, 200, 5, 400);
 		ball.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
 		ball.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 10, 10);
 		ball.GetPhysicsComponent()->SetMaxSpeed(100.0f);

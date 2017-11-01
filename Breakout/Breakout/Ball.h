@@ -6,11 +6,8 @@ class Collider;
 class Ball : public Entity
 {
 public:
-	Ball(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset);
+	Ball(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset, float speedModifier, float speedUpAmount, float maxSpeed);
 	~Ball();
-
-
-	//void SetVelocityY(float velocityY);
 
 	void Update(std::vector<Entity*> entityList);
 	SingleImageController* GetSingleImageController();
@@ -22,6 +19,10 @@ private:
 	CollisionSide HandleVerticalCollisions(std::vector<Entity*> entityList);
 	float collisionResolutionOffset = 0.001f;
 	bool paddleHit = false;
+	void IncrementSpeedModifier();
 	float hitPosition = 0.0f;
+	float speedModifier = 0;
+	float speedUpAmount = 0;
+	float maxSpeed = 0;
 };
 
