@@ -70,7 +70,7 @@ void Game::Start()
 
 
 		std::vector<Entity*> entityList;
-		int brickWidthCount = 15;
+		int brickWidthCount = 16;
 		int brickHeightCount = 10;
 		int brickWidth = 40;
 		int brickHeight = 15;

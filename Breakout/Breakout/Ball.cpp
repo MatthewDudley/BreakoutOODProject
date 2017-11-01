@@ -28,7 +28,7 @@ void Ball::Update(std::vector<Entity*> entityList)
 	if (paddleHit)
 	{
 		physicsComponent->SetVelocity(hitPosition, -200.0f);
-		std::cout << "PADDLE HIT: " << physicsComponent->GetVelocity()->GetX()<< ", " << physicsComponent->GetVelocity()->GetY()<< std::endl;
+		//std::cout << "PADDLE HIT: " << physicsComponent->GetVelocity()->GetX()<< ", " << physicsComponent->GetVelocity()->GetY()<< std::endl;
 	}
 	else if (horizontalSide != CollisionSide::NONE || verticalSide != CollisionSide::NONE)
 	{
@@ -37,11 +37,11 @@ void Ball::Update(std::vector<Entity*> entityList)
 		{
 			if (horizontalSide == CollisionSide::LEFT)
 			{
-				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(physicsComponent->GetVelocity(), &Vector2(1, 0)));
+				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(1, 0)));
 			}
 			else
 			{
-				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(physicsComponent->GetVelocity(), &Vector2(-1, 0)));
+				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(-1, 0)));
 			}
 		}
 		else if (horizontalSide == CollisionSide::NONE)
@@ -49,11 +49,11 @@ void Ball::Update(std::vector<Entity*> entityList)
 			//if it was a vertical collision
 			if (verticalSide == CollisionSide::BOTTOM)
 			{
-				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(physicsComponent->GetVelocity(), &Vector2(0, 1)));
+				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, 1)));
 			}
 			else
 			{
-				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(physicsComponent->GetVelocity(), &Vector2(0, -1)));
+				physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, -1)));
 			}
 		}
 		else

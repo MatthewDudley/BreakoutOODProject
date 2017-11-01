@@ -17,7 +17,6 @@ void Brick::Destroy()
 	//Destroy brick, increase score?
 	if (!destroyed)
 	{
-		std::cout << "Block destroyed" << std::endl;
 		destroyed = true;
 	}
 }
