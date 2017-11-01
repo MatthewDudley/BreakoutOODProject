@@ -1,6 +1,6 @@
 #pragma once
 #include "math.h"
-#include <iostream>
+
 class Vector2
 {
 public:
@@ -22,7 +22,6 @@ public:
 	//Destructor
 	~Vector2()
 	{
-		//std::cout << "Vector destroyed: " << GetX() << ", " << GetY() << std::endl;
 		delete[] internalArray;
 	}
 
@@ -50,9 +49,7 @@ public:
 	Vector2 operator*(float scalar) const
 	{
 		//If the argument is a scalar, perform multiplication by scalar operation
-		Vector2 vec(*this);
-		vec.MultiplyByScalar(scalar);
-		return vec;
+		return Vector2::MultiplyByScalar(*this, scalar);
 	}
 	Vector2 operator*(const Vector2& vec) const
 	{
@@ -64,9 +61,7 @@ public:
 	Vector2 operator+(float scalar) const
 	{
 		//If the argument is a scalar, perform component-wise addition by scalar operation
-		Vector2 vec(*this);
-		vec.Add(scalar);
-		return vec;
+		return Vector2::AddScalar(*this, scalar);
 	}
 	Vector2 operator+(const Vector2& vec) const
 	{
@@ -78,9 +73,7 @@ public:
 	Vector2 operator-(float scalar) const
 	{
 		//If the argument is a scalar, perform component-wise subtraction by scalar operation
-		Vector2 vec(*this);
-		vec.Add(-scalar);
-		return vec;
+		return Vector2::AddScalar(*this, -scalar);
 	}
 	Vector2 operator-(const Vector2& vec) const
 	{
@@ -91,9 +84,7 @@ public:
 	//'-' unary minus operator
 	Vector2 operator-() const
 	{
-		Vector2 vec(*this);
-		vec.MultiplyByScalar(-1);
-		return vec;
+		return Vector2::MultiplyByScalar(*this, -1);
 	}
 
 	//'*=' Multiplication-Assignment Overload
@@ -146,18 +137,6 @@ public:
 	void SetX(float x) { internalArray[0] = x; }
 	void SetY(float y) { internalArray[1] = y; }
 
-	void Add(float scalar)//float x, float y)
-	{
-		internalArray[0] += scalar;
-		internalArray[1] += scalar;
-	}
-
-	void MultiplyByScalar(float scalar)
-	{
-		internalArray[0] *= scalar;
-		internalArray[1] *= scalar;
-	}
-
 	static float Dot(const Vector2& v1, const Vector2& v2)
 	{
 		return (v1.GetX() * v2.GetX()) + (v1.GetY() * v2.GetY());
@@ -175,9 +154,17 @@ public:
 	{
 		return Vector2(vec1.GetX() * vec2.GetX(), vec1.GetY() * vec2.GetY());
 	}
+	static Vector2 MultiplyByScalar(const Vector2& vec, float scalar)
+	{
+		return Vector2(vec.GetX() * scalar, vec.GetY() * scalar);
+	}
 	static Vector2 ComponentWiseAddition(const Vector2& vec1, const Vector2& vec2)
 	{
 		return Vector2(vec1.GetX() + vec2.GetX(), vec1.GetY() + vec2.GetY());
+	}
+	static Vector2 AddScalar(const Vector2& vec, float scalar)
+	{
+		return Vector2(vec.GetX() + scalar, vec.GetY() + scalar);
 	}
 
 	static bool CheckEqual(const Vector2& v1, const Vector2& v2)
