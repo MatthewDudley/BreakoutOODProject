@@ -43,6 +43,12 @@
     <Filter Include="Header Files\Utility">
       <UniqueIdentifier>{798fd927-46da-4113-ab56-50a9a301a578}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Factories">
+      <UniqueIdentifier>{82fe13a3-5aa0-416d-9471-f2962e522eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Factories">
+      <UniqueIdentifier>{d1fd2d1c-9b94-42b5-9595-2e4ed45714ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entry.cpp">
@@ -93,6 +99,9 @@
     <ClCompile Include="Brick.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
+    <ClCompile Include="EntityFactory.cpp">
+      <Filter>Source Files\Factories</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -142,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="Brick.h">
       <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityFactory.h">
+      <Filter>Header Files\Factories</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

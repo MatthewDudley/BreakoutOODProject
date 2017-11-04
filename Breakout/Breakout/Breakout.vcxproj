@@ -121,6 +121,7 @@
     <ClCompile Include="Brick.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="Entry.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
@@ -139,6 +140,7 @@
     <ClInclude Include="Brick.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="MediaManager.h" />
