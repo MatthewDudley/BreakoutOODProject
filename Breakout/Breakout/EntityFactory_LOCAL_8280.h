@@ -4,12 +4,12 @@ class Entity;
 class EntityFactory
 {
 public:
-	~EntityFactory();
+	~EntityFactory(); //destructor
 	enum class EntityType { Paddle, Ball, Brick };
 	Entity* CreateEntity(EntityType entityType);
 	static EntityFactory& GetInstance();
 
 private:
-	EntityFactory();
+	EntityFactory(); //Constructor
 	static EntityFactory instance;
 };
