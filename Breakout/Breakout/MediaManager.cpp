@@ -4,6 +4,7 @@
 
 MediaManager::MediaManager()
 {
+	std::cout << "Create media manager" << std::endl;
 }
 
 
@@ -14,6 +15,14 @@ MediaManager::~MediaManager()
 		delete textureVector[i];
 		textureVector[i] = nullptr;
 	}
+}
+
+MediaManager& MediaManager::GetInstance()
+{
+	//No need to check if the instance exists, C++ won't create another static instance
+	//Also thread safe by default, C++ automatically locks on instance creation
+	static MediaManager instance;
+	return instance;
 }
 
 void MediaManager::CreateTexture(std::string path, SDL_Renderer* renderer)

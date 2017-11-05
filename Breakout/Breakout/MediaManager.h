@@ -12,13 +12,15 @@ class Texture;
 class MediaManager
 {
 public:
-	MediaManager();
+	static MediaManager& GetInstance();
 	~MediaManager();
 	void CreateTexture(std::string path, SDL_Renderer* renderer);
 	Texture* GetTexture(int index);
 	//void GeneratePlayerAnimations();
 	//std::map<Animations::AnimationType, Animation*> GetPlayerAnimations();
 private:
+	MediaManager();
+	static MediaManager instance;
 	std::vector<Texture*> textureVector;
 	//std::map<Animations::AnimationType, Animation*> playerAnimations;
 	int textureAmount;

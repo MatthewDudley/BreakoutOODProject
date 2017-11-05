@@ -19,7 +19,7 @@ Game::Game()
 	screenHeight = 601;
 
 	renderer = &Renderer::GetInstance();//new Renderer(screenWidth, screenHeight, false);
-	mediaManager = new MediaManager();
+	mediaManager = &MediaManager::GetInstance();//new MediaManager();
 	inputManager = new InputManager();
 }
 
@@ -27,7 +27,7 @@ Game::Game()
 Game::~Game()
 {
 	//delete renderer;
-	delete mediaManager;
+	//delete mediaManager;
 	delete inputManager;
 }
 
