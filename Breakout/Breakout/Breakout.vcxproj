@@ -124,8 +124,12 @@
     <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="Entry.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LevelState.cpp" />
+    <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MediaManager.cpp" />
+    <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -142,8 +146,12 @@
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityFactory.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LevelState.h" />
+    <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MediaManager.h" />
+    <ClInclude Include="MenuState.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Renderer.h" />
