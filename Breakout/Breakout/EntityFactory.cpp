@@ -1,5 +1,15 @@
 #include "EntityFactory.h"
 
+EntityFactory::EntityFactory(void)
+{
+	std::cout << "Created Factory" << std::endl;
+}
+
+EntityFactory::~EntityFactory(void)
+{
+	std::cout << "Deleted Factory" << std::endl;
+}
+
 Entity* EntityFactory::CreateEntity(EntityFactory::EntityType entityType)
 {
 	//Object which asks for the object is now in charge of that objects memory
