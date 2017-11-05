@@ -12,6 +12,7 @@ Ball::Ball(float x, float y, int collWidth, int collHeight, float collXOffset, f
 	this->maxSpeed = maxSpeed;
 	this->speedUpAmount = speedUpAmount;
 	this->speedModifier = speedModifier;
+	std::cout << "New ball being created" << std::endl;
 }
 
 
