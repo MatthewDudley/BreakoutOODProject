@@ -40,11 +40,10 @@ void Game::Start()
 		//Entities are instantiated here
 		//Need to use factories to create entities
 		//PaddleFactory, BallFactory, WallFactory, BrickFactory
-		
-		EntityFactory* factory = new EntityFactory();
-		Entity* paddleTest = factory->CreateEntity(EntityFactory::EntityType::Paddle);
-		Entity* ballTest = factory->CreateEntity(EntityFactory::EntityType::Ball);
-		Entity* brickTest = factory->CreateEntity(EntityFactory::EntityType::Brick);
+
+		Entity* paddleTest = EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Paddle);
+		Entity* ballTest = EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Ball);
+		Entity* brickTest = EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Brick);
 
 		Paddle paddle(screenWidth/2 - 50, screenHeight - 100, 100, 15, 0, 0);
 		paddle.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));

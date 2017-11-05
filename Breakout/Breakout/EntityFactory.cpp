@@ -1,11 +1,11 @@
 #include "EntityFactory.h"
 
-EntityFactory::EntityFactory(void)
+EntityFactory::EntityFactory()
 {
 	std::cout << "Created Factory" << std::endl;
 }
 
-EntityFactory::~EntityFactory(void)
+EntityFactory::~EntityFactory()
 {
 	std::cout << "Deleted Factory" << std::endl;
 }
