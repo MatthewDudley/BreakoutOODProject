@@ -1,11 +1,11 @@
 #include "EntityFactory.h"
 
-EntityFactory::EntityFactory(void)
+EntityFactory::EntityFactory()
 {
-	std::cout << "Created Factory" << std::endl;
+	std::cout << "Created Factory" << std::endl; //Singleton, should only print out once
 }
 
-EntityFactory::~EntityFactory(void)
+EntityFactory::~EntityFactory()
 {
 	std::cout << "Deleted Factory" << std::endl;
 }
@@ -16,21 +16,24 @@ Entity* EntityFactory::CreateEntity(EntityFactory::EntityType entityType)
 	switch (entityType)
 	{
 	case EntityFactory::EntityType::Ball:
-		//Create a ball
+		//If you pass in a Ball create it here:
 		std::cout << "Created a ball" << std::endl;
-		return nullptr;
+		return nullptr; //return pointer to entity
+
 	case EntityFactory::EntityType::Brick:
-		//Create a brick
+		//If you pass in a Brick create it here
 		std::cout << "Created a brick" << std::endl;
-		return nullptr;
+		return nullptr; //return pointer to entity
+
 	case EntityFactory::EntityType::Paddle:
-		//Create a paddle
+		//If you pass in a Paddle create it here
 		std::cout << "Created a paddle" << std::endl;
-		return nullptr;
+		return nullptr; //return pointer to entity
+
 	default:
 		//Idk how you got here, shouldn't be possible
 		std::cout << "Entity factory cannot create that entity" << std::endl;
-		return nullptr;
+		return nullptr; //return pointer to entity
 	}
 }
 
