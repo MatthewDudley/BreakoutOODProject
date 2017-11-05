@@ -1,4 +1,5 @@
 #include "GameState.h"
+#include "Time.h"
 GameState* GameState::Transition(GameState* newState)
 {
 	this->Exit();
@@ -8,6 +9,7 @@ GameState* GameState::Transition(GameState* newState)
 
 GameState* GameState::Update()
 {
+	Time::CalculateDeltaTime();
 	return nullptr;
 }
 GameState* GameState::HandleInput()

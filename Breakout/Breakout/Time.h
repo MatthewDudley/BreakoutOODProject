@@ -1,4 +1,5 @@
 #pragma once
+#include <SDL.h>
 class Time
 {
 public:
@@ -6,6 +7,13 @@ public:
 	{
 		Time::deltaTime = (float)(currentFrameTime - lastFrameTime) / 1000;
 	}
+	static void CalculateDeltaTime()
+	{
+		Time::lastFrameTime = Time::currentFrameTime;
+		Time::currentFrameTime = SDL_GetTicks();
+		Time::deltaTime = (float)(Time::currentFrameTime - Time::lastFrameTime) / 1000;
+	}
+
 	static float GetDeltaTime()
 	{
 		return Time::deltaTime;
@@ -13,4 +21,6 @@ public:
 private:
 	Time() {}
 	static float deltaTime;
+	static Uint32 lastFrameTime;
+	static Uint32 currentFrameTime;
 };
