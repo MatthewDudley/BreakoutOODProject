@@ -3,11 +3,11 @@
 #include "VisualComponent.h"
 #include "Collider.h"
 #include "math.h"
-Renderer::Renderer(int screenWidth, int screenHeight, bool debug)
+Renderer::Renderer()
 {
-	this->screenWidth = screenWidth;
-	this->screenHeight = screenHeight;
-	this->debug = debug;
+	//this->screenWidth = screenWidth;
+	//this->screenHeight = screenHeight;
+	//this->debug = debug;
 }
 
 
@@ -20,6 +20,15 @@ Renderer::~Renderer()
 	IMG_Quit();
 	SDL_Quit();
 }
+
+Renderer& Renderer::GetInstance()
+{
+	//No need to check if the instance exists, C++ won't create another static instance
+	//Also thread safe by default, C++ automatically locks on instance creation
+	static Renderer instance;
+	return instance;
+}
+
 
 void Renderer::Render(Entity* entity)//, Camera* camera)
 {
@@ -52,8 +61,11 @@ SDL_Renderer* Renderer::GetRenderer()
 	return sdlRenderer;
 }
 
-bool Renderer::Initialize()
+bool Renderer::Initialize(int screenWidth, int screenHeight, bool debug)
 {
+	this->screenWidth = screenWidth;
+	this->screenHeight = screenHeight;
+	this->debug = debug;
 	bool success = true;
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 	{
@@ -90,4 +102,13 @@ bool Renderer::Initialize()
 		}
 	}
 	return success;
+}
+
+int Renderer::GetScreenWidth()
+{
+	return screenWidth;
+}
+int Renderer::GetScreenHeight()
+{
+	return screenHeight;
 }

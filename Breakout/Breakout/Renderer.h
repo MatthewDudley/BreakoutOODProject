@@ -10,14 +10,18 @@ class Entity;
 class Renderer
 {
 public:
-	Renderer(int screenWidth, int screenHeight, bool debug);
+	static Renderer& GetInstance();
 	~Renderer();
 	void Render(Entity* entity);// , Camera* camera);
 	SDL_Renderer* GetRenderer();
 	void SetRenderer(SDL_Renderer* renderer);
 	void Draw(std::vector<Entity*>* entityList);//, Camera* camera);
-	bool Initialize();
+	bool Initialize(int screenWidth, int screenHeight, bool debug);
+	int GetScreenWidth();
+	int GetScreenHeight();
 private:
+	Renderer();
+	static Renderer instance;
 	SDL_Renderer* sdlRenderer;
 	SDL_Window* sdlWindow;
 	int screenWidth;

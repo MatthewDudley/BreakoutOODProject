@@ -18,7 +18,7 @@ Game::Game()
 	screenWidth = 800;
 	screenHeight = 601;
 
-	renderer = new Renderer(screenWidth, screenHeight, false);
+	renderer = &Renderer::GetInstance();//new Renderer(screenWidth, screenHeight, false);
 	mediaManager = new MediaManager();
 	inputManager = new InputManager();
 }
@@ -26,7 +26,7 @@ Game::Game()
 
 Game::~Game()
 {
-	delete renderer;
+	//delete renderer;
 	delete mediaManager;
 	delete inputManager;
 }
@@ -157,7 +157,7 @@ void Game::CheckDestroyedBricks(std::vector<Entity*>* entityList)
 
 bool Game::Initialize()
 {
-	if (renderer->Initialize() == true)
+	if (renderer->Initialize(screenWidth, screenHeight, false) == true)
 	{
 		mediaManager->CreateTexture("Media/Sprites/block1.png", renderer->GetRenderer());
 		/*
