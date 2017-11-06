@@ -17,6 +17,7 @@ LevelState::LevelState()
 
 LevelState::~LevelState()
 {
+	//Delete all elements of the entity list
 	for (int i = 0; i < entityList.size(); ++i)
 	{
 		delete entityList.at(i);
@@ -26,23 +27,28 @@ LevelState::~LevelState()
 
 void LevelState::Enter()
 {
+	//Set up the level
 	inputManager = new InputManager();
 	std::cout << "Entering Level State" << std::endl;
 	int screenWidth = Renderer::GetInstance().GetScreenWidth();
 	int screenHeight = Renderer::GetInstance().GetScreenHeight();
 
+	//Create entities, factory method will be used here
+	//Create a paddle
 	paddle = new Paddle(screenWidth / 2 - 50, screenHeight - 100, 100, 15, 0, 0);
 	paddle->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
 	paddle->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
-	paddle->GetPhysicsComponent()->SetMaxSpeed(200.0f);
+	paddle->GetPhysicsComponent()->SetMaxSpeed(400.0f);
 	paddle->SetBounds(25, screenWidth - 25);
 
+	//Create a ball
 	ball = new Ball(screenWidth / 2, screenHeight - 125, 10, 10, 0, 0, 200, 5, 400);
 	ball->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
 	ball->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 10, 10);
 	ball->GetPhysicsComponent()->SetMaxSpeed(100.0f);
 	ball->GetPhysicsComponent()->SetVelocity(0, 180);
 
+	//Create walls for level boundaries 
 	int wallThickness = 25;
 	Wall* topWall = new Wall(0, 0, screenWidth, wallThickness);
 	topWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
@@ -60,6 +66,7 @@ void LevelState::Enter()
 	rightWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
 	rightWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, wallThickness, screenHeight);
 
+	//Create bricks
 	int brickWidthCount = 16;
 	int brickHeightCount = 10;
 	int brickWidth = 40;
@@ -79,6 +86,8 @@ void LevelState::Enter()
 			entityList.push_back(brick);
 		}
 	}
+
+	//Add the rest of the entities to the entity list
 	entityList.push_back(paddle);
 	entityList.push_back(ball);
 	entityList.push_back(topWall);
@@ -92,16 +101,24 @@ void LevelState::Exit()
 }
 GameState* LevelState::Update()
 {
+	//Update the level
 	bool quit = false;
+	//Destroy the bricks that were hit last frame
 	CheckDestroyedBricks();
+	//Handle input !TO CHANGE!
 	quit = inputManager->HandleInput(paddle);
+	//Check if we quit !TO CHANGE!
 	if (quit)
 	{
 		return GameState::Transition(new ExitState());
 	}
+	//Update the paddle position
 	paddle->Update();
+	//Update the ball position and check for collisions
 	ball->Update(entityList);
+	//Draw everythhing to the screen. Move to base?
 	Renderer::GetInstance().Draw(&entityList);
+	//Delegate update to the base class 
 	return GameState::Update();
 }
 GameState* LevelState::HandleInput()
@@ -112,6 +129,7 @@ GameState* LevelState::HandleInput()
 
 void LevelState::CheckDestroyedBricks()
 {
+	//Check if a block is destroyed. If so, remove it form the entity list and delete it
 	int i = 0;
 	while (i < entityList.size())
 	{

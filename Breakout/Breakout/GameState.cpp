@@ -1,5 +1,4 @@
 #include "GameState.h"
-#include "Time.h"
 GameState* GameState::Transition(GameState* newState)
 {
 	this->Exit();
