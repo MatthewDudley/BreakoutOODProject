@@ -1,4 +1,5 @@
 #include "LevelState.h"
+#include "ExitState.h"
 #include "Entity.h"
 #include "Brick.h"
 #include "Ball.h"
@@ -16,8 +17,10 @@ LevelState::LevelState()
 
 LevelState::~LevelState()
 {
-	delete paddle;
-	delete ball;
+	for (int i = 0; i < entityList.size(); ++i)
+	{
+		delete entityList.at(i);
+	}
 	delete inputManager;
 }
 
@@ -27,11 +30,13 @@ void LevelState::Enter()
 	std::cout << "Entering Level State" << std::endl;
 	int screenWidth = Renderer::GetInstance().GetScreenWidth();
 	int screenHeight = Renderer::GetInstance().GetScreenHeight();
+
 	paddle = new Paddle(screenWidth / 2 - 50, screenHeight - 100, 100, 15, 0, 0);
 	paddle->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
 	paddle->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
 	paddle->GetPhysicsComponent()->SetMaxSpeed(200.0f);
 	paddle->SetBounds(25, screenWidth - 25);
+
 	ball = new Ball(screenWidth / 2, screenHeight - 125, 10, 10, 0, 0, 200, 5, 400);
 	ball->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
 	ball->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 10, 10);
@@ -92,7 +97,7 @@ GameState* LevelState::Update()
 	quit = inputManager->HandleInput(paddle);
 	if (quit)
 	{
-		//quit the game
+		return GameState::Transition(new ExitState());
 	}
 	paddle->Update();
 	ball->Update(entityList);

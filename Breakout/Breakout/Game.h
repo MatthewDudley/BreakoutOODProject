@@ -1,11 +1,7 @@
 #pragma once
 #include <SDL.h>
 #include <iostream>
-#include <vector>
-class Renderer;
-class InputManager;
-class MediaManager;
-class Entity;
+
 class GameState;
 /*
 #include "Entity.h"
