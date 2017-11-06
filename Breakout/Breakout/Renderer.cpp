@@ -3,6 +3,7 @@
 #include "VisualComponent.h"
 #include "Collider.h"
 #include "math.h"
+
 Renderer::Renderer()
 {
 	//this->screenWidth = screenWidth;
