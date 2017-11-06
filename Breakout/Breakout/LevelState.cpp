@@ -135,6 +135,7 @@ void LevelState::CheckDestroyedBricks()
 	{
 		if (entityList.at(i)->GetTag() == "brick" && ((Brick*)entityList.at(i))->IsDestroyed())
 		{
+			delete entityList.at(i);
 			entityList.erase(entityList.begin() + i);
 		}
 		else
