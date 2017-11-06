@@ -6,6 +6,9 @@
 #include "Wall.h"
 #include "SingleImageController.h"
 #include "PhysicsComponent.h"
+#include "Renderer.h"
+#include "MediaManager.h"
+#include "InputManager.h"
 LevelState::LevelState()
 {
 }
@@ -13,40 +16,44 @@ LevelState::LevelState()
 
 LevelState::~LevelState()
 {
+	delete paddle;
+	delete ball;
+	delete inputManager;
 }
 
 void LevelState::Enter()
 {
+	inputManager = new InputManager();
 	std::cout << "Entering Level State" << std::endl;
-	/*
-	Paddle paddle(screenWidth / 2 - 50, screenHeight - 100, 100, 15, 0, 0);
-	paddle.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
-	paddle.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
-	paddle.GetPhysicsComponent()->SetMaxSpeed(200.0f);
-	paddle.SetBounds(25, screenWidth - 25);
-
-	Ball ball(screenWidth / 2, screenHeight - 125, 10, 10, 0, 0, 200, 5, 400);
-	ball.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
-	ball.GetSingleImageController()->SetCurrentSpriteRect(0, 0, 10, 10);
-	ball.GetPhysicsComponent()->SetMaxSpeed(100.0f);
-	ball.GetPhysicsComponent()->SetVelocity(0, 180);
+	int screenWidth = Renderer::GetInstance().GetScreenWidth();
+	int screenHeight = Renderer::GetInstance().GetScreenHeight();
+	paddle = new Paddle(screenWidth / 2 - 50, screenHeight - 100, 100, 15, 0, 0);
+	paddle->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+	paddle->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
+	paddle->GetPhysicsComponent()->SetMaxSpeed(200.0f);
+	paddle->SetBounds(25, screenWidth - 25);
+	ball = new Ball(screenWidth / 2, screenHeight - 125, 10, 10, 0, 0, 200, 5, 400);
+	ball->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+	ball->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 10, 10);
+	ball->GetPhysicsComponent()->SetMaxSpeed(100.0f);
+	ball->GetPhysicsComponent()->SetVelocity(0, 180);
 
 	int wallThickness = 25;
-	Wall topWall(0, 0, screenWidth, wallThickness);
-	topWall.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
-	topWall.GetSingleImageController()->SetCurrentSpriteRect(0, 0, screenWidth, wallThickness);
+	Wall* topWall = new Wall(0, 0, screenWidth, wallThickness);
+	topWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+	topWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, screenWidth, wallThickness);
 
-	Wall bottomWall(0, screenHeight - wallThickness, screenWidth, wallThickness);
-	bottomWall.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
-	bottomWall.GetSingleImageController()->SetCurrentSpriteRect(0, 0, screenWidth, wallThickness);
+	Wall* bottomWall = new Wall(0, screenHeight - wallThickness, screenWidth, wallThickness);
+	bottomWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+	bottomWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, screenWidth, wallThickness);
 
-	Wall leftWall(0, 0, wallThickness, screenHeight);
-	leftWall.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
-	leftWall.GetSingleImageController()->SetCurrentSpriteRect(0, 0, wallThickness, screenHeight);
+	Wall* leftWall= new Wall(0, 0, wallThickness, screenHeight);
+	leftWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+	leftWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, wallThickness, screenHeight);
 
-	Wall rightWall(screenWidth - wallThickness, 0, wallThickness, screenHeight);
-	rightWall.GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
-	rightWall.GetSingleImageController()->SetCurrentSpriteRect(0, 0, wallThickness, screenHeight);
+	Wall* rightWall= new Wall(screenWidth - wallThickness, 0, wallThickness, screenHeight);
+	rightWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+	rightWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, wallThickness, screenHeight);
 
 	int brickWidthCount = 16;
 	int brickHeightCount = 10;
@@ -62,19 +69,17 @@ void LevelState::Enter()
 		for (int j = 0; j < brickHeightCount; ++j)
 		{
 			Brick* brick = new Brick(hOffset + i*brickWidth, vOffset + j * brickHeight, brickWidth, brickHeight);
-			brick->GetSingleImageController()->SetTexture(mediaManager->GetTexture(0));
+			brick->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
 			brick->GetSingleImageController()->SetCurrentSpriteRect(0, 0, brickWidth, brickHeight);
 			entityList.push_back(brick);
 		}
 	}
-	entityList.push_back(&paddle);
-	entityList.push_back(&ball);
-	entityList.push_back(&topWall);
-	entityList.push_back(&bottomWall);
-	entityList.push_back(&leftWall);
-	entityList.push_back(&rightWall);
-	*/
-
+	entityList.push_back(paddle);
+	entityList.push_back(ball);
+	entityList.push_back(topWall);
+	entityList.push_back(bottomWall);
+	entityList.push_back(leftWall);
+	entityList.push_back(rightWall);
 }
 void LevelState::Exit()
 {
@@ -82,13 +87,16 @@ void LevelState::Exit()
 }
 GameState* LevelState::Update()
 {
-	//bool quit = false;
-
-	//CheckDestroyedBricks();
-	//quit = inputManager->HandleInput(&paddle);
-	//paddle.Update();
-	//ball.Update(entityList);
-	//renderer->Draw(&entityList);
+	bool quit = false;
+	CheckDestroyedBricks();
+	quit = inputManager->HandleInput(paddle);
+	if (quit)
+	{
+		//quit the game
+	}
+	paddle->Update();
+	ball->Update(entityList);
+	Renderer::GetInstance().Draw(&entityList);
 	return GameState::Update();
 }
 GameState* LevelState::HandleInput()

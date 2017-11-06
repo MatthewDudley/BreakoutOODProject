@@ -6,6 +6,7 @@ class Renderer;
 class InputManager;
 class MediaManager;
 class Entity;
+class GameState;
 /*
 #include "Entity.h"
 #include "Player.h"
@@ -26,11 +27,13 @@ private:
 	bool Initialize();
 	int screenWidth;
 	int screenHeight;
-	void CheckDestroyedBricks(std::vector<Entity*>* entityList);
+	//void CheckDestroyedBricks(std::vector<Entity*>* entityList);
 
-	Renderer* renderer;
-	MediaManager* mediaManager;
-	InputManager* inputManager;
+	//Renderer* renderer;
+	//MediaManager* mediaManager;
+	//InputManager* inputManager;
+
+	GameState* currentState;
 
 };
 

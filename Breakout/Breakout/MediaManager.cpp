@@ -4,7 +4,6 @@
 
 MediaManager::MediaManager()
 {
-	std::cout << "Create media manager" << std::endl;
 }
 
 

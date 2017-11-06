@@ -12,15 +12,18 @@
 #include "Wall.h"
 #include "Brick.h"
 #include "EntityFactory.h"
+#include "GameState.h"
+#include "LevelState.h"
 
 Game::Game()
 {
 	screenWidth = 800;
 	screenHeight = 601;
 
-	renderer = &Renderer::GetInstance();//new Renderer(screenWidth, screenHeight, false);
-	mediaManager = &MediaManager::GetInstance();//new MediaManager();
-	inputManager = new InputManager();
+	//renderer = &Renderer::GetInstance();//new Renderer(screenWidth, screenHeight, false);
+	//mediaManager = &MediaManager::GetInstance();//new MediaManager();
+	//inputManager = new InputManager();
+	currentState = new LevelState();
 }
 
 
@@ -28,13 +31,32 @@ Game::~Game()
 {
 	//delete renderer;
 	//delete mediaManager;
-	delete inputManager;
+	//delete inputManager;
+	delete currentState;
 }
 
 void Game::Start()
 {
 	if (Initialize())
 	{
+		Uint32 lastFrameTime = 0;
+		Uint32 currentFrameTime = 0;
+		float deltaTime = 0.0f;
+		currentState->Enter();
+		currentFrameTime = SDL_GetTicks();
+		while (true)
+		{
+			lastFrameTime = currentFrameTime;
+			currentFrameTime = SDL_GetTicks();
+			Time::CalculateDeltaTime(lastFrameTime, currentFrameTime);
+			GameState* newState = currentState->Update();
+			if (newState != nullptr)
+			{
+				delete currentState;
+				currentState = newState;
+			}
+		}
+		/*
 		bool quit = false;
 
 		//Entities are instantiated here
@@ -113,7 +135,7 @@ void Game::Start()
 		BlockTest block(350, 345, 100, 100, -50.0f, -50.0f, false);
 		block.GetVisualComponent()->SetTexture(mediaManager->GetTexture(1));
 		block.GetSingleImageController()->SetCurrentSpriteRect(100, 0, 100, 100);
-		*/
+		
 
 		Uint32 lastFrameTime = 0;
 		Uint32 currentFrameTime = 0;
@@ -136,9 +158,10 @@ void Game::Start()
 			renderer->Draw(&entityList);// , &camera);
 			//SDL_Delay(30);
 		}
+		*/
 	}
 }
-
+/*
 void Game::CheckDestroyedBricks(std::vector<Entity*>* entityList)
 {
 	int i = 0;
@@ -154,12 +177,12 @@ void Game::CheckDestroyedBricks(std::vector<Entity*>* entityList)
 		}
 	}
 }
-
+*/
 bool Game::Initialize()
 {
-	if (renderer->Initialize(screenWidth, screenHeight, false) == true)
+	if (Renderer::GetInstance().Initialize(screenWidth, screenHeight, false) == true)//renderer->Initialize(screenWidth, screenHeight, false) == true)
 	{
-		mediaManager->CreateTexture("Media/Sprites/block1.png", renderer->GetRenderer());
+		MediaManager::GetInstance().CreateTexture("Media/Sprites/block1.png", Renderer::GetInstance().GetRenderer());
 		/*
 		mediaManager->CreateTexture("Media/Sprites/megamanx.png", renderer->GetRenderer());
 		//mediaManager->CreateTexture("Media/Sprites/megamanxidlerun.png", renderer->GetRenderer());

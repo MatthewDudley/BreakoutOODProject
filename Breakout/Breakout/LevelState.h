@@ -3,6 +3,9 @@
 #include <vector>
 
 class Entity;
+class Paddle;
+class Ball;
+class InputManager;
 class LevelState : public GameState
 {
 public:
@@ -15,4 +18,7 @@ public:
 private:
 	void CheckDestroyedBricks();
 	std::vector<Entity*> entityList;
+	Ball* ball;
+	Paddle* paddle;
+	InputManager* inputManager;
 };

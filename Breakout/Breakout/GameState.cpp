@@ -9,7 +9,6 @@ GameState* GameState::Transition(GameState* newState)
 
 GameState* GameState::Update()
 {
-	Time::CalculateDeltaTime();
 	return nullptr;
 }
 GameState* GameState::HandleInput()

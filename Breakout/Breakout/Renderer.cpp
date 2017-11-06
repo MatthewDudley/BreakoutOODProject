@@ -13,6 +13,7 @@ Renderer::Renderer()
 
 Renderer::~Renderer()
 {
+	std::cout << "Destroying renderer" << std::endl;
 	SDL_DestroyRenderer(sdlRenderer);
 	SDL_DestroyWindow(sdlWindow);
 	sdlRenderer = NULL;
