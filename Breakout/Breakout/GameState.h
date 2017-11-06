@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <vector>
+class Entity;
 class GameState
 {
 public:
@@ -9,5 +11,7 @@ public:
 	virtual GameState* Update();
 	virtual GameState* HandleInput();
 	GameState* Transition(GameState* newState);
+protected:
+	std::vector<Entity*> entityList;
 };
 

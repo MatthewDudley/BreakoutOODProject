@@ -116,8 +116,6 @@ GameState* LevelState::Update()
 	paddle->Update();
 	//Update the ball position and check for collisions
 	ball->Update(entityList);
-	//Draw everythhing to the screen. Move to base?
-	Renderer::GetInstance().Draw(&entityList);
 	//Delegate update to the base class 
 	return GameState::Update();
 }

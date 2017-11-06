@@ -17,7 +17,7 @@ public:
 	GameState* HandleInput();
 private:
 	void CheckDestroyedBricks();
-	std::vector<Entity*> entityList;
+	//std::vector<Entity*> entityList;
 	Ball* ball;
 	Paddle* paddle;
 	InputManager* inputManager;
