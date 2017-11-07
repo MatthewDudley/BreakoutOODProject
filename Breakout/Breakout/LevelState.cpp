@@ -30,21 +30,27 @@ void LevelState::Enter()
 	int screenWidth = Renderer::GetInstance().GetScreenWidth();
 	int screenHeight = Renderer::GetInstance().GetScreenHeight();
 
-	//Create entities, factory method will be used here
+	/**Create entities, factory method will be used here**/
+
 	//Create a paddle
-	//paddle = new Paddle(screenWidth / 2 - 50, screenHeight - 100, 100, 15, 0, 0);
-	//paddle->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
-	//paddle->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
-	//paddle->GetPhysicsComponent()->SetMaxSpeed(400.0f);
-	//paddle->SetBounds(25, screenWidth - 25);
-	paddle = (Paddle*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Paddle, screenWidth / 2, screenHeight - 100);
+	/*paddle = new Paddle(screenWidth / 2 - 50, screenHeight - 100, 100, 15, 0, 0);
+	paddle->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+	paddle->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
+	paddle->GetPhysicsComponent()->SetMaxSpeed(400.0f);
+	paddle->SetBounds(25, screenWidth - 25);*/
 
 	//Create a ball
-	ball = new Ball(screenWidth / 2, screenHeight - 125, 10, 10, 0, 0, 200, 5, 400);
+	/*ball = new Ball(screenWidth / 2, screenHeight - 125, 10, 10, 0, 0, 200, 5, 400);
 	ball->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
 	ball->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 10, 10);
 	ball->GetPhysicsComponent()->SetMaxSpeed(100.0f);
-	ball->GetPhysicsComponent()->SetVelocity(0, 180);
+	ball->GetPhysicsComponent()->SetVelocity(0, 180);*/
+
+	//Instead of using the code block above, we used a Singleton/Factory to house the code for entity creation
+	paddle = (Paddle*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Paddle, screenWidth / 2, screenHeight - 100);
+	
+	ball = (Ball*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Ball, screenWidth / 2, screenHeight - 125);
+
 
 	//Create walls for level boundaries 
 	int wallThickness = 25;

@@ -26,19 +26,22 @@ Entity* EntityFactory::CreateEntity(EntityFactory::EntityType entityType, int x,
 	{
 	case EntityFactory::EntityType::Ball:
 	{
-		//If you pass in a Ball create it here:
-		std::cout << "Creatint a ball" << std::endl;
+		//Ball creation:
 		Ball* ball = new Ball(x, y, 10, 10, 0, 0, 200, 5, 400);
+		ball->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+		ball->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 10, 10);
+		ball->GetPhysicsComponent()->SetMaxSpeed(100.0f);
+		ball->GetPhysicsComponent()->SetVelocity(0, 180);
 		return ball; //return pointer to entity
 	}
 	case EntityFactory::EntityType::Brick:
 	{
-		//If you pass in a Brick create it here
-		std::cout << "Creating a brick" << std::endl;
+		//Brick creation:
 		return nullptr; //return pointer to entity
 	}
 	case EntityFactory::EntityType::Paddle:
 	{
+		//Paddle creation:
 		Paddle* paddle = new Paddle(x - 50, y, 100, 15, 0, 0);
 		paddle->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
 		paddle->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
