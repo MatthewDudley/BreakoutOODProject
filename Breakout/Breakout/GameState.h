@@ -6,7 +6,7 @@ class TextElement;
 class GameState
 {
 public:
-	virtual ~GameState() {}
+	virtual ~GameState();
 	virtual void Enter() {}
 	virtual void Exit() {}
 	virtual GameState* Update();

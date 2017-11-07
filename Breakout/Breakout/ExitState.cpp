@@ -14,6 +14,7 @@ ExitState::~ExitState()
 void ExitState::Enter()
 {
 	std::cout << "Entering Exit State" << std::endl;
+	//textList.push_back(new TextElement(50, 50, "Hello World!"));
 }
 void ExitState::Exit()
 {

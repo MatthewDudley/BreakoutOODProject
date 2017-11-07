@@ -18,11 +18,6 @@ LevelState::LevelState()
 
 LevelState::~LevelState()
 {
-	//Delete all elements of the entity list
-	for (int i = 0; i < entityList.size(); ++i)
-	{
-		delete entityList.at(i);
-	}
 	delete inputManager;
 }
 

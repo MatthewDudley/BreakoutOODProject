@@ -1,5 +1,19 @@
 #include "GameState.h"
 #include "Renderer.h"
+
+GameState::~GameState()
+{
+	//Delete all elements of the entity list
+	for (int i = 0; i < entityList.size(); ++i)
+	{
+		delete entityList.at(i);
+	}
+	//Delete all elements in text list
+	for (int i = 0; i < textList.size(); ++i)
+	{
+		delete textList.at(i);
+	}
+}
 GameState* GameState::Transition(GameState* newState)
 {
 	this->Exit();
