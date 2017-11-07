@@ -37,6 +37,31 @@ void Texture::LoadTexture(std::string path, SDL_Renderer* renderer)
 	}
 }
 
+void Texture::LoadText(std::string message, SDL_Color textColor, TTF_Font* font, SDL_Renderer* renderer)
+{
+	FreeTexture();
+
+	SDL_Surface* loadedSurface = TTF_RenderText_Solid(font, message.c_str(), textColor);
+	if (loadedSurface == NULL)
+	{
+		std::cout << "Unable to load text surface. TTF Error: " << TTF_GetError() << std::endl;
+	}
+	else
+	{
+		texture = SDL_CreateTextureFromSurface(renderer, loadedSurface);
+		if (texture == NULL)
+		{
+			std::cout << "Unable to create texture from text. SDL error: " << SDL_GetError() << std::endl;
+		}
+		else
+		{
+			width = loadedSurface->w;
+			height = loadedSurface->h;
+		}
+		SDL_FreeSurface(loadedSurface);
+	}
+}
+
 void Texture::FreeTexture()
 {
 	if (texture != NULL)
@@ -46,6 +71,15 @@ void Texture::FreeTexture()
 		width = 0;
 		height = 0;
 	}
+}
+
+int Texture::GetWidth()
+{
+	return width;
+}
+int Texture::GetHeight()
+{
+	return height;
 }
 void Texture::Render(int posX, int posY, SDL_Rect* cutRect, SDL_Renderer* renderer, SDL_RendererFlip flip)
 {

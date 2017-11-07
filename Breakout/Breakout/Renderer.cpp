@@ -1,4 +1,6 @@
 #include "Renderer.h"
+#include <SDL_ttf.h>
+#include "TextElement.h"
 #include "Entity.h"
 #include "VisualComponent.h"
 #include "Collider.h"
@@ -44,7 +46,7 @@ void Renderer::Render(Entity* entity)//, Camera* camera)
 }
 
 
-void Renderer::Draw(std::vector<Entity*>* entityList)//, Camera* camera)
+void Renderer::Draw(std::vector<Entity*>* entityList, std::vector<TextElement*>* textList)//, Camera* camera)
 {
 	SDL_RenderClear(sdlRenderer);
 	for (unsigned i = 0; i < entityList->size(); ++i)
@@ -52,8 +54,14 @@ void Renderer::Draw(std::vector<Entity*>* entityList)//, Camera* camera)
 		//Render((*entityList)[i]);
 		Render(entityList->at(i));
 	}
+
+	for (unsigned i = 0; i < textList->size(); ++i)
+	{
+		textList->at(i)->Render();
+	}
 	SDL_RenderPresent(sdlRenderer);
 }
+
 void Renderer::SetRenderer(SDL_Renderer* renderer)
 {
 	sdlRenderer = renderer;
@@ -98,6 +106,11 @@ bool Renderer::Initialize(int screenWidth, int screenHeight, bool debug)
 				if (!(IMG_Init(imgFlags)) & imgFlags)
 				{
 					std::cout << "SDL Img could not be initialized. SDL Img error: " << IMG_GetError() << std::endl;
+					success = false;
+				}
+				if (TTF_Init() == -1)
+				{
+					std::cout << "SDL ttf could not initialize. SDL ttf Error: " << TTF_GetError() << std::endl;
 					success = false;
 				}
 			}

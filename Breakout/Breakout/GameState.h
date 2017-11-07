@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 class Entity;
+class TextElement;
 class GameState
 {
 public:
@@ -13,5 +14,6 @@ public:
 	GameState* Transition(GameState* newState);
 protected:
 	std::vector<Entity*> entityList;
+	std::vector<TextElement*> textList;
 };
 

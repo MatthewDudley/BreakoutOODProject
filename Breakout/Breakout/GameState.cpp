@@ -11,7 +11,7 @@ GameState* GameState::Update()
 {
 	//Render the scene
 	//Since every game state must render to the screen, the base class handles the rendering
-	Renderer::GetInstance().Draw(&entityList);
+	Renderer::GetInstance().Draw(&entityList, &textList);
 	return nullptr;
 }
 GameState* GameState::HandleInput()

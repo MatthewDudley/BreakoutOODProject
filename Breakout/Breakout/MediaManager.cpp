@@ -44,6 +44,18 @@ Texture* MediaManager::GetTexture(int index)
 		return textureVector[index];
 	}
 }
+void MediaManager::LoadFont(std::string path, int fontSize)
+{
+	font = TTF_OpenFont(path.c_str(), fontSize);
+	if (font == NULL)
+	{
+		std::cout << "Failed to load font at path: " << path << ". SDL ttf error: " << TTF_GetError() << std::endl;
+	}
+}
+TTF_Font* MediaManager::GetFont()
+{
+	return font;
+}
 
 /*
 void MediaManager::GeneratePlayerAnimations()

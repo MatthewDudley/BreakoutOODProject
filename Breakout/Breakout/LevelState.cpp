@@ -10,6 +10,7 @@
 #include "Renderer.h"
 #include "MediaManager.h"
 #include "InputManager.h"
+#include "TextElement.h"
 LevelState::LevelState()
 {
 }
@@ -94,6 +95,8 @@ void LevelState::Enter()
 	entityList.push_back(bottomWall);
 	entityList.push_back(leftWall);
 	entityList.push_back(rightWall);
+
+	textList.push_back(new TextElement(50, 50, "Hello World!"));
 }
 void LevelState::Exit()
 {

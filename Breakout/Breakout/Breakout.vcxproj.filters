@@ -123,6 +123,9 @@
     <ClCompile Include="ExitState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TextElement.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -189,6 +192,9 @@
       <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="ExitState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TextElement.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

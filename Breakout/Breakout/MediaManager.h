@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL.h>
+#include <SDL_ttf.h>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -15,7 +16,9 @@ public:
 	static MediaManager& GetInstance();
 	~MediaManager();
 	void CreateTexture(std::string path, SDL_Renderer* renderer);
+	void LoadFont(std::string path, int fontSize);
 	Texture* GetTexture(int index);
+	TTF_Font* GetFont();
 	//void GeneratePlayerAnimations();
 	//std::map<Animations::AnimationType, Animation*> GetPlayerAnimations();
 private:
@@ -24,5 +27,6 @@ private:
 	std::vector<Texture*> textureVector;
 	//std::map<Animations::AnimationType, Animation*> playerAnimations;
 	int textureAmount;
+	TTF_Font* font = nullptr;
 };
 
