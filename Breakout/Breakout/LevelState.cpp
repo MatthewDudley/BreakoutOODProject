@@ -11,6 +11,7 @@
 #include "MediaManager.h"
 #include "InputManager.h"
 #include "TextElement.h"
+#include "EntityFactory.h"
 LevelState::LevelState()
 {
 }
@@ -31,11 +32,12 @@ void LevelState::Enter()
 
 	//Create entities, factory method will be used here
 	//Create a paddle
-	paddle = new Paddle(screenWidth / 2 - 50, screenHeight - 100, 100, 15, 0, 0);
-	paddle->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
-	paddle->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
-	paddle->GetPhysicsComponent()->SetMaxSpeed(400.0f);
-	paddle->SetBounds(25, screenWidth - 25);
+	//paddle = new Paddle(screenWidth / 2 - 50, screenHeight - 100, 100, 15, 0, 0);
+	//paddle->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+	//paddle->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
+	//paddle->GetPhysicsComponent()->SetMaxSpeed(400.0f);
+	//paddle->SetBounds(25, screenWidth - 25);
+	paddle = (Paddle*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Paddle, screenWidth / 2, screenHeight - 100);
 
 	//Create a ball
 	ball = new Ball(screenWidth / 2, screenHeight - 125, 10, 10, 0, 0, 200, 5, 400);
