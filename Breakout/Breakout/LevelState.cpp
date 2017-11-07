@@ -91,7 +91,7 @@ void LevelState::Enter()
 	entityList.push_back(leftWall);
 	entityList.push_back(rightWall);
 
-	textList.push_back(new TextElement(50, 50, "Hello World!"));
+	textList.push_back(new TextElement("Hello World!", 50, 50));
 }
 void LevelState::Exit()
 {

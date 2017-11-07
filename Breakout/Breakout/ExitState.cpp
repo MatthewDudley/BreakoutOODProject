@@ -1,6 +1,6 @@
 #include "ExitState.h"
-
-
+#include "TextElement.h"
+#include "Renderer.h"
 
 ExitState::ExitState()
 {
@@ -14,7 +14,12 @@ ExitState::~ExitState()
 void ExitState::Enter()
 {
 	std::cout << "Entering Exit State" << std::endl;
-	//textList.push_back(new TextElement(50, 50, "Hello World!"));
+	TextElement* text = new TextElement("Close console window to close game");
+	int x = (Renderer::GetInstance().GetScreenWidth() / 2) - (text->GetWidth()/2);
+	int y = (Renderer::GetInstance().GetScreenHeight() / 2) - (text->GetHeight()/2);
+	text->SetX(x);
+	text->SetY(y);
+	textList.push_back(text);
 }
 void ExitState::Exit()
 {
@@ -22,10 +27,9 @@ void ExitState::Exit()
 }
 GameState* ExitState::Update()
 {
-	std::cout << "Close the console window to close the game" << std::endl;
-	return nullptr;
+	return GameState::Update();
 }
 GameState* ExitState::HandleInput()
 {
-	return nullptr;
+	return GameState::HandleInput();
 }
