@@ -23,4 +23,5 @@ private:
 	Paddle* paddle;
 	InputManager* inputManager;
 	ScoreKeeper* scoreKeeper;
+	TextElement* scoreCard;
 };

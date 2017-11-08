@@ -103,8 +103,8 @@ void LevelState::Enter()
 	entityList.push_back(bottomWall);
 	entityList.push_back(leftWall);
 	entityList.push_back(rightWall);
-
-	textList.push_back(new TextElement("Hello World!", 50, 50));
+	scoreCard = new TextElement("Score: 0", 50, 50);
+	textList.push_back(scoreCard);
 }
 void LevelState::Exit()
 {
@@ -128,6 +128,8 @@ GameState* LevelState::Update()
 	//Update the ball position and check for collisions
 	ball->Update(entityList);
 	//Delegate update to the base class 
+
+	scoreCard->SetText("Score: " + std::to_string(scoreKeeper->GetScore()));
 	return GameState::Update();
 }
 GameState* LevelState::HandleInput()

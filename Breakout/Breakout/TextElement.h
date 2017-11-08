@@ -5,6 +5,7 @@ class TextElement
 {
 public:
 	TextElement(std::string message, int x = 0, int y = 0);
+	void SetText(std::string message);
 	int GetWidth();
 	int GetHeight();
 	void Render();
@@ -13,7 +14,7 @@ public:
 	void SetY(int y);
 private:
 	std::string message;
-	Texture* texture;
+	Texture* texture = nullptr;
 	int x;
 	int y;
 	int width;

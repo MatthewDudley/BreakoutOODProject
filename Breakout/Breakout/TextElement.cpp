@@ -21,6 +21,20 @@ TextElement::~TextElement()
 	//delete rect;
 }
 
+void TextElement::SetText(std::string message)
+{
+	this->message = message;
+	if (texture != nullptr)
+	{
+		delete texture;
+		texture = nullptr;
+	}
+	texture = new Texture();
+	texture->LoadText(message, { 0, 0, 0, 0 }, MediaManager::GetInstance().GetFont(), Renderer::GetInstance().GetRenderer());
+	width = texture->GetWidth();
+	height = texture->GetHeight();
+}
+
 int TextElement::GetHeight()
 {
 	return  height;
