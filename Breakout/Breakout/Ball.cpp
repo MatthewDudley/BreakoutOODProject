@@ -4,20 +4,23 @@
 #include "PhysicsComponent.h"
 #include "Collider.h"
 #include "Brick.h"
+#include "Renderer.h"
 
 Ball::Ball(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset, float speedModifier, float speedUpAmount, float maxSpeed) : Entity(x, y, collWidth, collHeight, collXOffset, collYOffset, "ball")
 {
+	startingPosition = new Vector2(x, y);
 	visualComponent = new SingleImageController();
 	physicsComponent = new PhysicsComponent(this);
 	this->maxSpeed = maxSpeed;
 	this->speedUpAmount = speedUpAmount;
 	this->speedModifier = speedModifier;
+	this->startingSpeedModifier = speedModifier;
 }
 
 
 Ball::~Ball()
 {
-
+	delete startingPosition;
 }
 
 void Ball::Update(std::vector<Entity*> entityList)
@@ -76,6 +79,21 @@ void Ball::Update(std::vector<Entity*> entityList)
 			physicsComponent->SetVelocity(-physicsComponent->GetVelocity()->GetX(), -physicsComponent->GetVelocity()->GetY());
 		}
 	}
+
+	if (this->GetPosY() > Renderer::GetInstance().GetScreenHeight())
+	{
+		NotifyAll();
+		ResetBall();
+	}
+
+}
+
+void Ball::ResetBall()
+{
+	this->SetPosX(startingPosition->GetX());
+	this->SetPosY(startingPosition->GetY());
+	speedModifier = startingSpeedModifier;
+	physicsComponent->SetVelocity(0, 180); //Hardcode starting velocity?
 }
 
 void Ball::IncrementSpeedModifier()

@@ -62,9 +62,9 @@ void LevelState::Enter()
 	topWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
 	topWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, screenWidth, wallThickness);
 
-	Wall* bottomWall = new Wall(0, screenHeight - wallThickness, screenWidth, wallThickness);
-	bottomWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
-	bottomWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, screenWidth, wallThickness);
+	//Wall* bottomWall = new Wall(0, screenHeight - wallThickness, screenWidth, wallThickness);
+	//bottomWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+	//bottomWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, screenWidth, wallThickness);
 
 	Wall* leftWall= new Wall(0, 0, wallThickness, screenHeight);
 	leftWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
@@ -100,7 +100,7 @@ void LevelState::Enter()
 	entityList.push_back(paddle);
 	entityList.push_back(ball);
 	entityList.push_back(topWall);
-	entityList.push_back(bottomWall);
+	//entityList.push_back(bottomWall);
 	entityList.push_back(leftWall);
 	entityList.push_back(rightWall);
 	scoreCard = new TextElement("Score: 0", 50, 50);

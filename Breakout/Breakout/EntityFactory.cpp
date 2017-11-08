@@ -31,7 +31,7 @@ Entity* EntityFactory::CreateEntity(EntityFactory::EntityType entityType, int x,
 		ball->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
 		ball->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 10, 10);
 		ball->GetPhysicsComponent()->SetMaxSpeed(100.0f);
-		ball->GetPhysicsComponent()->SetVelocity(0, 180);
+		ball->GetPhysicsComponent()->SetVelocity(0, 180);//Hardcode starting velocity?
 		return ball; //return pointer to entity
 	}
 	case EntityFactory::EntityType::Brick:
