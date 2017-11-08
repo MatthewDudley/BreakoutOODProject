@@ -10,6 +10,7 @@
 Ball::Ball(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset, float speedModifier, float speedUpAmount, float maxSpeed) : Entity(x, y, collWidth, collHeight, collXOffset, collYOffset, "ball")
 {
 	startingPosition = new Vector2(x, y);
+	startingVelocity = new Vector2();
 	visualComponent = new SingleImageController();
 	physicsComponent = new PhysicsComponent(this);
 	this->maxSpeed = maxSpeed;
@@ -22,6 +23,16 @@ Ball::Ball(float x, float y, int collWidth, int collHeight, float collXOffset, f
 Ball::~Ball()
 {
 	delete startingPosition;
+}
+void Ball::SetResetTimer(float resetTimer)
+{
+	this->resetDelay = resetTimer;
+}
+
+void Ball::SetStartingVelocity(float x, float y)
+{
+	startingVelocity->SetX(x);
+	startingVelocity->SetY(y);
 }
 
 void Ball::Update(std::vector<Entity*> entityList)
@@ -106,7 +117,7 @@ void Ball::ResetBall()
 	this->SetPosX(startingPosition->GetX());
 	this->SetPosY(startingPosition->GetY());
 	speedModifier = startingSpeedModifier;
-	physicsComponent->SetVelocity(0, 180); //Hardcode starting velocity?
+	physicsComponent->SetVelocity(startingVelocity);
 	resetting = true;
 }
 

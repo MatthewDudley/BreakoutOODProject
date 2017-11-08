@@ -30,8 +30,10 @@ Entity* EntityFactory::CreateEntity(EntityFactory::EntityType entityType, int x,
 		Ball* ball = new Ball(x, y, 10, 10, 0, 0, 200, 5, 400);
 		ball->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
 		ball->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 10, 10);
+		ball->SetStartingVelocity(0, 180);
+		ball->SetResetTimer(2);//in seconds
 		ball->GetPhysicsComponent()->SetMaxSpeed(100.0f);
-		ball->GetPhysicsComponent()->SetVelocity(0, 180);//Hardcode starting velocity?
+		ball->GetPhysicsComponent()->SetVelocity(0, 180);
 		return ball; //return pointer to entity
 	}
 	case EntityFactory::EntityType::Brick:

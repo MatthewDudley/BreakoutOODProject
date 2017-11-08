@@ -9,12 +9,14 @@ class Ball : public Entity, public Subject
 public:
 	Ball(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset, float speedModifier, float speedUpAmount, float maxSpeed);
 	~Ball();
-
+	void SetStartingVelocity(float x, float y);
+	void SetResetTimer(float resetTimer);
 	void Update(std::vector<Entity*> entityList);
 	SingleImageController* GetSingleImageController();
 
 private:
 	Vector2* startingPosition;
+	Vector2* startingVelocity;
 	enum CollisionSide{NONE, TOP, RIGHT, BOTTOM, LEFT};
 	bool CheckCollisions(Collider* other);
 	CollisionSide HandleHorizontalCollisions(std::vector<Entity*> entityList);
