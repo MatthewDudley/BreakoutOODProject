@@ -6,6 +6,7 @@ class Entity;
 class Paddle;
 class Ball;
 class InputManager;
+class ScoreKeeper;
 class LevelState : public GameState
 {
 public:
@@ -21,4 +22,5 @@ private:
 	Ball* ball;
 	Paddle* paddle;
 	InputManager* inputManager;
+	ScoreKeeper* scoreKeeper;
 };

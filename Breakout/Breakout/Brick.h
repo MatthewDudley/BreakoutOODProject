@@ -1,8 +1,9 @@
 #pragma once
 #include "Entity.h"
+#include "Subject.h"
 
 class SingleImageController;
-class Brick : public Entity
+class Brick : public Entity, public Subject
 {
 public:
 	Brick(float x, float y, int collWidth, int collHeight);

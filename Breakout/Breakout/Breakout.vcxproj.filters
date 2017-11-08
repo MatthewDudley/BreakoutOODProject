@@ -55,6 +55,12 @@
     <Filter Include="Source Files\States">
       <UniqueIdentifier>{847b8e95-cb27-4815-b8e8-bcab7e6e499b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\GameManagement">
+      <UniqueIdentifier>{2290a136-bb13-4c78-bab0-a62509c0365c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameManagement">
+      <UniqueIdentifier>{3ed53317-683a-4c98-8c0d-7e905ac64225}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entry.cpp">
@@ -126,6 +132,12 @@
     <ClCompile Include="TextElement.cpp">
       <Filter>Source Files\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>Source Files\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreKeeper.cpp">
+      <Filter>Source Files\GameManagement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -196,6 +208,15 @@
     </ClInclude>
     <ClInclude Include="TextElement.h">
       <Filter>Header Files\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="Observer.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>Header Files\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreKeeper.h">
+      <Filter>Header Files\GameManagement</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

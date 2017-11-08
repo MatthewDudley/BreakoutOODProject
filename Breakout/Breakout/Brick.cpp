@@ -18,6 +18,7 @@ void Brick::Destroy()
 	if (!destroyed)
 	{
 		destroyed = true;
+		NotifyAll();
 	}
 }
 bool Brick::IsDestroyed()

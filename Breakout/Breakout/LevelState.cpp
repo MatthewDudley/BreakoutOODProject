@@ -12,6 +12,8 @@
 #include "InputManager.h"
 #include "TextElement.h"
 #include "EntityFactory.h"
+
+#include "ScoreKeeper.h"
 LevelState::LevelState()
 {
 }
@@ -20,12 +22,14 @@ LevelState::LevelState()
 LevelState::~LevelState()
 {
 	delete inputManager;
+	delete scoreKeeper;
 }
 
 void LevelState::Enter()
 {
 	//Set up the level
 	inputManager = new InputManager();
+	scoreKeeper = new ScoreKeeper();
 	std::cout << "Entering Level State" << std::endl;
 	int screenWidth = Renderer::GetInstance().GetScreenWidth();
 	int screenHeight = Renderer::GetInstance().GetScreenHeight();
@@ -88,6 +92,7 @@ void LevelState::Enter()
 			brick->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
 			brick->GetSingleImageController()->SetCurrentSpriteRect(0, 0, brickWidth, brickHeight);
 			entityList.push_back(brick);
+			brick->AddObserver(scoreKeeper);
 		}
 	}
 
