@@ -53,7 +53,7 @@ void LevelState::Enter()
 	//Instead of using the code block above, we used a Singleton/Factory to house the code for entity creation
 	paddle = (Paddle*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Paddle, screenWidth / 2, screenHeight - 100);
 	
-	ball = (Ball*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Ball, screenWidth / 2, screenHeight - 125);
+	ball = (Ball*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Ball, screenWidth / 2, screenHeight - 200);
 
 
 	//Create walls for level boundaries 

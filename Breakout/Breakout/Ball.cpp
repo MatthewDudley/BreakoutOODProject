@@ -4,6 +4,7 @@
 #include "PhysicsComponent.h"
 #include "Collider.h"
 #include "Brick.h"
+#include "Time.h"
 #include "Renderer.h"
 
 Ball::Ball(float x, float y, int collWidth, int collHeight, float collXOffset, float collYOffset, float speedModifier, float speedUpAmount, float maxSpeed) : Entity(x, y, collWidth, collHeight, collXOffset, collYOffset, "ball")
@@ -25,65 +26,77 @@ Ball::~Ball()
 
 void Ball::Update(std::vector<Entity*> entityList)
 {
-	//update logic here
-	paddleHit = false;
-	physicsComponent->UpdateHorizontal();
-	CollisionSide horizontalSide = HandleHorizontalCollisions(entityList);
-	physicsComponent->UpdateVertical();
-	CollisionSide verticalSide = HandleVerticalCollisions(entityList);
-	if (paddleHit)
+	if (resetting)
 	{
-		IncrementSpeedModifier();
-		Vector2 newVelocity = Vector2(hitPosition, -50).Normalized() * speedModifier;
-		physicsComponent->SetVelocity(&newVelocity);
-	}
-	else if (horizontalSide != CollisionSide::NONE || verticalSide != CollisionSide::NONE)
-	{
-		//If there was a collision
-		IncrementSpeedModifier();
-		if (verticalSide == CollisionSide::NONE)
+		resetCounter += Time::GetDeltaTime();
+		if (resetCounter >= resetDelay)
 		{
-			if (horizontalSide == CollisionSide::LEFT)
+			resetCounter = 0;
+			resetting = false;
+		}
+	}
+	else
+	{
+		//update logic here
+		paddleHit = false;
+		physicsComponent->UpdateHorizontal();
+		CollisionSide horizontalSide = HandleHorizontalCollisions(entityList);
+		physicsComponent->UpdateVertical();
+		CollisionSide verticalSide = HandleVerticalCollisions(entityList);
+		if (paddleHit)
+		{
+			IncrementSpeedModifier();
+			Vector2 newVelocity = Vector2(hitPosition, -50).Normalized() * speedModifier;
+			physicsComponent->SetVelocity(&newVelocity);
+		}
+		else if (horizontalSide != CollisionSide::NONE || verticalSide != CollisionSide::NONE)
+		{
+			//If there was a collision
+			IncrementSpeedModifier();
+			if (verticalSide == CollisionSide::NONE)
 			{
-				//physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(1, 0)));
-				Vector2 newVelocity = Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(1, 0)).Normalized() * speedModifier;
-				physicsComponent->SetVelocity(&newVelocity);
+				if (horizontalSide == CollisionSide::LEFT)
+				{
+					//physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(1, 0)));
+					Vector2 newVelocity = Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(1, 0)).Normalized() * speedModifier;
+					physicsComponent->SetVelocity(&newVelocity);
+				}
+				else
+				{
+					Vector2 newVelocity = Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(-1, 0)).Normalized() * speedModifier;
+					physicsComponent->SetVelocity(&newVelocity);
+					//physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(-1, 0)));
+				}
+			}
+			else if (horizontalSide == CollisionSide::NONE)
+			{
+				//if it was a vertical collision
+				if (verticalSide == CollisionSide::BOTTOM)
+				{
+					Vector2 newVelocity = Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, 1)).Normalized() * speedModifier;
+					physicsComponent->SetVelocity(&newVelocity);
+					//physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, 1)));
+				}
+				else
+				{
+					Vector2 newVelocity = Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, -1)).Normalized() * speedModifier;
+					physicsComponent->SetVelocity(&newVelocity);
+					//physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, -1)));
+				}
 			}
 			else
 			{
-				Vector2 newVelocity = Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(-1, 0)).Normalized() * speedModifier;
-				physicsComponent->SetVelocity(&newVelocity);
-				//physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(-1, 0)));
+				//if it was both a vertical and horizontal collision (corner)
+				//Never actually gets called due to collision offsets. look into?
+				physicsComponent->SetVelocity(-physicsComponent->GetVelocity()->GetX(), -physicsComponent->GetVelocity()->GetY());
 			}
 		}
-		else if (horizontalSide == CollisionSide::NONE)
-		{
-			//if it was a vertical collision
-			if (verticalSide == CollisionSide::BOTTOM)
-			{
-				Vector2 newVelocity = Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, 1)).Normalized() * speedModifier;
-				physicsComponent->SetVelocity(&newVelocity);
-				//physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, 1)));
-			}
-			else
-			{
-				Vector2 newVelocity = Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, -1)).Normalized() * speedModifier;
-				physicsComponent->SetVelocity(&newVelocity);
-				//physicsComponent->SetVelocity(&Vector2::GetReflectionAngle(*physicsComponent->GetVelocity(), Vector2(0, -1)));
-			}
-		}
-		else
-		{
-			//if it was both a vertical and horizontal collision (corner)
-			//Never actually gets called due to collision offsets. look into?
-			physicsComponent->SetVelocity(-physicsComponent->GetVelocity()->GetX(), -physicsComponent->GetVelocity()->GetY());
-		}
-	}
 
-	if (this->GetPosY() > Renderer::GetInstance().GetScreenHeight())
-	{
-		NotifyAll();
-		ResetBall();
+		if (this->GetPosY() > Renderer::GetInstance().GetScreenHeight())
+		{
+			NotifyAll();
+			ResetBall();
+		}
 	}
 
 }
@@ -94,6 +107,7 @@ void Ball::ResetBall()
 	this->SetPosY(startingPosition->GetY());
 	speedModifier = startingSpeedModifier;
 	physicsComponent->SetVelocity(0, 180); //Hardcode starting velocity?
+	resetting = true;
 }
 
 void Ball::IncrementSpeedModifier()

@@ -28,5 +28,8 @@ private:
 	float speedUpAmount = 0;
 	float maxSpeed = 0;
 	void ResetBall();
+	float resetDelay = 2;
+	float resetCounter = 0;
+	bool resetting = true;
 };
 
