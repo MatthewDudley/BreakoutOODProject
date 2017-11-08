@@ -33,6 +33,7 @@ void LevelState::Enter()
 	std::cout << "Entering Level State" << std::endl;
 	int screenWidth = Renderer::GetInstance().GetScreenWidth();
 	int screenHeight = Renderer::GetInstance().GetScreenHeight();
+	currentBallCount = startingBallCount;
 
 	/**Create entities, factory method will be used here**/
 
@@ -54,7 +55,7 @@ void LevelState::Enter()
 	paddle = (Paddle*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Paddle, screenWidth / 2, screenHeight - 100);
 	
 	ball = (Ball*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Ball, screenWidth / 2, screenHeight - 200);
-
+	ball->AddObserver(this);
 
 	//Create walls for level boundaries 
 	int wallThickness = 25;
@@ -103,7 +104,9 @@ void LevelState::Enter()
 	//entityList.push_back(bottomWall);
 	entityList.push_back(leftWall);
 	entityList.push_back(rightWall);
+	ballCounter = new TextElement("Balls: " + std::to_string(currentBallCount), 50, 30);
 	scoreCard = new TextElement("Score: 0", 50, 50);
+	textList.push_back(ballCounter);
 	textList.push_back(scoreCard);
 }
 void LevelState::Exit()
@@ -112,6 +115,10 @@ void LevelState::Exit()
 }
 GameState* LevelState::Update()
 {
+	if (currentBallCount <= 0)
+	{
+		return GameState::Transition(new ExitState());
+	}
 	//Update the level
 	bool quit = false;
 	//Destroy the bricks that were hit last frame
@@ -130,12 +137,17 @@ GameState* LevelState::Update()
 	//Delegate update to the base class 
 
 	scoreCard->SetText("Score: " + std::to_string(scoreKeeper->GetScore()));
+	ballCounter->SetText("Balls: " + std::to_string(currentBallCount));
 	return GameState::Update();
 }
 GameState* LevelState::HandleInput()
 {
 	//handle paddle movement and all that here
 	return GameState::HandleInput();
+}
+void LevelState::Notify()
+{
+	currentBallCount--;
 }
 
 void LevelState::CheckDestroyedBricks()

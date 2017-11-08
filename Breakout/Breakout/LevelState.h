@@ -1,13 +1,13 @@
 #pragma once
 #include "GameState.h"
 #include <vector>
-
+#include "Observer.h"
 class Entity;
 class Paddle;
 class Ball;
 class InputManager;
 class ScoreKeeper;
-class LevelState : public GameState
+class LevelState : public GameState, public Observer
 {
 public:
 	LevelState();
@@ -16,6 +16,7 @@ public:
 	void Exit();
 	GameState* Update();
 	GameState* HandleInput();
+	void Notify();
 private:
 	void CheckDestroyedBricks();
 	//std::vector<Entity*> entityList;
@@ -24,4 +25,7 @@ private:
 	InputManager* inputManager;
 	ScoreKeeper* scoreKeeper;
 	TextElement* scoreCard;
+	TextElement* ballCounter;
+	int startingBallCount = 3;
+	int currentBallCount;
 };
