@@ -97,6 +97,7 @@ void LevelState::Enter()
 		}
 	}
 
+	brickCount = brickWidthCount * brickHeightCount;
 	//Add the rest of the entities to the entity list
 	entityList.push_back(paddle);
 	entityList.push_back(ball);
@@ -115,7 +116,7 @@ void LevelState::Exit()
 }
 GameState* LevelState::Update()
 {
-	if (currentBallCount <= 0)
+	if (currentBallCount <= 0 || brickCount <= 0)
 	{
 		return GameState::Transition(new ScoreState(levelNumber, scoreKeeper->GetScore()));
 	}
@@ -182,6 +183,7 @@ void LevelState::CheckDestroyedBricks()
 		{
 			delete entityList.at(i);
 			entityList.erase(entityList.begin() + i);
+			brickCount--;
 		}
 		else
 		{

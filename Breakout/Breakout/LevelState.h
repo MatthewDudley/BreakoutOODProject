@@ -33,4 +33,5 @@ private:
 	int startingBallCount = 3;
 	int currentBallCount;
 	int levelNumber;
+	int brickCount;
 };
