@@ -124,7 +124,7 @@ GameState* LevelState::Update()
 	//Destroy the bricks that were hit last frame
 	CheckDestroyedBricks();
 	//Handle input !TO CHANGE!
-	quit = inputManager->HandleInput(paddle);
+	quit = inputManager->HandleInput(this);
 	//Check if we quit !TO CHANGE!
 	if (quit)
 	{
@@ -145,10 +145,35 @@ GameState* LevelState::HandleInput()
 	//handle paddle movement and all that here
 	return GameState::HandleInput();
 }
+void LevelState::stopPaddle()
+{
+	paddle->GetPhysicsComponent()->SetVelocity(0, 0);
+}
+GameState * LevelState::LeftPressed()
+{
+	paddle->GetPhysicsComponent()->SetVelocity(-paddle->GetPhysicsComponent()->GetMaxSpeed(), 0);
+	return nullptr;
+}
+GameState * LevelState::LeftReleased()
+{
+	stopPaddle();
+	return nullptr;
+}
+GameState * LevelState::RightPressed()
+{
+	paddle->GetPhysicsComponent()->SetVelocity(paddle->GetPhysicsComponent()->GetMaxSpeed(), 0);
+	return nullptr;
+}
+GameState * LevelState::RightReleased()
+{
+	stopPaddle();
+	return nullptr;
+}
 void LevelState::Notify()
 {
 	currentBallCount--;
 }
+
 
 void LevelState::CheckDestroyedBricks()
 {

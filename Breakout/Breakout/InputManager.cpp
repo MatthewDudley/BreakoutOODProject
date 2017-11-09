@@ -1,4 +1,5 @@
 #include "InputManager.h"
+#include "GameState.h"
 #include "Entity.h"
 #include "PhysicsComponent.h"
 InputManager::InputManager()
@@ -11,12 +12,12 @@ InputManager::~InputManager()
 {
 }
 
-bool InputManager::HandleInput(Entity* entity)
+bool InputManager::HandleInput(GameState* currentState)
 {
 
 	//Command pattern code will go here
 	bool quit = false;
-	PhysicsComponent* phsComp = entity->GetPhysicsComponent();
+	//PhysicsComponent* phsComp = entity->GetPhysicsComponent();
 	while (SDL_PollEvent(&e) != 0 && e.key.repeat == 0)
 	{
 		if (e.type == SDL_QUIT)
@@ -42,26 +43,29 @@ bool InputManager::HandleInput(Entity* entity)
 			switch (e.key.keysym.sym)
 			{
 			case SDLK_LEFT:
+				currentState->LeftReleased();
+				break;
 			case SDLK_RIGHT:
-				phsComp->SetVelocity(0, 0);
+				currentState->RightReleased();
+				//phsComp->SetVelocity(0, 0);
 				break;
 			}
 		}
 	}
+	//Instead of just moving the paddle, call the move paddle command
 
-	if (phsComp != nullptr)
+	if (currentKeyboardState[SDL_SCANCODE_LEFT])
 	{
-		//Instead of just moving the paddle, call the move paddle command
-		if (currentKeyboardState[SDL_SCANCODE_LEFT])
-		{
-			//move entity left
-			phsComp->SetVelocity(-phsComp->GetMaxSpeed(), 0);
-		}
-		if (currentKeyboardState[SDL_SCANCODE_RIGHT])
-		{
-			//move entity right
-			phsComp->SetVelocity(phsComp->GetMaxSpeed(), 0);
-		}
+		//move entity left
+		//phsComp->SetVelocity(-phsComp->GetMaxSpeed(), 0);
+		currentState->LeftPressed();
 	}
+	if (currentKeyboardState[SDL_SCANCODE_RIGHT])
+	{
+		//move entity right
+		//phsComp->SetVelocity(phsComp->GetMaxSpeed(), 0);
+		currentState->RightPressed();
+	}	
+
 	return quit;
 }

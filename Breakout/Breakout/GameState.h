@@ -11,6 +11,11 @@ public:
 	virtual void Exit() {}
 	virtual GameState* Update();
 	virtual GameState* HandleInput();
+	virtual GameState* LeftPressed();
+	virtual GameState* LeftReleased();
+	virtual GameState* RightPressed();
+	virtual GameState* RightReleased();
+	virtual GameState* EscPressed();
 	GameState* Transition(GameState* newState);
 protected:
 	std::vector<Entity*> entityList;

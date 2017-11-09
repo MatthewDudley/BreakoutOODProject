@@ -16,6 +16,11 @@ public:
 	void Exit();
 	GameState* Update();
 	GameState* HandleInput();
+	void stopPaddle();
+	virtual GameState* LeftPressed();
+	virtual GameState* LeftReleased();
+	virtual GameState* RightPressed();
+	virtual GameState* RightReleased();
 	void Notify();
 private:
 	void CheckDestroyedBricks();

@@ -32,3 +32,24 @@ GameState* GameState::HandleInput()
 {
 	return nullptr;
 }
+
+GameState* GameState::LeftPressed()
+{
+	return nullptr;
+}
+GameState * GameState::LeftReleased()
+{
+	return nullptr;
+}
+GameState* GameState::RightPressed()
+{
+	return nullptr;
+}
+GameState * GameState::RightReleased()
+{
+	return nullptr;
+}
+GameState* GameState::EscPressed()
+{
+	return nullptr;
+}
