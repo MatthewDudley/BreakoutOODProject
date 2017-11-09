@@ -17,10 +17,11 @@ public:
 	GameState* Update();
 	GameState* HandleInput();
 	void stopPaddle();
-	virtual GameState* LeftPressed();
-	virtual GameState* LeftReleased();
-	virtual GameState* RightPressed();
-	virtual GameState* RightReleased();
+	GameState* LeftPressed();
+	GameState* LeftReleased();
+	GameState* RightPressed();
+	GameState* RightReleased();
+	GameState* EscPressed();
 	void Notify();
 private:
 	void CheckDestroyedBricks();

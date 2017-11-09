@@ -171,6 +171,11 @@ GameState * LevelState::RightReleased()
 	stopPaddle();
 	return nullptr;
 }
+GameState* LevelState::EscPressed()
+{
+	return GameState::Transition(new ExitState());
+}
+
 void LevelState::Notify()
 {
 	currentBallCount--;
