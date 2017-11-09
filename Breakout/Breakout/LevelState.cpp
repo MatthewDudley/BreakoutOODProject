@@ -9,7 +9,7 @@
 #include "PhysicsComponent.h"
 #include "Renderer.h"
 #include "MediaManager.h"
-#include "InputManager.h"
+//#include "InputManager.h"
 #include "TextElement.h"
 #include "EntityFactory.h"
 
@@ -21,14 +21,14 @@ LevelState::LevelState()
 
 LevelState::~LevelState()
 {
-	delete inputManager;
+	//delete inputManager;
 	delete scoreKeeper;
 }
 
 void LevelState::Enter()
 {
 	//Set up the level
-	inputManager = new InputManager();
+	//inputManager = new InputManager();
 	scoreKeeper = new ScoreKeeper();
 	std::cout << "Entering Level State" << std::endl;
 	int screenWidth = Renderer::GetInstance().GetScreenWidth();
@@ -123,13 +123,15 @@ GameState* LevelState::Update()
 	bool quit = false;
 	//Destroy the bricks that were hit last frame
 	CheckDestroyedBricks();
+	/*
 	//Handle input !TO CHANGE!
-	quit = inputManager->HandleInput(this);
+	//quit = inputManager->HandleInput(this);
 	//Check if we quit !TO CHANGE!
 	if (quit)
 	{
 		return GameState::Transition(new ExitState());
 	}
+	*/
 	//Update the paddle position
 	paddle->Update();
 	//Update the ball position and check for collisions

@@ -27,7 +27,7 @@ private:
 	//std::vector<Entity*> entityList;
 	Ball* ball;
 	Paddle* paddle;
-	InputManager* inputManager;
+	//InputManager* inputManager;
 	ScoreKeeper* scoreKeeper;
 	TextElement* scoreCard;
 	TextElement* ballCounter;

@@ -4,6 +4,7 @@
 #include "Time.h"
 #include "GameState.h"
 #include "LevelState.h"
+#include "InputManager.h"
 
 Game::Game()
 {
@@ -11,6 +12,7 @@ Game::Game()
 	screenHeight = 600;
 
 	currentState = new LevelState();
+	inputManager = new InputManager();
 }
 
 
@@ -36,10 +38,16 @@ void Game::Start()
 			Time::CalculateDeltaTime(lastFrameTime, currentFrameTime);
 
 			//Updates the current state
-			GameState* newState = currentState->Update();
+			GameState* newState = inputManager->HandleInput(currentState);
 			if (newState != nullptr)
 			{
 				//If the state needs to change, change it
+				delete currentState;
+				currentState = newState;
+			}
+			newState = currentState->Update();
+			if (newState != nullptr)
+			{
 				delete currentState;
 				currentState = newState;
 			}

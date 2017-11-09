@@ -3,6 +3,7 @@
 #include <iostream>
 
 class GameState;
+class InputManager;
 /*
 #include "Entity.h"
 #include "Player.h"
@@ -23,6 +24,7 @@ private:
 	bool Initialize();
 	int screenWidth;
 	int screenHeight;
+	InputManager* inputManager;
 	//void CheckDestroyedBricks(std::vector<Entity*>* entityList);
 
 	//Renderer* renderer;

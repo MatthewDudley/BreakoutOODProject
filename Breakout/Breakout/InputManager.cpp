@@ -12,18 +12,17 @@ InputManager::~InputManager()
 {
 }
 
-bool InputManager::HandleInput(GameState* currentState)
+GameState* InputManager::HandleInput(GameState* currentState)
 {
+	GameState* newState = nullptr;
 
-	//Command pattern code will go here
-	bool quit = false;
 	//PhysicsComponent* phsComp = entity->GetPhysicsComponent();
 	while (SDL_PollEvent(&e) != 0 && e.key.repeat == 0)
 	{
-		if (e.type == SDL_QUIT)
-		{
-			quit = true;
-		}
+		//if (e.type == SDL_QUIT)
+		//{
+		//	quit = true;
+		//}
 		//if (e.type == SDL_KEYDOWN)
 		//{
 		//	switch (e.key.keysym.sym)
@@ -43,10 +42,10 @@ bool InputManager::HandleInput(GameState* currentState)
 			switch (e.key.keysym.sym)
 			{
 			case SDLK_LEFT:
-				currentState->LeftReleased();
+				newState = currentState->LeftReleased();
 				break;
 			case SDLK_RIGHT:
-				currentState->RightReleased();
+				newState = currentState->RightReleased();
 				//phsComp->SetVelocity(0, 0);
 				break;
 			}
@@ -58,14 +57,14 @@ bool InputManager::HandleInput(GameState* currentState)
 	{
 		//move entity left
 		//phsComp->SetVelocity(-phsComp->GetMaxSpeed(), 0);
-		currentState->LeftPressed();
+		newState = currentState->LeftPressed();
 	}
 	if (currentKeyboardState[SDL_SCANCODE_RIGHT])
 	{
 		//move entity right
 		//phsComp->SetVelocity(phsComp->GetMaxSpeed(), 0);
-		currentState->RightPressed();
+		newState = currentState->RightPressed();
 	}	
 
-	return quit;
+	return newState;
 }

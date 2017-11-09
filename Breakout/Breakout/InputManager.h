@@ -9,7 +9,7 @@ class InputManager
 public:
 	InputManager();
 	~InputManager();
-	bool HandleInput(GameState* currentState);
+	GameState* HandleInput(GameState* currentState);
 private:
 	SDL_Event e;
 	const Uint8* currentKeyboardState;
