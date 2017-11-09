@@ -60,7 +60,9 @@ bool Game::Initialize()
 	if (Renderer::GetInstance().Initialize(screenWidth, screenHeight, false) == true)
 	{
 		MediaManager::GetInstance().CreateTexture("Media/Sprites/block1.png", Renderer::GetInstance().GetRenderer());
-		MediaManager::GetInstance().LoadFont("Media/Fonts/TimesNewRoman.ttf", 18);
+		//MediaManager::GetInstance().LoadFont("Media/Fonts/TimesNewRoman.ttf", 18);
+		MediaManager::GetInstance().LoadFont("Media/Fonts/FippsRegular.ttf", 14);
+
 		/*
 		mediaManager->GeneratePlayerAnimations();
 		*/
