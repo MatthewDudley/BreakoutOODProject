@@ -6,6 +6,7 @@
 #include "LevelState.h"
 #include "InputManager.h"
 #include "MainMenuState.h"
+
 Game::Game()
 {
 	screenWidth = 800;
@@ -61,7 +62,7 @@ bool Game::Initialize()
 	{
 		MediaManager::GetInstance().CreateTexture("Media/Sprites/block1.png", Renderer::GetInstance().GetRenderer());
 		//MediaManager::GetInstance().LoadFont("Media/Fonts/TimesNewRoman.ttf", 18);
-		MediaManager::GetInstance().LoadFont("Media/Fonts/FippsRegular.ttf", 14);
+		MediaManager::GetInstance().LoadFont("Media/Fonts/FippsRegular.ttf", 16);
 
 		/*
 		mediaManager->GeneratePlayerAnimations();

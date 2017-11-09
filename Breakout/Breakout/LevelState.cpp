@@ -1,5 +1,4 @@
 #include "LevelState.h"
-#include "ExitState.h"
 #include "Entity.h"
 #include "Brick.h"
 #include "Ball.h"
@@ -12,10 +11,11 @@
 //#include "InputManager.h"
 #include "TextElement.h"
 #include "EntityFactory.h"
-
 #include "ScoreKeeper.h"
-LevelState::LevelState()
+#include "ScoreState.h"
+LevelState::LevelState(int levelNumber)
 {
+	this->levelNumber = levelNumber;
 }
 
 
@@ -30,7 +30,7 @@ void LevelState::Enter()
 	//Set up the level
 	//inputManager = new InputManager();
 	scoreKeeper = new ScoreKeeper();
-	std::cout << "Entering Level State" << std::endl;
+	std::cout << "Entering Level State " << levelNumber << std::endl;
 	int screenWidth = Renderer::GetInstance().GetScreenWidth();
 	int screenHeight = Renderer::GetInstance().GetScreenHeight();
 	currentBallCount = startingBallCount;
@@ -117,7 +117,7 @@ GameState* LevelState::Update()
 {
 	if (currentBallCount <= 0)
 	{
-		return GameState::Transition(new ExitState());
+		return GameState::Transition(new ScoreState(levelNumber, scoreKeeper->GetScore()));
 	}
 	//Update the level
 	bool quit = false;

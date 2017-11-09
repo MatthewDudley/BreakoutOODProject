@@ -45,6 +45,13 @@ GameState* InputManager::HandleInput(GameState* currentState)
 					return newState;
 				}
 				break;
+			case SDLK_d:
+				newState = currentState->DPressed();
+				if (newState != nullptr)
+				{
+					return newState;
+				}
+				break;
 			default:
 				break;
 			}

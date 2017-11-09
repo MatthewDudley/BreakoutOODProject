@@ -135,6 +135,9 @@
     <ClCompile Include="ScoreKeeper.cpp">
       <Filter>Source Files\GameManagement</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -211,6 +214,9 @@
     </ClInclude>
     <ClInclude Include="ScoreKeeper.h">
       <Filter>Header Files\GameManagement</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

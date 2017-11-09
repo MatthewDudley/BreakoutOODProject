@@ -43,7 +43,7 @@ GameState* MainMenuState::Update()
 GameState* MainMenuState::APressed()
 {
 	//continue to play level
-	return GameState::Transition(new LevelState());
+	return GameState::Transition(new LevelState(1));
 }
 GameState* MainMenuState::SPressed()
 {

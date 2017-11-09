@@ -10,7 +10,7 @@ class ScoreKeeper;
 class LevelState : public GameState, public Observer
 {
 public:
-	LevelState();
+	LevelState(int levelNumber);
 	~LevelState();
 	void Enter();
 	void Exit();
@@ -32,4 +32,5 @@ private:
 	TextElement* ballCounter;
 	int startingBallCount = 3;
 	int currentBallCount;
+	int levelNumber;
 };

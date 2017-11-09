@@ -17,6 +17,7 @@ public:
 	virtual GameState* EscPressed();
 	virtual GameState* APressed() { return nullptr; }
 	virtual GameState* SPressed() { return nullptr; }
+	virtual GameState* DPressed() { return nullptr; }
 	GameState* Transition(GameState* newState);
 protected:
 	std::vector<Entity*> entityList;
