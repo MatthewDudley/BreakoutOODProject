@@ -29,7 +29,3 @@ GameState* ExitState::Update()
 {
 	return GameState::Update();
 }
-GameState* ExitState::HandleInput()
-{
-	return GameState::HandleInput();
-}

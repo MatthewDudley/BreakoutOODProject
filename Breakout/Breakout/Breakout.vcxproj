@@ -130,7 +130,6 @@
     <ClCompile Include="LevelState.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MediaManager.cpp" />
-    <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -156,7 +155,6 @@
     <ClInclude Include="LevelState.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MediaManager.h" />
-    <ClInclude Include="MenuState.h" />
     <ClInclude Include="Observer.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PhysicsComponent.h" />

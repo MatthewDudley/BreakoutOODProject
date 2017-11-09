@@ -1,5 +1,6 @@
 #include "GameState.h"
 #include "Renderer.h"
+#include "ExitState.h"
 
 GameState::~GameState()
 {
@@ -28,10 +29,6 @@ GameState* GameState::Update()
 	Renderer::GetInstance().Draw(&entityList, &textList);
 	return nullptr;
 }
-GameState* GameState::HandleInput()
-{
-	return nullptr;
-}
 
 GameState* GameState::LeftPressed()
 {
@@ -51,5 +48,5 @@ GameState * GameState::RightReleased()
 }
 GameState* GameState::EscPressed()
 {
-	return nullptr;
+	return Transition(new ExitState());
 }

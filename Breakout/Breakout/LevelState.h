@@ -15,13 +15,11 @@ public:
 	void Enter();
 	void Exit();
 	GameState* Update();
-	GameState* HandleInput();
 	void stopPaddle();
 	GameState* LeftPressed();
 	GameState* LeftReleased();
 	GameState* RightPressed();
 	GameState* RightReleased();
-	GameState* EscPressed();
 	void Notify();
 private:
 	void CheckDestroyedBricks();

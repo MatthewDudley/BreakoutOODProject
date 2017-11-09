@@ -117,9 +117,6 @@
     <ClCompile Include="GameState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
-    <ClCompile Include="MenuState.cpp">
-      <Filter>Source Files\States</Filter>
-    </ClCompile>
     <ClCompile Include="LevelState.cpp">
       <Filter>Source Files\States</Filter>
     </ClCompile>
@@ -192,9 +189,6 @@
       <Filter>Header Files\Factories</Filter>
     </ClInclude>
     <ClInclude Include="GameState.h">
-      <Filter>Header Files\States</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuState.h">
       <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="LevelState.h">

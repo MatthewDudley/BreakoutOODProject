@@ -1,6 +1,6 @@
 #pragma once
-#include "MenuState.h"
-class MainMenuState : public MenuState
+#include "GameState.h"
+class MainMenuState : public GameState
 {
 public:
 	MainMenuState();
@@ -8,6 +8,7 @@ public:
 	void Enter();
 	void Exit();
 	GameState* Update();
-	GameState* HandleInput();
+	GameState* APressed();
+	GameState* SPressed();
 };
 

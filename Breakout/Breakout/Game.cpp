@@ -5,13 +5,13 @@
 #include "GameState.h"
 #include "LevelState.h"
 #include "InputManager.h"
-
+#include "MainMenuState.h"
 Game::Game()
 {
 	screenWidth = 800;
 	screenHeight = 600;
 
-	currentState = new LevelState();
+	currentState = new MainMenuState();//LevelState();
 	inputManager = new InputManager();
 }
 

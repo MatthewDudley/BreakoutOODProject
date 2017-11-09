@@ -8,6 +8,5 @@ public:
 	void Enter();
 	void Exit();
 	GameState* Update();
-	GameState* HandleInput();
 };
 

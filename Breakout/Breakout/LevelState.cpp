@@ -142,11 +142,6 @@ GameState* LevelState::Update()
 	ballCounter->SetText("Balls: " + std::to_string(currentBallCount));
 	return GameState::Update();
 }
-GameState* LevelState::HandleInput()
-{
-	//handle paddle movement and all that here
-	return GameState::HandleInput();
-}
 void LevelState::stopPaddle()
 {
 	paddle->GetPhysicsComponent()->SetVelocity(0, 0);
@@ -171,11 +166,6 @@ GameState * LevelState::RightReleased()
 	stopPaddle();
 	return nullptr;
 }
-GameState* LevelState::EscPressed()
-{
-	return GameState::Transition(new ExitState());
-}
-
 void LevelState::Notify()
 {
 	currentBallCount--;

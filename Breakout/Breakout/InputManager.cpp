@@ -27,20 +27,28 @@ GameState* InputManager::HandleInput(GameState* currentState)
 				return newState;
 			}
 		}
-		//if (e.type == SDL_KEYDOWN)
-		//{
-		//	switch (e.key.keysym.sym)
-		//	{
-		//	case SDLK_LEFT:
-		//		phsComp->SetVelocity(-phsComp->GetMaxSpeed(), 0);
-		//		break;
-		//	case SDLK_RIGHT:
-		//		phsComp->SetVelocity(phsComp->GetMaxSpeed(), 0);
-		//		break;
-		//	default:
-		//		break;
-		//	}
-		//}
+		if (e.type == SDL_KEYDOWN)
+		{
+			switch (e.key.keysym.sym)
+			{
+			case SDLK_a:
+				newState = currentState->APressed();
+				if (newState != nullptr)
+				{
+					return newState;
+				}
+				break;
+			case SDLK_s:
+				newState = currentState->SPressed();
+				if (newState != nullptr)
+				{
+					return newState;
+				}
+				break;
+			default:
+				break;
+			}
+		}
 		if (e.type == SDL_KEYUP)
 		{
 			switch (e.key.keysym.sym)
