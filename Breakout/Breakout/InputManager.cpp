@@ -52,6 +52,27 @@ GameState* InputManager::HandleInput(GameState* currentState)
 					return newState;
 				}
 				break;
+			case SDLK_1:
+				newState = currentState->OnePressed();
+				if (newState != nullptr)
+				{
+					return newState;
+				}
+				break;
+			case SDLK_2:
+				newState = currentState->TwoPressed();
+				if (newState != nullptr)
+				{
+					return newState;
+				}
+				break;
+			case SDLK_3:
+				newState = currentState->ThreePressed();
+				if (newState != nullptr)
+				{
+					return newState;
+				}
+				break;
 			default:
 				break;
 			}

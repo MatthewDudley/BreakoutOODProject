@@ -127,6 +127,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LastLevelScoreState.cpp" />
+    <ClCompile Include="LevelSelectState.cpp" />
     <ClCompile Include="LevelState.cpp" />
     <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="MediaManager.cpp" />
@@ -153,6 +155,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LastLevelScoreState.h" />
+    <ClInclude Include="LevelSelectState.h" />
     <ClInclude Include="LevelState.h" />
     <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="MediaManager.h" />

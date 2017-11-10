@@ -10,5 +10,6 @@ public:
 	GameState* Update();
 	GameState* APressed();
 	GameState* SPressed();
+	GameState* DPressed();
 };
 

@@ -5,12 +5,12 @@ class ScoreState : public GameState
 public:
 	ScoreState(int level, int score);
 	~ScoreState();
-	void Enter();
-	void Exit();
+	virtual void Enter();
+	virtual void Exit();
 	GameState* Update();
-	GameState* APressed();
-	GameState* SPressed();
-	GameState* DPressed();
+	virtual GameState* APressed() { return nullptr; }
+	virtual GameState* SPressed() { return nullptr; }
+	virtual GameState* DPressed() { return nullptr; }
 private:
 	int level;
 	int score;

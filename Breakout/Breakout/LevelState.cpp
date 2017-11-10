@@ -12,7 +12,7 @@
 #include "TextElement.h"
 #include "EntityFactory.h"
 #include "ScoreKeeper.h"
-#include "ScoreState.h"
+#include "LastLevelScoreState.h"
 LevelState::LevelState(int levelNumber)
 {
 	this->levelNumber = levelNumber;
@@ -118,7 +118,7 @@ GameState* LevelState::Update()
 {
 	if (currentBallCount <= 0 || brickCount <= 0)
 	{
-		return GameState::Transition(new ScoreState(levelNumber, scoreKeeper->GetScore()));
+		return GameState::Transition(new LastLevelScoreState(levelNumber, scoreKeeper->GetScore()));
 	}
 	//Update the level
 	bool quit = false;
