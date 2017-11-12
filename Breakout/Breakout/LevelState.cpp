@@ -13,6 +13,7 @@
 #include "EntityFactory.h"
 #include "ScoreKeeper.h"
 #include "LastLevelScoreState.h"
+#include "LevelSelectScoreState.h"
 LevelState::LevelState(int levelNumber)
 {
 	this->levelNumber = levelNumber;
@@ -118,21 +119,12 @@ GameState* LevelState::Update()
 {
 	if (currentBallCount <= 0 || brickCount <= 0)
 	{
-		return GameState::Transition(new LastLevelScoreState(levelNumber, scoreKeeper->GetScore()));
+		return GameState::Transition(new LevelSelectScoreState(levelNumber, scoreKeeper->GetScore()));//LastLevelScoreState(levelNumber, scoreKeeper->GetScore()));
 	}
 	//Update the level
 	bool quit = false;
 	//Destroy the bricks that were hit last frame
 	CheckDestroyedBricks();
-	/*
-	//Handle input !TO CHANGE!
-	//quit = inputManager->HandleInput(this);
-	//Check if we quit !TO CHANGE!
-	if (quit)
-	{
-		return GameState::Transition(new ExitState());
-	}
-	*/
 	//Update the paddle position
 	paddle->Update();
 	//Update the ball position and check for collisions

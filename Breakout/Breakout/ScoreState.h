@@ -11,7 +11,7 @@ public:
 	virtual GameState* APressed() { return nullptr; }
 	virtual GameState* SPressed() { return nullptr; }
 	virtual GameState* DPressed() { return nullptr; }
-private:
+protected:
 	int level;
 	int score;
 };
