@@ -14,6 +14,7 @@
 #include "ScoreKeeper.h"
 #include "LastLevelScoreState.h"
 #include "LevelSelectScoreState.h"
+#include "Game.h"
 LevelState::LevelState(int levelNumber)
 {
 	this->levelNumber = levelNumber;
@@ -77,8 +78,8 @@ void LevelState::Enter()
 	rightWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, wallThickness, screenHeight);
 
 	//Create bricks
-	int brickWidthCount = 16;
-	int brickHeightCount = 10;
+	int brickWidthCount = 2;//16;
+	int brickHeightCount = 2;//10;
 	int brickWidth = 40;
 	int brickHeight = 15;
 	int screenSpace = screenWidth - (2 * wallThickness);
@@ -95,6 +96,7 @@ void LevelState::Enter()
 			brick->GetSingleImageController()->SetCurrentSpriteRect(0, 0, brickWidth, brickHeight);
 			entityList.push_back(brick);
 			brick->AddObserver(scoreKeeper);
+			brick->AddObserver(Game::GetInstance().GetScoreKeeper());
 		}
 	}
 
@@ -107,7 +109,15 @@ void LevelState::Enter()
 	entityList.push_back(leftWall);
 	entityList.push_back(rightWall);
 	ballCounter = new TextElement("Balls: " + std::to_string(currentBallCount), 50, 30);
-	scoreCard = new TextElement("Score: 0", 50, 50);
+	//scoreCard = new TextElement("Score: 0", 50, 50);
+	if (Game::GetInstance().GetGameType() == Game::GameType::RUN)
+	{
+		scoreCard = new TextElement("Score: " + std::to_string(Game::GetInstance().GetScoreKeeper()->GetScore()), 50, 50);
+	}
+	else
+	{
+		scoreCard = new TextElement("Score: " + std::to_string(scoreKeeper->GetScore()), 50, 50);
+	}
 	textList.push_back(ballCounter);
 	textList.push_back(scoreCard);
 }
@@ -117,9 +127,13 @@ void LevelState::Exit()
 }
 GameState* LevelState::Update()
 {
-	if (currentBallCount <= 0 || brickCount <= 0)
+	if (currentBallCount <= 0)
 	{
-		return GameState::Transition(new LevelSelectScoreState(levelNumber, scoreKeeper->GetScore()));//LastLevelScoreState(levelNumber, scoreKeeper->GetScore()));
+		return EndLevel(false);
+	}
+	else if (brickCount <= 0)
+	{
+		return EndLevel(true);
 	}
 	//Update the level
 	bool quit = false;
@@ -131,7 +145,14 @@ GameState* LevelState::Update()
 	ball->Update(entityList);
 	//Delegate update to the base class 
 
-	scoreCard->SetText("Score: " + std::to_string(scoreKeeper->GetScore()));
+	if (Game::GetInstance().GetGameType() == Game::GameType::RUN)
+	{
+		scoreCard->SetText("Score: " + std::to_string(Game::GetInstance().GetScoreKeeper()->GetScore()));
+	}
+	else
+	{
+		scoreCard->SetText("Score: " + std::to_string(scoreKeeper->GetScore()));
+	}
 	ballCounter->SetText("Balls: " + std::to_string(currentBallCount));
 	return GameState::Update();
 }
@@ -162,6 +183,26 @@ GameState * LevelState::RightReleased()
 void LevelState::Notify()
 {
 	currentBallCount--;
+}
+
+GameState* LevelState::EndLevel(bool won)
+{
+	Game::GameType currentGameType = Game::GetInstance().GetGameType();
+	if (currentGameType == Game::GameType::SELECT)
+	{
+		return GameState::Transition(new LevelSelectScoreState(levelNumber, scoreKeeper->GetScore()));
+	}
+	else
+	{
+		if (!won || levelNumber == Game::GetInstance().GetLevelCount())
+		{
+			return GameState::Transition(new LastLevelScoreState(levelNumber, Game::GetInstance().GetScoreKeeper()->GetScore()));
+		}
+		else
+		{
+			return GameState::Transition(new LevelState(++levelNumber));
+		}
+	}
 }
 
 

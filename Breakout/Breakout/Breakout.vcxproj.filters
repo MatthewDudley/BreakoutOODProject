@@ -135,17 +135,17 @@
     <ClCompile Include="ScoreKeeper.cpp">
       <Filter>Source Files\GameManagement</Filter>
     </ClCompile>
-    <ClCompile Include="ScoreState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="LastLevelScoreState.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelSelectState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\States</Filter>
     </ClCompile>
     <ClCompile Include="LevelSelectScoreState.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelSelectState.cpp">
+      <Filter>Source Files\States</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreState.cpp">
+      <Filter>Source Files\States</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -224,17 +224,17 @@
     <ClInclude Include="ScoreKeeper.h">
       <Filter>Header Files\GameManagement</Filter>
     </ClInclude>
-    <ClInclude Include="ScoreState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="LastLevelScoreState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelSelectState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\States</Filter>
     </ClInclude>
     <ClInclude Include="LevelSelectScoreState.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSelectState.h">
+      <Filter>Header Files\States</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreState.h">
+      <Filter>Header Files\States</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

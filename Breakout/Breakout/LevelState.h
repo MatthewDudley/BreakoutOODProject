@@ -23,6 +23,7 @@ public:
 	void Notify();
 private:
 	void CheckDestroyedBricks();
+	GameState* EndLevel(bool won);
 	//std::vector<Entity*> entityList;
 	Ball* ball;
 	Paddle* paddle;

@@ -2,7 +2,6 @@
 
 int main(int argc, char* args[])
 {
-	Game game;
-	game.Start();
+	Game::GetInstance().Start();
 	return 0;
 }

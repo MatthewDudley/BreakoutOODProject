@@ -6,20 +6,25 @@
 #include "LevelState.h"
 #include "InputManager.h"
 #include "MainMenuState.h"
-
+#include "ScoreKeeper.h"
 Game::Game()
 {
 	screenWidth = 800;
 	screenHeight = 600;
-
+	levelCount = 3;
+	currentGameType == Game::GameType::RUN;
 	currentState = new MainMenuState();//LevelState();
 	inputManager = new InputManager();
+	scoreKeeper = new ScoreKeeper();
+
 }
 
 
 Game::~Game()
 {
 	delete currentState;
+	delete scoreKeeper;
+	delete inputManager;
 }
 
 void Game::Start()
@@ -63,14 +68,38 @@ bool Game::Initialize()
 		MediaManager::GetInstance().CreateTexture("Media/Sprites/block1.png", Renderer::GetInstance().GetRenderer());
 		//MediaManager::GetInstance().LoadFont("Media/Fonts/TimesNewRoman.ttf", 18);
 		MediaManager::GetInstance().LoadFont("Media/Fonts/FippsRegular.ttf", 16);
-
-		/*
-		mediaManager->GeneratePlayerAnimations();
-		*/
 		return true;
 	}
 	else
 	{
 		return false;
 	}
+}
+void Game::SetGameType(Game::GameType type)
+{
+	if (type == GameType::RUN)
+	{
+		scoreKeeper->WipeScore();
+	}
+	currentGameType = type;
+}
+Game::GameType Game::GetGameType()
+{
+	return currentGameType;
+}
+Game& Game::GetInstance()
+{
+	//No need to check if the instance exists, C++ won't create another static instance
+	//Also thread safe by default, C++ automatically locks on instance creation
+	static Game instance;
+	return instance;
+}
+
+ScoreKeeper* Game::GetScoreKeeper()
+{
+	return scoreKeeper;
+}
+int Game::GetLevelCount()
+{
+	return levelCount;
 }

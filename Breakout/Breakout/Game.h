@@ -4,6 +4,7 @@
 
 class GameState;
 class InputManager;
+class ScoreKeeper;
 /*
 #include "Entity.h"
 #include "Player.h"
@@ -17,14 +18,24 @@ class InputManager;
 class Game
 {
 public:
-	Game();
+	enum class GameType{RUN, SELECT};
 	~Game();
 	void Start();
+	ScoreKeeper* GetScoreKeeper();
+	GameType GetGameType();
+	void SetGameType(GameType type);
+	static Game& GetInstance();
+	int GetLevelCount();
 private:
+	int levelCount;
+	Game();
+	GameType currentGameType;
+	static Game instance;
 	bool Initialize();
 	int screenWidth;
 	int screenHeight;
 	InputManager* inputManager;
+	ScoreKeeper* scoreKeeper;
 	//void CheckDestroyedBricks(std::vector<Entity*>* entityList);
 
 	//Renderer* renderer;

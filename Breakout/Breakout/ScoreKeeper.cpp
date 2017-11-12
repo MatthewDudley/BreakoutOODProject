@@ -14,7 +14,10 @@ int ScoreKeeper::GetScore()
 {
 	return score;
 }
-
+void ScoreKeeper::WipeScore()
+{
+	score = 0;
+}
 ScoreKeeper::~ScoreKeeper()
 {
 }

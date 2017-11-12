@@ -4,6 +4,7 @@
 #include "TextElement.h"
 #include "Renderer.h"
 #include "LevelSelectState.h"
+#include "Game.h"
 MainMenuState::MainMenuState()
 {
 }
@@ -15,7 +16,7 @@ MainMenuState::~MainMenuState()
 void MainMenuState::Enter()
 {
 	std::cout << "Entering Main Menu State" << std::endl;
-	TextElement* playText = new TextElement("Press 'a' to play");
+	TextElement* playText = new TextElement("Press 'a' to play a run");
 	TextElement* selectText = new TextElement("Press 's' to select level");
 	TextElement* exitText = new TextElement("Press 'd' to exit");
 	TextElement* menuText = new TextElement("Breakout Clone");
@@ -48,12 +49,12 @@ GameState* MainMenuState::Update()
 }
 GameState* MainMenuState::APressed()
 {
-	//continue to play level
+	Game::GetInstance().SetGameType(Game::GameType::RUN);
 	return GameState::Transition(new LevelState(1));
 }
 GameState* MainMenuState::SPressed()
 {
-	//exit
+	Game::GetInstance().SetGameType(Game::GameType::SELECT);
 	return GameState::Transition(new LevelSelectState());
 }
 GameState* MainMenuState::DPressed()

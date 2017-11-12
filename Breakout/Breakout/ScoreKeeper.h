@@ -7,6 +7,7 @@ public:
 	ScoreKeeper();
 	void Notify();
 	int GetScore();
+	void WipeScore();
 	~ScoreKeeper();
 private:
 	int score = 0;
