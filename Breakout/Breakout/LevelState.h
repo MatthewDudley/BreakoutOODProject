@@ -21,6 +21,7 @@ public:
 	GameState* LeftReleased();
 	GameState* RightPressed();
 	GameState* RightReleased();
+	GameState* APressed();
 	void Notify();
 private:
 	void CheckDestroyedBricks();

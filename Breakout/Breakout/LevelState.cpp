@@ -143,9 +143,9 @@ void LevelState::LoadLevel(int levelNumber)
 	std::string filename = "Level" + std::to_string(levelNumber) + ".txt";
 	file.open("Media\\Levels\\" + filename);
 
-	int tempCount = 0;
 	int brickWidthCount = 0;
 	int brickHeightCount = 1;
+	std::vector<char> arr;
 
 	char c;
 	//open file
@@ -156,24 +156,21 @@ void LevelState::LoadLevel(int levelNumber)
 		{
 			if (c == '#')
 			{
-				std::cout << c;
-				tempCount++;
+				//std::cout << c;
+				arr.push_back(c);
+				brickWidthCount++;
 			}
 			else if (c == '_')
 			{
-				std::cout << c;
-				tempCount++;
+				//std::cout << c;
+				arr.push_back(c);
+				brickWidthCount++;
 			}
 			else if (c == '\n')
 			{
-				std::cout << c;
+				//std::cout << c;
 				brickHeightCount++;
-				if (tempCount > brickWidthCount)
-				{
-					brickWidthCount = tempCount;
-					tempCount = 0;
-				}
-				else tempCount = 0;
+				brickWidthCount = 0;
 			}
 		}
 	}
@@ -186,6 +183,7 @@ void LevelState::LoadLevel(int levelNumber)
 	std::cout << "Brick width " << brickWidthCount << std::endl;
 	std::cout << "Brick height " << brickHeightCount << std::endl;
 
+
 	int brickWidth = 40;
 	int brickHeight = 15;
 	int screenSpace = screenWidth - (2 * wallThickness);
@@ -194,27 +192,28 @@ void LevelState::LoadLevel(int levelNumber)
 	int hOffset = (whiteSpace / 2) + wallThickness;
 	int vOffset = 100;
 
-	//creating bricks
-	for (int i = 0; i < brickWidthCount; ++i)
+	for (int y = 0; y < brickHeightCount; ++y)
 	{
-		for (int j = 0; j < brickHeightCount; ++j)
+		for (int x = 0; x < brickWidthCount; ++x)
 		{
-			Brick* brick = new Brick(hOffset + i*brickWidth, vOffset + j * brickHeight, brickWidth, brickHeight);
-			brick->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
-			brick->GetSingleImageController()->SetCurrentSpriteRect(0, 0, brickWidth, brickHeight);
-			entityList.push_back(brick);
-			brick->AddObserver(scoreKeeper);
-			brick->AddObserver(Game::GetInstance().GetScoreKeeper());
+			if (arr.at(x + (y*brickWidthCount)) == '#')
+			{
+				//Brick* brick = new Brick(hOffset + x*brickWidth, vOffset + y * brickHeight, brickWidth, brickHeight);
+				//brick->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+				//brick->GetSingleImageController()->SetCurrentSpriteRect(0, 0, brickWidth, brickHeight);
+				//entityList.push_back(brick);
+				//brick->AddObserver(scoreKeeper);
+				//brick->AddObserver(Game::GetInstance().GetScoreKeeper());
 
-			//brick = (Brick*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Brick, hOffset + i*brickWidth, vOffset + j * brickHeight);
-			//entityList.push_back(brick);
-			//brick->AddObserver(scoreKeeper);
-			//brick->AddObserver(Game::GetInstance().GetScoreKeeper());
-			
+				brickCount++;
+
+				Brick* brick = (Brick*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Brick, hOffset + x*brickWidth, vOffset + y * brickHeight);
+				entityList.push_back(brick);
+				brick->AddObserver(scoreKeeper);
+				brick->AddObserver(Game::GetInstance().GetScoreKeeper());
+			}
 		}
 	}
-
-	brickCount = brickWidthCount * brickHeightCount;
 }
 void LevelState::Exit()
 {
@@ -274,6 +273,10 @@ GameState * LevelState::RightReleased()
 {
 	stopPaddle();
 	return nullptr;
+}
+GameState* LevelState::APressed()
+{
+	return EndLevel(true);
 }
 void LevelState::Notify()
 {
