@@ -1,3 +1,6 @@
+#include <iostream>
+#include <fstream>
+#include <string>
 #include "LevelState.h"
 #include "Entity.h"
 #include "Brick.h"
@@ -15,6 +18,7 @@
 #include "LastLevelScoreState.h"
 #include "LevelSelectScoreState.h"
 #include "Game.h"
+
 LevelState::LevelState(int levelNumber)
 {
 	this->levelNumber = levelNumber;
@@ -78,6 +82,89 @@ void LevelState::Enter()
 	rightWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, wallThickness, screenHeight);
 
 	//Create bricks
+	//LoadLevel(int levelNumer) to creat bricks based on level
+	LoadLevel(levelNumber);
+
+	//int brickWidthCount = 2;//16;
+	//int brickHeightCount = 2;//10;
+	//int brickWidth = 40;
+	//int brickHeight = 15;
+	//int screenSpace = screenWidth - (2 * wallThickness);
+	//int blockSpace = brickWidth * brickWidthCount;
+	//int whiteSpace = screenSpace - blockSpace;
+	//int hOffset = (whiteSpace / 2) + wallThickness;
+	//int vOffset = 100;
+	//for (int i = 0; i < brickWidthCount; ++i)
+	//{
+	//	for (int j = 0; j < brickHeightCount; ++j)
+	//	{
+	//		Brick* brick = new Brick(hOffset + i*brickWidth, vOffset + j * brickHeight, brickWidth, brickHeight);
+	//		brick->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+	//		brick->GetSingleImageController()->SetCurrentSpriteRect(0, 0, brickWidth, brickHeight);
+	//		entityList.push_back(brick);
+	//		brick->AddObserver(scoreKeeper);
+	//		brick->AddObserver(Game::GetInstance().GetScoreKeeper());
+	//	}
+	//}
+
+	//brickCount = brickWidthCount * brickHeightCount;
+
+
+	//Add the rest of the entities to the entity list
+	entityList.push_back(paddle);
+	entityList.push_back(ball);
+	entityList.push_back(topWall);
+	//entityList.push_back(bottomWall);
+	entityList.push_back(leftWall);
+	entityList.push_back(rightWall);
+	ballCounter = new TextElement("Balls: " + std::to_string(currentBallCount), 50, 30);
+	//scoreCard = new TextElement("Score: 0", 50, 50);
+	if (Game::GetInstance().GetGameType() == Game::GameType::RUN)
+	{
+		scoreCard = new TextElement("Score: " + std::to_string(Game::GetInstance().GetScoreKeeper()->GetScore()), 50, 50);
+	}
+	else
+	{
+		scoreCard = new TextElement("Score: " + std::to_string(scoreKeeper->GetScore()), 50, 50);
+	}
+	textList.push_back(ballCounter);
+	textList.push_back(scoreCard);
+}
+void LevelState::LoadLevel(int levelNumber)
+{
+	int screenWidth = Renderer::GetInstance().GetScreenWidth();
+	int screenHeight = Renderer::GetInstance().GetScreenHeight();
+	int wallThickness = 25;
+
+	std::cout << "Creating brick layout for level " << levelNumber << std::endl;
+
+	//open level file
+	std::ifstream inFile;
+	inFile.open("Breakout\Resource Files\Levels\Level1.txt");
+	char c;
+	std::cout << "Opening File... " << std::endl;
+	if (inFile.is_open()) 
+	{
+		while (inFile.get(c)) 
+		{
+			if (c == '#')
+			{
+				std::cout << "BRICK ";
+			}
+			else if (c == '_')
+			{
+				std::cout << "     ";
+			}
+			else if (c == '\n')
+			{
+				std::cout << "\n";
+			}
+		}
+	}
+	else std::cout << "File is not open " << std::endl;
+	inFile.close();
+
+
 	int brickWidthCount = 2;//16;
 	int brickHeightCount = 2;//10;
 	int brickWidth = 40;
@@ -101,25 +188,6 @@ void LevelState::Enter()
 	}
 
 	brickCount = brickWidthCount * brickHeightCount;
-	//Add the rest of the entities to the entity list
-	entityList.push_back(paddle);
-	entityList.push_back(ball);
-	entityList.push_back(topWall);
-	//entityList.push_back(bottomWall);
-	entityList.push_back(leftWall);
-	entityList.push_back(rightWall);
-	ballCounter = new TextElement("Balls: " + std::to_string(currentBallCount), 50, 30);
-	//scoreCard = new TextElement("Score: 0", 50, 50);
-	if (Game::GetInstance().GetGameType() == Game::GameType::RUN)
-	{
-		scoreCard = new TextElement("Score: " + std::to_string(Game::GetInstance().GetScoreKeeper()->GetScore()), 50, 50);
-	}
-	else
-	{
-		scoreCard = new TextElement("Score: " + std::to_string(scoreKeeper->GetScore()), 50, 50);
-	}
-	textList.push_back(ballCounter);
-	textList.push_back(scoreCard);
 }
 void LevelState::Exit()
 {

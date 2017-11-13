@@ -13,6 +13,7 @@ public:
 	LevelState(int levelNumber);
 	~LevelState();
 	void Enter();
+	void LoadLevel(int levelNumber);
 	void Exit();
 	GameState* Update();
 	void stopPaddle();
