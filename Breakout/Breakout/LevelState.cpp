@@ -57,7 +57,7 @@ void LevelState::Enter()
 	ball->GetPhysicsComponent()->SetMaxSpeed(100.0f);
 	ball->GetPhysicsComponent()->SetVelocity(0, 180);*/
 
-	//Instead of using the code block above, we used a Singleton/Factory to house the code for entity creation
+	//Instead of using the code block above, we used a Singleton/Factory to hold the code for entity creation
 	paddle = (Paddle*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Paddle, screenWidth / 2, screenHeight - 100);
 	
 	ball = (Ball*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Ball, screenWidth / 2, screenHeight - 200);
@@ -81,8 +81,7 @@ void LevelState::Enter()
 	rightWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
 	rightWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, wallThickness, screenHeight);
 
-	//Create bricks
-	//LoadLevel(int levelNumer) to creat bricks based on level
+	//load level by levelNumber
 	LoadLevel(levelNumber);
 
 	//int brickWidthCount = 2;//16;
@@ -139,37 +138,37 @@ void LevelState::LoadLevel(int levelNumber)
 	std::cout << "Creating brick layout for level " << levelNumber << std::endl;
 
 
-	//open level file
-	std::ifstream inFile;
+	//get filename
+	std::ifstream file;
 	std::string filename = "Level" + std::to_string(levelNumber) + ".txt";
-	inFile.open("Media\\Levels\\" + filename);
+	file.open("Media\\Levels\\" + filename);
 
 	int tempCount = 0;
 	int brickWidthCount = 0;
 	int brickHeightCount = 1;
 
 	char c;
-	std::cout << "Getting height and width of layout..." << std::endl;
-
-	if (inFile.is_open()) 
+	//open file
+	if (file.is_open()) 
 	{
-		while (inFile.get(c))
+		std::cout << "File " << filename << " opened! Reading file" << std::endl;
+		while (file.get(c)) //get each char from the file
 		{
 			if (c == '#')
 			{
-				//std::cout << "BRICK ";
+				std::cout << c;
 				tempCount++;
 			}
 			else if (c == '_')
 			{
-				//std::cout << "     ";
+				std::cout << c;
 				tempCount++;
 			}
 			else if (c == '\n')
 			{
-				//std::cout << "\n";
+				std::cout << c;
 				brickHeightCount++;
-				if (tempCount >= brickWidthCount)
+				if (tempCount > brickWidthCount)
 				{
 					brickWidthCount = tempCount;
 					tempCount = 0;
@@ -178,10 +177,11 @@ void LevelState::LoadLevel(int levelNumber)
 			}
 		}
 	}
-	else std::cout << "File " << filename << " is not open..." << std::endl;
+	else std::cout << "File " << filename << " Could not open" << std::endl;
 
 	//close file
-	inFile.close();
+	file.close();
+	std::cout << "File " << filename << " closed!" << std::endl;
 
 	std::cout << "Brick width " << brickWidthCount << std::endl;
 	std::cout << "Brick height " << brickHeightCount << std::endl;
@@ -194,8 +194,7 @@ void LevelState::LoadLevel(int levelNumber)
 	int hOffset = (whiteSpace / 2) + wallThickness;
 	int vOffset = 100;
 
-	//loop through layout to send to brick factory
-
+	//creating bricks
 	for (int i = 0; i < brickWidthCount; ++i)
 	{
 		for (int j = 0; j < brickHeightCount; ++j)
