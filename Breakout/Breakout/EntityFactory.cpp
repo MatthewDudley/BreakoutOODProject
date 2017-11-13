@@ -39,6 +39,17 @@ Entity* EntityFactory::CreateEntity(EntityFactory::EntityType entityType, int x,
 	case EntityFactory::EntityType::Brick:
 	{
 		//Brick creation:
+
+		int brickWidth = 40;
+		int brickHeight = 15;
+
+		Brick* brick = new Brick(x, y, brickWidth, brickHeight);
+		brick->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+		brick->GetSingleImageController()->SetCurrentSpriteRect(0, 0, brickWidth, brickHeight);
+		/*entityList.push_back(brick);
+		brick->AddObserver(scoreKeeper);
+		brick->AddObserver(Game::GetInstance().GetScoreKeeper());*/
+
 		return nullptr; //return pointer to entity
 	}
 	case EntityFactory::EntityType::Paddle:

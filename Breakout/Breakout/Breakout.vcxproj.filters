@@ -61,9 +61,6 @@
     <Filter Include="Source Files\GameManagement">
       <UniqueIdentifier>{3ed53317-683a-4c98-8c0d-7e905ac64225}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resource Files\Levels">
-      <UniqueIdentifier>{31d1950e-013a-46ef-b9b4-2a647f46fb9a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Entry.cpp">
@@ -241,11 +238,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\..\..\..\Level1.txt">
-      <Filter>Resource Files\Levels</Filter>
-    </Text>
-    <Text Include="..\..\..\..\Level2.txt">
-      <Filter>Resource Files\Levels</Filter>
-    </Text>
+    <Text Include="..\..\..\..\Level1.txt" />
+    <Text Include="..\..\..\..\Level2.txt" />
   </ItemGroup>
 </Project>

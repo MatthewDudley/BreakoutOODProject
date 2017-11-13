@@ -138,35 +138,54 @@ void LevelState::LoadLevel(int levelNumber)
 
 	std::cout << "Creating brick layout for level " << levelNumber << std::endl;
 
+
 	//open level file
 	std::ifstream inFile;
-	inFile.open("Breakout\Resource Files\Levels\Level1.txt");
+	std::string filename = "Level" + std::to_string(levelNumber) + ".txt";
+	inFile.open("Media\\Levels\\" + filename);
+
+	int tempCount = 0;
+	int brickWidthCount = 0;
+	int brickHeightCount = 1;
+
 	char c;
-	std::cout << "Opening File... " << std::endl;
+	std::cout << "Getting height and width of layout..." << std::endl;
+
 	if (inFile.is_open()) 
 	{
-		while (inFile.get(c)) 
+		while (inFile.get(c))
 		{
 			if (c == '#')
 			{
-				std::cout << "BRICK ";
+				//std::cout << "BRICK ";
+				tempCount++;
 			}
 			else if (c == '_')
 			{
-				std::cout << "     ";
+				//std::cout << "     ";
+				tempCount++;
 			}
 			else if (c == '\n')
 			{
-				std::cout << "\n";
+				//std::cout << "\n";
+				brickHeightCount++;
+				if (tempCount >= brickWidthCount)
+				{
+					brickWidthCount = tempCount;
+					tempCount = 0;
+				}
+				else tempCount = 0;
 			}
 		}
 	}
-	else std::cout << "File is not open " << std::endl;
+	else std::cout << "File " << filename << " is not open..." << std::endl;
+
+	//close file
 	inFile.close();
 
+	std::cout << "Brick width " << brickWidthCount << std::endl;
+	std::cout << "Brick height " << brickHeightCount << std::endl;
 
-	int brickWidthCount = 2;//16;
-	int brickHeightCount = 2;//10;
 	int brickWidth = 40;
 	int brickHeight = 15;
 	int screenSpace = screenWidth - (2 * wallThickness);
@@ -174,6 +193,9 @@ void LevelState::LoadLevel(int levelNumber)
 	int whiteSpace = screenSpace - blockSpace;
 	int hOffset = (whiteSpace / 2) + wallThickness;
 	int vOffset = 100;
+
+	//loop through layout to send to brick factory
+
 	for (int i = 0; i < brickWidthCount; ++i)
 	{
 		for (int j = 0; j < brickHeightCount; ++j)
@@ -184,6 +206,12 @@ void LevelState::LoadLevel(int levelNumber)
 			entityList.push_back(brick);
 			brick->AddObserver(scoreKeeper);
 			brick->AddObserver(Game::GetInstance().GetScoreKeeper());
+
+			//brick = (Brick*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Brick, hOffset + i*brickWidth, vOffset + j * brickHeight);
+			//entityList.push_back(brick);
+			//brick->AddObserver(scoreKeeper);
+			//brick->AddObserver(Game::GetInstance().GetScoreKeeper());
+			
 		}
 	}
 
