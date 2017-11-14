@@ -13,6 +13,7 @@ public:
 	void SetResetTimer(float resetTimer);
 	void Update(std::vector<Entity*> entityList);
 	SingleImageController* GetSingleImageController();
+	Subject* GetOnPaddleHit();
 
 private:
 	Vector2* startingPosition;
@@ -33,5 +34,6 @@ private:
 	float resetDelay = 2;
 	float resetCounter = 0;
 	bool resetting = true;
+	Subject OnPaddleHit;
 };
 

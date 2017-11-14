@@ -62,7 +62,14 @@ void LevelState::Enter()
 	
 	ball = (Ball*)EntityFactory::GetInstance().CreateEntity(EntityFactory::EntityType::Ball, screenWidth / 2, screenHeight - 200);
 	ball->AddObserver(this);
-
+	if (Game::GetInstance().GetGameType() == Game::GameType::RUN)
+	{
+		ball->GetOnPaddleHit()->AddObserver((Observer*)Game::GetInstance().GetScoreKeeper()->GetMultiplierManager());
+	}
+	else
+	{
+		ball->GetOnPaddleHit()->AddObserver((Observer*)scoreKeeper->GetMultiplierManager());
+	}
 	//Create walls for level boundaries 
 	int wallThickness = 25;
 	Wall* topWall = new Wall(0, 0, screenWidth, wallThickness);
@@ -121,13 +128,22 @@ void LevelState::Enter()
 	if (Game::GetInstance().GetGameType() == Game::GameType::RUN)
 	{
 		scoreCard = new TextElement("Score: " + std::to_string(Game::GetInstance().GetScoreKeeper()->GetScore()), 50, 50);
+		//multiplierCounter = new TextElement("Multiplier: " + std::to_string(Game::GetInstance().GetScoreKeeper()->GetMultiplier()), 50, 70);
+		std::string multiplier = std::to_string(Game::GetInstance().GetScoreKeeper()->GetMultiplier());
+		multiplier.erase(multiplier.find_last_not_of('0') + 1, std::string::npos);
+		multiplierCounter = new TextElement("Multiplier: " + multiplier, 50, 70);
+
 	}
 	else
 	{
 		scoreCard = new TextElement("Score: " + std::to_string(scoreKeeper->GetScore()), 50, 50);
+		std::string multiplier = std::to_string(scoreKeeper->GetMultiplier());
+		multiplier.erase(multiplier.find_last_not_of('0') + 1, std::string::npos);
+		multiplierCounter = new TextElement("Multiplier: " + multiplier, 50, 70);
 	}
 	textList.push_back(ballCounter);
 	textList.push_back(scoreCard);
+	textList.push_back(multiplierCounter);
 }
 void LevelState::LoadLevel(int levelNumber)
 {
@@ -242,10 +258,17 @@ GameState* LevelState::Update()
 	if (Game::GetInstance().GetGameType() == Game::GameType::RUN)
 	{
 		scoreCard->SetText("Score: " + std::to_string(Game::GetInstance().GetScoreKeeper()->GetScore()));
+		std::string multiplier = std::to_string(Game::GetInstance().GetScoreKeeper()->GetMultiplier());
+		multiplier.erase(multiplier.find_last_not_of('0') + 1, std::string::npos);
+		multiplierCounter->SetText("Multiplier: " + multiplier);
 	}
 	else
 	{
 		scoreCard->SetText("Score: " + std::to_string(scoreKeeper->GetScore()));
+
+		std::string multiplier = std::to_string(scoreKeeper->GetMultiplier());
+		multiplier.erase(multiplier.find_last_not_of('0') + 1, std::string::npos);
+		multiplierCounter->SetText("Multiplier: " + multiplier);
 	}
 	ballCounter->SetText("Balls: " + std::to_string(currentBallCount));
 	return GameState::Update();

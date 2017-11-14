@@ -5,7 +5,6 @@ class Subject
 {
 public:
 	void AddObserver(Observer* observer);
-protected:
 	void NotifyAll();
 private:
 	std::vector<Observer*> observers;

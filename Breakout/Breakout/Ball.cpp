@@ -56,6 +56,7 @@ void Ball::Update(std::vector<Entity*> entityList)
 		CollisionSide verticalSide = HandleVerticalCollisions(entityList);
 		if (paddleHit)
 		{
+			OnPaddleHit.NotifyAll();
 			IncrementSpeedModifier();
 			Vector2 newVelocity = Vector2(hitPosition, -50).Normalized() * speedModifier;
 			physicsComponent->SetVelocity(&newVelocity);
@@ -112,6 +113,10 @@ void Ball::Update(std::vector<Entity*> entityList)
 
 }
 
+Subject* Ball::GetOnPaddleHit()
+{
+	return &OnPaddleHit;
+}
 void Ball::ResetBall()
 {
 	this->SetPosX(startingPosition->GetX());

@@ -137,6 +137,7 @@
     <ClCompile Include="PhysicsComponent.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="ScoreKeeper.cpp" />
+    <ClCompile Include="ScoreMultipierManager.cpp" />
     <ClCompile Include="ScoreState.cpp" />
     <ClCompile Include="SingleImageController.cpp" />
     <ClCompile Include="Subject.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="ScoreKeeper.h" />
+    <ClInclude Include="ScoreMultipierManager.h" />
     <ClInclude Include="ScoreState.h" />
     <ClInclude Include="SingleImageController.h" />
     <ClInclude Include="Subject.h" />

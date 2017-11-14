@@ -33,6 +33,7 @@ private:
 	ScoreKeeper* scoreKeeper;
 	TextElement* scoreCard;
 	TextElement* ballCounter;
+	TextElement* multiplierCounter;
 	int startingBallCount = 3;
 	int currentBallCount;
 	int levelNumber;
