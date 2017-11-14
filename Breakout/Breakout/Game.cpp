@@ -11,7 +11,7 @@ Game::Game()
 {
 	screenWidth = 800;
 	screenHeight = 600;
-	levelCount = 3;
+	levelCount = 5;
 	currentGameType == Game::GameType::RUN;
 	currentState = new MainMenuState();//LevelState();
 	inputManager = new InputManager();
