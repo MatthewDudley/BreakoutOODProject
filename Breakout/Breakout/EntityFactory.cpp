@@ -28,8 +28,8 @@ Entity* EntityFactory::CreateEntity(EntityFactory::EntityType entityType, int x,
 	{
 		//Ball creation:
 		Ball* ball = new Ball(x, y, 10, 10, 0, 0, 200, 5, 400);
-		ball->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
-		ball->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 10, 10);
+		ball->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(1));
+		ball->GetSingleImageController()->SetCurrentSpriteRect(41, 0, 10, 10);
 		ball->SetStartingVelocity(0, 180);
 		ball->SetResetTimer(2);//in seconds
 		ball->GetPhysicsComponent()->SetMaxSpeed(100.0f);
@@ -44,7 +44,7 @@ Entity* EntityFactory::CreateEntity(EntityFactory::EntityType entityType, int x,
 		int brickHeight = 15;
 
 		Brick* brick = new Brick(x, y, brickWidth, brickHeight);
-		brick->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+		brick->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(1));
 		brick->GetSingleImageController()->SetCurrentSpriteRect(0, 0, brickWidth, brickHeight);
 
 		return brick; //return pointer to entity
@@ -53,8 +53,8 @@ Entity* EntityFactory::CreateEntity(EntityFactory::EntityType entityType, int x,
 	{
 		//Paddle creation:
 		Paddle* paddle = new Paddle(x - 50, y, 100, 15, 0, 0);
-		paddle->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
-		paddle->GetSingleImageController()->SetCurrentSpriteRect(0, 0, 100, 15);
+		paddle->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(1));
+		paddle->GetSingleImageController()->SetCurrentSpriteRect(0, 16, 100, 15);
 		paddle->GetPhysicsComponent()->SetMaxSpeed(400.0f);
 		paddle->SetBounds(25, Renderer::GetInstance().GetScreenWidth() - 25);
 		return paddle; //return pointer to entity
