@@ -101,7 +101,8 @@ bool Renderer::Initialize(int screenWidth, int screenHeight, bool debug)
 			}
 			else
 			{
-				SDL_SetRenderDrawColor(sdlRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+				//SDL_SetRenderDrawColor(sdlRenderer, 0xFF, 0xFF, 0xFF, 0xFF); old just white one
+				SDL_SetRenderDrawColor(sdlRenderer, 0xB9, 0xD9, 0xEE, 0xFF);
 				int imgFlags = IMG_INIT_PNG;
 				if (!(IMG_Init(imgFlags)) & imgFlags)
 				{
