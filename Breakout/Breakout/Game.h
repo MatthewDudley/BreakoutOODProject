@@ -5,16 +5,7 @@
 class GameState;
 class InputManager;
 class ScoreKeeper;
-/*
-#include "Entity.h"
-#include "Player.h"
-#include "BlockTest.h"
-#include <vector>
-#include "Texture.h"
-#include "MediaManager.h"
-#include "Camera.h"
-#include "AnimationNames.h"
-*/
+
 class Game
 {
 public:
@@ -38,11 +29,6 @@ private:
 	bool quit = false;
 	InputManager* inputManager;
 	ScoreKeeper* scoreKeeper;
-	//void CheckDestroyedBricks(std::vector<Entity*>* entityList);
-
-	//Renderer* renderer;
-	//MediaManager* mediaManager;
-	//InputManager* inputManager;
 
 	GameState* currentState;
 

@@ -15,7 +15,6 @@ MainMenuState::~MainMenuState()
 
 void MainMenuState::Enter()
 {
-	std::cout << "Entering Main Menu State" << std::endl;
 	TextElement* playText = new TextElement("Press 'a' to play a run");
 	TextElement* selectText = new TextElement("Press 's' to select level");
 	TextElement* exitText = new TextElement("Press 'd' to exit");
@@ -39,7 +38,6 @@ void MainMenuState::Enter()
 }
 void MainMenuState::Exit()
 {
-	std::cout << "Exiting Main Menu State" << std::endl;
 }
 GameState* MainMenuState::Update()
 {

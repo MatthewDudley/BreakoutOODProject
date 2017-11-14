@@ -15,8 +15,6 @@ LevelSelectState::~LevelSelectState()
 
 void LevelSelectState::Enter()
 {
-	//oh god its a fucking mess look away
-	std::cout << "Entering Level Select State" << std::endl;
 	TextElement* text = new TextElement("Level Select");
 	int x = (Renderer::GetInstance().GetScreenWidth() / 2) - (text->GetWidth() / 2);
 	int y = (Renderer::GetInstance().GetScreenHeight() / 2) - (text->GetHeight() / 2) - 100;
@@ -34,8 +32,7 @@ void LevelSelectState::Enter()
 	int commandX = Renderer::GetInstance().GetScreenWidth() / 2;
 	int spacing = 50;
 	int starting = (Renderer::GetInstance().GetScreenHeight() / 2) - 80;
-	//replayText->SetY((Renderer::GetInstance().GetScreenHeight() / 2) + spacing);
-	//replayText->SetX(commandX - replayText->GetWidth() / 2);
+
 	menuText->SetY(starting + spacing);
 	menuText->SetX(commandX - menuText->GetWidth() / 2);
 
@@ -50,8 +47,7 @@ void LevelSelectState::Enter()
 	level4Text->SetX(commandX - level4Text->GetWidth() / 2);
 	level5Text->SetY(starting + 6 * spacing);
 	level5Text->SetX(commandX - level5Text->GetWidth() / 2);
-	//nextText->SetY((Renderer::GetInstance().GetScreenHeight() / 2) + 2 * spacing);
-	//nextText->SetX(commandX - nextText->GetWidth() / 2);
+
 	textList.push_back(menuText);
 	textList.push_back(level1Text);
 	textList.push_back(level2Text);
@@ -59,12 +55,9 @@ void LevelSelectState::Enter()
 	textList.push_back(level4Text);
 	textList.push_back(level5Text);
 	textList.push_back(text);
-	//textList.push_back(replayText);
-	//textList.push_back(nextText);
 }
 void LevelSelectState::Exit()
 {
-	std::cout << "Exiting Level Select State" << std::endl;
 }
 GameState* LevelSelectState::APressed()
 {

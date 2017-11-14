@@ -25,7 +25,7 @@ void ScoreState::Enter()
 }
 void ScoreState::Exit()
 {
-	std::cout << "Exiting Score State" << std::endl;
+
 }
 GameState* ScoreState::Update()
 {

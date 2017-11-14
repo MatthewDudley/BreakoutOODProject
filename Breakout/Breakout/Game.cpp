@@ -13,7 +13,7 @@ Game::Game()
 	screenHeight = 600;
 	levelCount = 5;
 	currentGameType == Game::GameType::RUN;
-	currentState = new MainMenuState();//LevelState();
+	currentState = new MainMenuState();
 	inputManager = new InputManager();
 	scoreKeeper = new ScoreKeeper();
 
@@ -66,7 +66,6 @@ bool Game::Initialize()
 	{
 		MediaManager::GetInstance().CreateTexture("Media/Sprites/block1.png", Renderer::GetInstance().GetRenderer());
 		MediaManager::GetInstance().CreateTexture("Media/Sprites/breakoutsprites1.png", Renderer::GetInstance().GetRenderer());
-		//MediaManager::GetInstance().LoadFont("Media/Fonts/TimesNewRoman.ttf", 18);
 		MediaManager::GetInstance().LoadFont("Media/Fonts/FippsRegular.ttf", 16);
 		return true;
 	}
