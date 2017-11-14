@@ -26,6 +26,7 @@ public:
 	void SetGameType(GameType type);
 	static Game& GetInstance();
 	int GetLevelCount();
+	void QuitGame();
 private:
 	int levelCount;
 	Game();
@@ -34,6 +35,7 @@ private:
 	bool Initialize();
 	int screenWidth;
 	int screenHeight;
+	bool quit = false;
 	InputManager* inputManager;
 	ScoreKeeper* scoreKeeper;
 	//void CheckDestroyedBricks(std::vector<Entity*>* entityList);

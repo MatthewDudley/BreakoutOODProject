@@ -33,7 +33,6 @@ void Game::Start()
 	{
 		//Enters the first state
 		currentState->Enter();
-		bool quit = false;
 		float deltaTime = 0.0f;
 		Uint32 lastFrameTime = 0;
 		Uint32 currentFrameTime = SDL_GetTicks();
@@ -103,4 +102,8 @@ ScoreKeeper* Game::GetScoreKeeper()
 int Game::GetLevelCount()
 {
 	return levelCount;
+}
+void Game::QuitGame()
+{
+	quit = true;
 }
