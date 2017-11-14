@@ -21,6 +21,8 @@ public:
 	virtual GameState* OnePressed() { return nullptr; }
 	virtual GameState* TwoPressed() { return nullptr; }
 	virtual GameState* ThreePressed() { return nullptr; }
+	virtual GameState* FourPressed() { return nullptr; }
+	virtual GameState* FivePressed() { return nullptr; }
 	GameState* Transition(GameState* newState);
 protected:
 	std::vector<Entity*> entityList;

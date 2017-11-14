@@ -73,6 +73,20 @@ GameState* InputManager::HandleInput(GameState* currentState)
 					return newState;
 				}
 				break;
+			case SDLK_4:
+				newState = currentState->FourPressed();
+				if (newState != nullptr)
+				{
+					return newState;
+				}
+				break;
+			case SDLK_5:
+				newState = currentState->FivePressed();
+				if (newState != nullptr)
+				{
+					return newState;
+				}
+				break;
 			default:
 				break;
 			}

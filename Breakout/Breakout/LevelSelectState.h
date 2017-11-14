@@ -7,9 +7,11 @@ public:
 	~LevelSelectState();
 	void Enter();
 	void Exit();
-	virtual GameState* APressed();
-	virtual GameState* OnePressed();
-	virtual GameState* TwoPressed();
-	virtual GameState* ThreePressed();
+	GameState* APressed();
+	GameState* OnePressed();
+	GameState* TwoPressed();
+	GameState* ThreePressed();
+	GameState* FourPressed();
+	GameState* FivePressed();
 };
 
