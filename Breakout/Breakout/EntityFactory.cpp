@@ -11,12 +11,10 @@
 #include "Renderer.h"
 EntityFactory::EntityFactory()
 {
-	std::cout << "Created Factory" << std::endl; //Singleton, should only print out once
 }
 
 EntityFactory::~EntityFactory()
 {
-	std::cout << "Deleted Factory" << std::endl;
 }
 
 Entity* EntityFactory::CreateEntity(EntityFactory::EntityType entityType, int x, int y)
