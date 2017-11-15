@@ -65,7 +65,7 @@ bool Game::Initialize()
 	if (Renderer::GetInstance().Initialize(screenWidth, screenHeight, false) == true)
 	{
 		MediaManager::GetInstance().CreateTexture("Media/Sprites/block1.png", Renderer::GetInstance().GetRenderer());
-		MediaManager::GetInstance().CreateTexture("Media/Sprites/breakoutsprites1.png", Renderer::GetInstance().GetRenderer());
+		MediaManager::GetInstance().CreateTexture("Media/Sprites/breakoutsprites3.png", Renderer::GetInstance().GetRenderer());
 		MediaManager::GetInstance().CreateTexture("Media/Sprites/VerticalWall.png", Renderer::GetInstance().GetRenderer());
 		MediaManager::GetInstance().CreateTexture("Media/Sprites/HorizontalWall.png", Renderer::GetInstance().GetRenderer());
 		MediaManager::GetInstance().LoadFont("Media/Fonts/FippsRegular.ttf", 16);

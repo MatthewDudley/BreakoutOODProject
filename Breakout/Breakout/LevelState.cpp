@@ -77,22 +77,23 @@ void LevelState::Enter()
 	entityList.push_back(topWall);
 	entityList.push_back(leftWall);
 	entityList.push_back(rightWall);
-	ballCounter = new TextElement("Balls: " + std::to_string(currentBallCount), 50, 30);
+	int textX = 30;
+	ballCounter = new TextElement("Balls: " + std::to_string(currentBallCount), textX, 20);
 
 	if (Game::GetInstance().GetGameType() == Game::GameType::RUN)
 	{
-		scoreCard = new TextElement("Score: " + std::to_string(Game::GetInstance().GetScoreKeeper()->GetScore()), 50, 50);
+		scoreCard = new TextElement("Score: " + std::to_string(Game::GetInstance().GetScoreKeeper()->GetScore()), textX, 40);
 		std::string multiplier = std::to_string(Game::GetInstance().GetScoreKeeper()->GetMultiplier());
 		multiplier.erase(multiplier.find_last_not_of('0') + 1, std::string::npos);
-		multiplierCounter = new TextElement("Multiplier: " + multiplier, 50, 70);
+		multiplierCounter = new TextElement("Multiplier: " + multiplier, textX, 60);
 
 	}
 	else
 	{
-		scoreCard = new TextElement("Score: " + std::to_string(scoreKeeper->GetScore()), 50, 50);
+		scoreCard = new TextElement("Score: " + std::to_string(scoreKeeper->GetScore()), textX, 40);
 		std::string multiplier = std::to_string(scoreKeeper->GetMultiplier());
 		multiplier.erase(multiplier.find_last_not_of('0') + 1, std::string::npos);
-		multiplierCounter = new TextElement("Multiplier: " + multiplier, 50, 70);
+		multiplierCounter = new TextElement("Multiplier: " + multiplier, textX, 60);
 	}
 	textList.push_back(ballCounter);
 	textList.push_back(scoreCard);

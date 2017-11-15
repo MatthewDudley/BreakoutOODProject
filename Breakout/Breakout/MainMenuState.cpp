@@ -19,6 +19,7 @@ void MainMenuState::Enter()
 	TextElement* selectText = new TextElement("Press 's' to select level");
 	TextElement* exitText = new TextElement("Press 'd' to exit");
 	TextElement* menuText = new TextElement("Breakout Clone");
+	TextElement* creditText = new TextElement("By: Scott Buglass, Matthew Dudley, and Mitchell Hodzen");
 	menuText->SetX((Renderer::GetInstance().GetScreenWidth() / 2) - (menuText->GetWidth() / 2));
 	menuText->SetY((Renderer::GetInstance().GetScreenHeight() / 2) - (menuText->GetHeight() / 2));
 
@@ -35,6 +36,7 @@ void MainMenuState::Enter()
 	textList.push_back(selectText);
 	textList.push_back(exitText);
 	textList.push_back(playText);
+	textList.push_back(creditText);
 }
 void MainMenuState::Exit()
 {
