@@ -80,6 +80,9 @@ void LevelState::Enter()
 	int textX = 30;
 	ballCounter = new TextElement("Balls: " + std::to_string(currentBallCount), textX, 20);
 
+	int numberX = Renderer::GetInstance().GetScreenWidth() - 120;
+	TextElement* levelNumberUI = new TextElement("Level " + std::to_string(levelNumber), numberX, 20);
+
 	if (Game::GetInstance().GetGameType() == Game::GameType::RUN)
 	{
 		scoreCard = new TextElement("Score: " + std::to_string(Game::GetInstance().GetScoreKeeper()->GetScore()), textX, 40);
@@ -98,6 +101,7 @@ void LevelState::Enter()
 	textList.push_back(ballCounter);
 	textList.push_back(scoreCard);
 	textList.push_back(multiplierCounter);
+	textList.push_back(levelNumberUI);
 }
 void LevelState::LoadLevel(int levelNumber)
 {
