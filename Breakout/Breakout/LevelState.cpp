@@ -47,10 +47,12 @@ void LevelState::Enter()
 	if (Game::GetInstance().GetGameType() == Game::GameType::RUN)
 	{
 		ball->GetOnPaddleHit()->AddObserver((Observer*)Game::GetInstance().GetScoreKeeper()->GetMultiplierManager());
+		ball->AddObserver((Observer*)Game::GetInstance().GetScoreKeeper()->GetMultiplierManager());
 	}
 	else
 	{
 		ball->GetOnPaddleHit()->AddObserver((Observer*)scoreKeeper->GetMultiplierManager());
+		ball->AddObserver((Observer*)scoreKeeper->GetMultiplierManager());
 	}
 	//Create walls for level boundaries 
 	int wallThickness = 25;
