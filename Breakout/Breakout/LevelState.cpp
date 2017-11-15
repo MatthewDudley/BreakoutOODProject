@@ -55,15 +55,15 @@ void LevelState::Enter()
 	//Create walls for level boundaries 
 	int wallThickness = 25;
 	Wall* topWall = new Wall(0, 0, screenWidth, wallThickness);
-	topWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+	topWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(3));
 	topWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, screenWidth, wallThickness);
 
 	Wall* leftWall= new Wall(0, 0, wallThickness, screenHeight);
-	leftWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+	leftWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(2));
 	leftWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, wallThickness, screenHeight);
 
 	Wall* rightWall= new Wall(screenWidth - wallThickness, 0, wallThickness, screenHeight);
-	rightWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(0));
+	rightWall->GetSingleImageController()->SetTexture(MediaManager::GetInstance().GetTexture(2));
 	rightWall->GetSingleImageController()->SetCurrentSpriteRect(0, 0, wallThickness, screenHeight);
 
 	//load level by levelNumber
