@@ -91,7 +91,7 @@ bool Renderer::Initialize(int screenWidth, int screenHeight, bool debug)
 		}
 		else
 		{
-			//SDL_SetWindowFullscreen(sdlWindow, SDL_WINDOW_FULLSCREEN);
+			SDL_SetWindowFullscreen(sdlWindow, SDL_WINDOW_FULLSCREEN);
 			sdlRenderer = SDL_CreateRenderer(sdlWindow, -1, SDL_RENDERER_ACCELERATED);
 			if (sdlRenderer == NULL)
 			{

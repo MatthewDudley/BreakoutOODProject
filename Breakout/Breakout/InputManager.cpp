@@ -31,6 +31,13 @@ GameState* InputManager::HandleInput(GameState* currentState)
 		{
 			switch (e.key.keysym.sym)
 			{
+			case SDLK_ESCAPE:
+				newState = currentState->EscPressed();
+				if (newState != nullptr)
+				{
+					return newState;
+				}
+				break;
 			case SDLK_a:
 				newState = currentState->APressed();
 				if (newState != nullptr)
