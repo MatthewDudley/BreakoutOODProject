@@ -233,7 +233,7 @@ GameState * LevelState::RightPressed()
 	paddle->GetPhysicsComponent()->SetVelocity(paddle->GetPhysicsComponent()->GetMaxSpeed(), 0);
 	return nullptr;
 }
-GameState * LevelState::RightReleased()
+GameState* LevelState::RightReleased()
 {
 	stopPaddle();
 	return nullptr;
